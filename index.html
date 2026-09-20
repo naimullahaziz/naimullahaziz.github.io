@@ -59,17 +59,22 @@
         }
         .nav-links a:hover { color: var(--accent-color); }
 
-        /* --- HERO SECTION WITH LIGHT BEAM ANIMATION --- */
+        /* --- HERO SECTION (FULL WIDTH) --- */
         .hero { 
-            padding-top: 12vh; 
-            padding-bottom: 8vh; 
-            text-align: left; 
+            width: 100vw;
             position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding: 14vh calc((100vw - 1200px) / 2 + 2rem) 10vh;
+            background: linear-gradient(180deg, rgba(13, 20, 36, 0.5) 0%, rgba(7, 11, 20, 0) 100%);
+            border-bottom: 1px solid var(--border-color);
             overflow: hidden;
             animation: fadeInUp 1s ease forwards;
         }
         
-        /* Animasi Berkas Cahaya Bergerak (Light Beam) di Hero */
+        /* Animasi Berkas Cahaya Bergerak (Light Beam) di Hero Full-Width */
         .hero::before {
             content: '';
             position: absolute;
@@ -77,8 +82,8 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(7, 11, 20, 0) 60%);
-            animation: lightBeamMove 10s linear infinite;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, rgba(7, 11, 20, 0) 65%);
+            animation: lightBeamMove 12s linear infinite;
             z-index: -1;
             pointer-events: none;
         }
@@ -87,11 +92,11 @@
         .hero::after {
             content: '';
             position: absolute;
-            top: 10%; right: 10%;
-            width: 35vw; height: 35vw;
-            max-width: 350px; max-height: 350px;
+            top: 10%; right: 15%;
+            width: 40vw; height: 40vw;
+            max-width: 450px; max-height: 450px;
             background: var(--accent-glow);
-            filter: blur(100px);
+            filter: blur(130px);
             border-radius: 50%;
             animation: pulseGlow 7s ease-in-out infinite alternate;
             z-index: -1;
@@ -99,7 +104,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 5.5vw, 4.5rem);
+            font-size: clamp(2.2rem, 5.5vw, 4.8rem);
             font-weight: 900;
             line-height: 1.1;
             letter-spacing: -0.04em;
@@ -111,9 +116,9 @@
             animation: gradientShine 5s linear infinite;
         }
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.18rem;
             color: var(--text-secondary);
-            max-width: 650px;
+            max-width: 720px;
             margin-bottom: 2.5rem;
             font-weight: 300;
             line-height: 1.7;
@@ -213,7 +218,6 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            /* Memperlebar jarak bawah badge agar tidak mepet ke judul */
             margin-bottom: 1.2rem; 
             border: 1px solid rgba(255,255,255,0.1);
         }
@@ -221,13 +225,11 @@
         .card h3 {
             font-size: 1.4rem;
             font-weight: 700;
-            /* Memperlebar jarak bawah judul agar tidak mepet ke paragraf */
             margin-bottom: 1.1rem; 
             letter-spacing: -0.02em;
             line-height: 1.3;
         }
 
-        /* Memperlebar jarak spasi antar baris teks pada deskripsi card */
         .card p {
             color: var(--text-secondary);
             font-size: 0.98rem;
@@ -271,8 +273,6 @@
             border: 1px solid rgba(255,255,255,0.2);
         }
         .visual-card:hover .gallery-indicator { opacity: 1; }
-        
-        /* Memperlebar ruang padding card agar elemen di dalam punya napas */
         .visual-card .content { padding: 2.2rem; }
 
         .hidden-details { display: none; }
@@ -384,8 +384,8 @@
             .nav-links { display: none; }
             section { padding-top: 7rem; padding-bottom: 4rem; } 
             
-            .hero { padding-top: 8vh; padding-bottom: 6vh; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero { padding: 8vh 1.5rem; }
+            .hero h1 { font-size: 2.3rem; }
             .hero p { font-size: 1rem; }
             
             .modal-project-content { max-height: 95vh; }
@@ -412,7 +412,7 @@
         </div>
     </nav>
 
-    <header class="container hero">
+    <header class="hero">
         <h1>Crafting Digital Experiences &<br>Creative Solutions.</h1>
         <p>Your time is truly valuable, and thank you for taking the time to explore this space. I designed this portfolio to be clean and straightforward; there's plenty more happening behind the scenes that isn't featured here just yet!</p>
         <a href="https://www.linkedin.com/in/naimullahaziz/" target="_blank" rel="noopener noreferrer" class="btn">Let's Connect</a>
