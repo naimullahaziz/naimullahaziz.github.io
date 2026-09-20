@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +26,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         .container {
@@ -44,6 +45,7 @@
             border-bottom: 1px solid var(--border-color);
             z-index: 100;
             padding: 1rem 0;
+            animation: fadeInDown 0.8s ease forwards;
         }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: -0.02em; }
@@ -57,18 +59,56 @@
         }
         .nav-links a:hover { color: var(--accent-color); }
 
-        /* --- HERO SECTION --- */
-        .hero { padding: 12vh 0 8vh; text-align: left; }
+        /* --- HERO SECTION WITH LIGHT BEAM ANIMATION --- */
+        .hero { 
+            padding-top: 12vh; 
+            padding-bottom: 8vh; 
+            text-align: left; 
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease forwards;
+        }
         
+        /* Animasi Berkas Cahaya Bergerak (Light Beam) di Hero */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(7, 11, 20, 0) 60%);
+            animation: lightBeamMove 10s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Ambient Glowing Orb */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 10%; right: 10%;
+            width: 35vw; height: 35vw;
+            max-width: 350px; max-height: 350px;
+            background: var(--accent-glow);
+            filter: blur(100px);
+            border-radius: 50%;
+            animation: pulseGlow 7s ease-in-out infinite alternate;
+            z-index: -1;
+            pointer-events: none;
+        }
+
         .hero h1 {
             font-size: clamp(2rem, 5.5vw, 4.5rem);
             font-weight: 900;
             line-height: 1.1;
             letter-spacing: -0.04em;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 30%, #7a8b99);
+            background: linear-gradient(135deg, #ffffff 20%, #7a8b99 50%, #ffffff 80%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradientShine 5s linear infinite;
         }
         .hero p {
             font-size: 1.15rem;
@@ -76,6 +116,7 @@
             max-width: 650px;
             margin-bottom: 2.5rem;
             font-weight: 300;
+            line-height: 1.7;
         }
         .btn {
             display: inline-block;
@@ -90,19 +131,40 @@
         }
         .btn:hover {
             background-color: var(--accent-color);
-            box-shadow: 0 0 20px var(--accent-glow);
-            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--accent-glow);
+            transform: translateY(-3px);
             color: #000;
         }
 
-        /* --- BENTO GRID SECTION --- */
-        /* UPDATE: Padding top ditambah agar spasi lebih lega (breathing room) */
+        /* Keyframes Animations */
+        @keyframes lightBeamMove {
+            0% { transform: translate(-30%, -30%) rotate(0deg); }
+            50% { transform: translate(10%, 10%) rotate(180deg); }
+            100% { transform: translate(-30%, -30%) rotate(360deg); }
+        }
+        @keyframes gradientShine {
+            to { background-position: 200% center; }
+        }
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9); opacity: 0.4; }
+            100% { transform: scale(1.15); opacity: 0.8; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- BENTO GRID SECTION (HOMEPAGE) --- */
         section { 
-            padding-top: 8rem; 
-            padding-bottom: 5rem; 
+            padding-top: 11rem; 
+            padding-bottom: 6rem; 
             border-top: 1px solid var(--border-color); 
         }
-        .section-header { margin-bottom: 3.5rem; }
+        .section-header { margin-bottom: 4.5rem; }
         .section-header h2 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; }
         .section-header span {
             color: var(--accent-color);
@@ -117,7 +179,7 @@
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
         .bento-grid.large {
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -143,7 +205,7 @@
 
         .badge {
             align-self: flex-start;
-            padding: 0.4rem 1rem;
+            padding: 0.45rem 1.1rem;
             background: rgba(255,255,255,0.05);
             color: #cbd5e1;
             border-radius: 100px;
@@ -151,23 +213,28 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
+            /* Memperlebar jarak bawah badge agar tidak mepet ke judul */
+            margin-bottom: 1.2rem; 
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .card h3 {
             font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            /* Memperlebar jarak bawah judul agar tidak mepet ke paragraf */
+            margin-bottom: 1.1rem; 
             letter-spacing: -0.02em;
-        }
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 300;
+            line-height: 1.3;
         }
 
-        /* --- VISUAL CARDS (For Images) --- */
+        /* Memperlebar jarak spasi antar baris teks pada deskripsi card */
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            font-weight: 300;
+            line-height: 1.8; 
+        }
+
         .visual-card .img-container {
             width: 100%;
             height: 220px;
@@ -188,7 +255,6 @@
             transform: scale(1.05);
         }
         
-        /* Indikator Gallery Hover */
         .gallery-indicator {
             position: absolute;
             top: 50%; left: 50%;
@@ -205,120 +271,104 @@
             border: 1px solid rgba(255,255,255,0.2);
         }
         .visual-card:hover .gallery-indicator { opacity: 1; }
-        .visual-card .content { padding: 2rem; }
+        
+        /* Memperlebar ruang padding card agar elemen di dalam punya napas */
+        .visual-card .content { padding: 2.2rem; }
 
-        /* --- GALLERY MODAL (CARD STYLE) --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
+        .hidden-details { display: none; }
+
+        /* =========================================
+           MODAL 1: PROJECT DETAILS (Sub-Postcards)
+           ========================================= */
+        .modal-project {
+            display: none; position: fixed; z-index: 9998; top: 0; left: 0;
+            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px); justify-content: center; align-items: center; padding: 1.5rem;
         }
-        .modal-content {
-            position: relative;
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            max-width: 900px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-            max-height: 90vh; /* Agar tidak melewati layar */
+        .modal-project-content {
+            position: relative; background: var(--bg-color); border: 1px solid var(--border-color);
+            border-radius: 24px; max-width: 1100px; width: 100%; display: flex; flex-direction: column;
+            overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.8); max-height: 90vh;
+            animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .modal-image-wrapper {
-            position: relative;
-            width: 100%;
-            height: 55vh;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-image-wrapper img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            animation: fadeIn 0.3s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.98); }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
+
+        .modal-header { padding: 2.5rem; background: var(--surface-color); border-bottom: 1px solid var(--border-color); }
+        .modal-header h2 { font-size: 2rem; color: var(--text-primary); margin-bottom: 0.8rem; letter-spacing: -0.02em; }
+        .modal-header p { font-size: 1.05rem; color: var(--text-secondary); max-width: 900px; line-height: 1.7; }
+        
+        .modal-body { padding: 2.5rem; overflow-y: auto; background: var(--bg-color); }
+        
+        .sub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem; }
+        .sub-card {
+            background: var(--surface-color); border: 1px solid var(--border-color);
+            border-radius: 16px; overflow: hidden; transition: all 0.3s ease; cursor: pointer;
+            position: relative;
+        }
+        .sub-card:hover { transform: translateY(-4px); border-color: rgba(0, 229, 255, 0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        
+        .sub-card-img { width: 100%; height: 200px; background: #111; position: relative; overflow: hidden; }
+        .sub-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .sub-card:hover .sub-card-img img { transform: scale(1.05); }
+        
+        .sub-gallery-indicator {
+            position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8);
+            color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px); opacity: 0; transition: 0.3s;
+        }
+        .sub-card:hover .sub-gallery-indicator { opacity: 1; }
+
+        .sub-card-content { padding: 1.6rem; }
+        .sub-card-content h4 { font-size: 1.15rem; color: var(--text-primary); margin-bottom: 0.7rem; }
+        .sub-card-content p { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.7; }
+
         .close-btn {
-            position: absolute;
-            top: 15px; right: 15px;
-            width: 40px; height: 40px;
-            background: rgba(0,0,0,0.6);
-            border-radius: 50%;
-            color: #fff;
-            font-size: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 10;
-            border: 1px solid rgba(255,255,255,0.1);
+            position: absolute; top: 20px; right: 25px; width: 44px; height: 44px;
+            background: rgba(255,255,255,0.05); border-radius: 50%; color: #fff; font-size: 26px;
+            display: flex; justify-content: center; align-items: center; cursor: pointer;
+            transition: all 0.3s; z-index: 10; border: 1px solid rgba(255,255,255,0.1);
         }
         .close-btn:hover { background: var(--accent-color); color: #000; }
-        
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 44px; height: 44px;
-            display: flex; justify-content: center; align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50%;
-            user-select: none;
-            transition: 0.3s ease;
-        }
-        .prev { left: 15px; }
-        .next { right: 15px; }
-        .prev:hover, .next:hover { background-color: var(--accent-color); color: #000; }
-        
-        .counter {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            background: rgba(0,0,0,0.6);
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
 
-        .modal-text {
-            padding: 2rem;
-            background: var(--surface-color);
-            overflow-y: auto;
+        /* =========================================
+           MODAL 2: IMAGE GALLERY SLIDER
+           ========================================= */
+        .modal-gallery {
+            display: none; position: fixed; z-index: 9999; top: 0; left: 0;
+            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center; align-items: center; flex-direction: column;
         }
-        .modal-text h3 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
+        .gallery-wrapper {
+            position: relative; width: 100%; max-width: 1200px; height: 75vh;
+            display: flex; justify-content: center; align-items: center; padding: 0 2rem;
         }
-        .modal-text p {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
+        .gallery-wrapper img {
+            max-width: 100%; max-height: 100%; object-fit: contain;
+            transition: opacity 0.2s ease; border-radius: 8px;
         }
+        .gallery-close {
+            position: absolute; top: 30px; right: 40px; color: #fff; font-size: 40px;
+            cursor: pointer; z-index: 100; transition: color 0.3s;
+        }
+        .gallery-close:hover { color: var(--accent-color); }
+        
+        .gallery-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;
+            color: white; font-size: 24px; background: rgba(255,255,255,0.1); border-radius: 50%;
+            cursor: pointer; transition: 0.3s ease; border: 1px solid rgba(255,255,255,0.2);
+        }
+        .gallery-nav.prev { left: 20px; }
+        .gallery-nav.next { right: 20px; }
+        .gallery-nav:hover { background-color: var(--accent-color); color: #000; }
+        
+        .gallery-info { text-align: center; margin-top: 20px; max-width: 800px; padding: 0 20px; }
+        .gallery-info h3 { color: #fff; font-size: 1.5rem; margin-bottom: 8px; }
+        .gallery-info p { color: #aaa; font-size: 1rem; margin-bottom: 15px; line-height: 1.6; }
+        .gallery-counter { color: #fff; font-weight: bold; background: rgba(255,255,255,0.15); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; }
 
         /* --- FOOTER --- */
         footer {
@@ -329,12 +379,23 @@
             font-size: 0.9rem;
         }
 
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            section { padding: 5rem 0 4rem; } /* Penyesuaian spasi mobile */
+            section { padding-top: 7rem; padding-bottom: 4rem; } 
+            
+            .hero { padding-top: 8vh; padding-bottom: 6vh; }
             .hero h1 { font-size: 2.5rem; }
-            .modal-image-wrapper { height: 40vh; }
-            .modal-text { padding: 1.5rem; }
+            .hero p { font-size: 1rem; }
+            
+            .modal-project-content { max-height: 95vh; }
+            .modal-header { padding: 1.5rem; }
+            .modal-body { padding: 1.5rem; }
+            .sub-grid { grid-template-columns: 1fr; }
+            .gallery-wrapper { height: 60vh; }
+            .gallery-nav { width: 40px; height: 40px; font-size: 18px; }
+            .gallery-close { top: 15px; right: 20px; font-size: 30px; }
+            .visual-card.tall .img-container { height: 220px; }
         }
     </style>
 </head>
@@ -360,47 +421,156 @@
     <!-- SECTION 1: PROFESSIONAL WORK & WEB MANAGEMENT -->
     <section id="work" class="container">
         <div class="section-header">
-            <span>Operations & Web</span>
+            <span>Operations, Comms & Web</span>
             <h2>Professional Experience</h2>
         </div>
         
-        <div class="bento-grid">
-            <!-- Kartu 1 -->
-            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/work/live-01.webp,assets/img/work/live-02.webp">
+        <div class="bento-grid large">
+            <!-- MAIN CARD: Prowibo Operations & Comms -->
+            <div class="card visual-card tall" onclick="openProject(this)">
                 <div class="img-container">
-                    <img src="assets/img/work/live-01.webp" alt="Live Play Mobile" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
+                    <img src="assets/img/work/prowibo-annual.webp" alt="Prowibo Operations & Design" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">Open Projects</div>
                 </div>
                 <div class="content">
-                    <span class="badge">Production</span>
-                    <h3>Live Play Mobile Inc.</h3>
-                    <p><strong>Jr. Producer</strong><br>Managing the production of live host-led bingo shows. Guiding hosts, preparing scripts, and monitoring real-time technical operations to ensure an immersive gaming experience.</p>
+                    <span class="badge">Operations & Visual Comms</span>
+                    <h3 class="card-title">Professors Without Borders (Prowibo)</h3>
+                    <div class="card-desc">
+                        <p><strong>Operations & Communication Assistant</strong><br>End-to-end digital operations and visual communications. Designing Annual Reports and One-Pagers, managing organizational documents, setting up Monday.com automations, and executing comprehensive LinkedIn and social media content strategies.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Kartu 2 -->
-            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/work/maytech-01.webp,assets/img/work/maytech-02.webp">
-                <div class="img-container">
-                    <img src="assets/img/work/maytech-01.webp" alt="Maytech E-Commerce" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
-                </div>
-                <div class="content">
-                    <span class="badge">E-Commerce</span>
-                    <h3>Maytech Digital Provider</h3>
-                    <p><strong>Digital Content Specialist</strong><br>Supported online store management for school IT equipment via SIPLah. Handled product photography, visual layouts, and streamlined digital storefronts.</p>
+                
+                <!-- HIDDEN SUB-PROJECTS FOR PROWIBO -->
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-annual1.webp,assets/img/work/prowibo-annual2.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/prowibo-annual1.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Annual Report Design</h4>
+                            <p class="sub-desc">Visual layout and infographics for global organizational annual reports.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-onepager1.webp,assets/img/work/prowibo-onepager2.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/prowibo-onepager1.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">One-Pager Documents</h4>
+                            <p class="sub-desc">Designing one-page executive documents for presentations and partnerships.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-monday1.webp,assets/img/work/prowibo-monday2.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/prowibo-monday1.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Monday.com Automation</h4>
+                            <p class="sub-desc">Building workflows and automations for international team task management.</p>
+                        </div>
+                    </div>
+
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-linkedin1.webp,assets/img/work/prowibo-linkedin2.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/prowibo-linkedin1.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">LinkedIn Strategy</h4>
+                            <p class="sub-desc">Managing content calendars, copywriting, and visual asset design for Prowibo's LinkedIn.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kartu 3 -->
-            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/work/web-01.webp,assets/img/work/web-02.webp">
+            <!-- Card: Live Play Mobile -->
+            <div class="card visual-card tall" onclick="openProject(this)">
+                <div class="img-container">
+                    <img src="assets/img/work/live-01.webp" alt="Live Play Mobile" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">Open Projects</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Production</span>
+                    <h3 class="card-title">Live Play Mobile Inc.</h3>
+                    <div class="card-desc">
+                        <p><strong>Jr. Producer</strong><br>Managing the production of live host-led bingo shows. Guiding hosts, preparing scripts, and monitoring real-time technical operations to ensure an immersive gaming experience.</p>
+                    </div>
+                </div>
+                
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/live-01.webp,assets/img/work/live-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/live-01.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Live Show Production</h4>
+                            <p class="sub-desc">Directing hosts in real-time and ensuring smooth technical broadcasts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-grid" style="margin-top: 1.8rem;">
+            <!-- Card: Maytech -->
+            <div class="card visual-card" onclick="openProject(this)">
+                <div class="img-container">
+                    <img src="assets/img/work/maytech-01.webp" alt="Maytech E-Commerce" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">Open Projects</div>
+                </div>
+                <div class="content">
+                    <span class="badge">E-Commerce</span>
+                    <h3 class="card-title">Maytech Digital Provider</h3>
+                    <div class="card-desc">
+                        <p><strong>Digital Content Specialist</strong><br>Supported online store management for school IT equipment via SIPLah. Handled product photography, visual layouts, and streamlined digital storefronts.</p>
+                    </div>
+                </div>
+
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/maytech-01.webp,assets/img/work/maytech-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/maytech-01.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">SIPLah Storefront</h4>
+                            <p class="sub-desc">Product listing management for school digital procurement platforms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card: Web Freelance -->
+            <div class="card visual-card" onclick="openProject(this)">
                 <div class="img-container">
                     <img src="assets/img/work/web-01.webp" alt="Web Development" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
+                    <div class="gallery-indicator">Open Projects</div>
                 </div>
                 <div class="content">
                     <span class="badge">Web Management</span>
-                    <h3>Freelance Web Specialist</h3>
-                    <p><strong>WordPress & Database</strong><br>Expertise in building and managing WordPress sites, configuring cPanel/Niagahoster, and utilizing basic PHP & SQL to solve technical challenges and enhance website functionality.</p>
+                    <h3 class="card-title">Freelance Web Specialist</h3>
+                    <div class="card-desc">
+                        <p><strong>WordPress & Database</strong><br>Expertise in building and managing WordPress sites, configuring cPanel/Niagahoster, and utilizing PHP & SQL to solve technical challenges.</p>
+                    </div>
+                </div>
+
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/web-01.webp,assets/img/work/web-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/web-01.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">WordPress Builds & Database</h4>
+                            <p class="sub-desc">Custom website builds, cPanel management, and SQL database optimization.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -415,41 +585,86 @@
         <div class="bento-grid large">
             
             <!-- InstaCilacap -->
-            <div class="card visual-card tall" onclick="openGallery(this)" data-gallery="assets/img/work/instacilacap-01.webp,assets/img/work/instacilacap-02.webp">
+            <div class="card visual-card tall" onclick="openProject(this)">
                 <div class="img-container">
                     <img src="assets/img/work/instacilacap-01.webp" alt="InstaCilacap Feed" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
+                    <div class="gallery-indicator">Open Projects</div>
                 </div>
                 <div class="content">
                     <span class="badge">Founder</span>
-                    <h3>InstaCilacap (13.4K Followers)</h3>
-                    <p>Built a dedicated platform showcasing the vibrant culture and attractions of Cilacap, creating high-quality engaging content to connect local businesses and residents.</p>
+                    <h3 class="card-title">InstaCilacap (13.4K Followers)</h3>
+                    <div class="card-desc">
+                        <p>Built a dedicated platform showcasing the vibrant culture and attractions of Cilacap, creating high-quality engaging content to connect local businesses and residents.</p>
+                    </div>
+                </div>
+
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/instacilacap-01.webp,assets/img/work/instacilacap-02.webp,assets/img/work/instacilacap-03.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/instacilacap-01.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Content Curation & Partnerships</h4>
+                            <p class="sub-desc">Curating local landscape photography and executing paid business collaboration campaigns.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Prowibo Campaigns -->
-            <div class="card visual-card tall" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-01.webp,assets/img/work/prowibo-02.webp">
+            <!-- Prowibo Showcase Campaign -->
+            <div class="card visual-card tall" onclick="openProject(this)">
                 <div class="img-container">
                     <img src="assets/img/work/prowibo-01.webp" alt="Global Poetry Showcase" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
+                    <div class="gallery-indicator">Open Projects</div>
                 </div>
                 <div class="content">
-                    <span class="badge">Professors Without Borders</span>
-                    <h3>Global Campaigns & Posters</h3>
-                    <p>Creative Lead & Communication Assistant. Designed campaign visuals for the <strong>Global Poetry Showcase 2025</strong> and the <strong>"Educate, Inspire, Empower"</strong> brochure, maintaining branding consistency across platforms.</p>
+                    <span class="badge">Event Campaign</span>
+                    <h3 class="card-title">Global Poetry Showcase 2025</h3>
+                    <div class="card-desc">
+                        <p>Designed targeted campaign visuals, brochures, and promotional social media assets for the Global Poetry Showcase to maintain branding consistency and drive global engagement.</p>
+                    </div>
+                </div>
+                
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-poetry1.webp,assets/img/work/prowibo-poetry2.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/prowibo-poetry1.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Campaign Assets</h4>
+                            <p class="sub-desc">Poster design, digital brochures, and Instagram feed curation for Prowibo's poetry event.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Freelance Client Content -->
-            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/work/client-01.webp,assets/img/work/client-02.webp">
-                <div class="img-container">
+            <div class="card visual-card" style="grid-column: 1 / -1; flex-direction: row;" onclick="openProject(this)">
+                <div class="img-container" style="width: 50%; height: auto;">
                     <img src="assets/img/work/client-01.webp" alt="Let's Move & SMK Content" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
+                    <div class="gallery-indicator">Open Projects</div>
                 </div>
-                <div class="content">
+                <div class="content" style="width: 50%; display: flex; flex-direction: column; justify-content: center;">
                     <span class="badge">Creative Developer</span>
-                    <h3>Client Social Media & Brands</h3>
-                    <p>Developed digital identities and social media feeds for various clients, including health campaigns ("Let's Move") and full digital makeovers for institutions like SMK Muhammadiyah 1 Cilacap.</p>
+                    <h3 class="card-title">Client Social Media & Brands</h3>
+                    <div class="card-desc">
+                        <p>Developed digital identities and social media feeds for various clients, including health campaigns ("Let's Move") and full digital makeovers for educational institutions.</p>
+                    </div>
+                </div>
+
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/client-01.webp,assets/img/work/client-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/client-01.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Let's Move & SMK Campaign</h4>
+                            <p class="sub-desc">Visual feed branding for educational campaigns and new student admissions.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -465,41 +680,86 @@
         <div class="bento-grid">
             
             <!-- Video Editing -->
-            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/creative/video-01.webp,assets/img/creative/video-02.webp">
+            <div class="card visual-card" onclick="openProject(this)">
                 <div class="img-container">
                     <img src="assets/img/creative/video-01.webp" alt="Short Form Video" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
+                    <div class="gallery-indicator">Open Projects</div>
                 </div>
                 <div class="content">
                     <span class="badge">Video Editor</span>
-                    <h3>Short-Form & Multi-Angle Video</h3>
-                    <p>3+ years experience creating trendy short-form content (Reels/Shorts) using Premiere, CapCut, and Filmora. Projects range from product ads (MUD WTR), podcast edits, to multi-angle lifestyle shoots.</p>
+                    <h3 class="card-title">Short-Form & Multi-Angle Video</h3>
+                    <div class="card-desc">
+                        <p>3+ years experience creating trendy short-form content (Reels/Shorts) using Premiere, CapCut, and Filmora. Projects range from product ads (MUD WTR), podcast edits, to multi-angle shoots.</p>
+                    </div>
+                </div>
+
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/creative/video-01.webp,assets/img/creative/video-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/creative/video-01.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Commercials & Multi-Cam</h4>
+                            <p class="sub-desc">Fast-paced editing with motion text (MUD WTR) and color grading for multi-angle shoots (KFC).</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Documentary -->
-            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/creative/doc-01.webp,assets/img/creative/doc-02.webp">
+            <div class="card visual-card" onclick="openProject(this)">
                 <div class="img-container">
                     <img src="assets/img/creative/doc-01.webp" alt="Documentary" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
+                    <div class="gallery-indicator">Open Projects</div>
                 </div>
                 <div class="content">
                     <span class="badge">Documentary</span>
-                    <h3>Event & Remote Village Coverage</h3>
-                    <p>Filmed and edited the "17 Agustus 2024" Independence Day documentary and school scouting activities. Transforming raw, modest setups into vibrant, emotionally powerful visual stories.</p>
+                    <h3 class="card-title">Event & Remote Village Coverage</h3>
+                    <div class="card-desc">
+                        <p>Filmed and edited the August 17th Independence Day documentary and school scouting activities. Transforming raw, modest setups into vibrant, emotionally powerful visual stories.</p>
+                    </div>
+                </div>
+
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/creative/doc-01.webp,assets/img/creative/doc-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/creative/doc-01.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Event Documentary</h4>
+                            <p class="sub-desc">Cinematography and emotional editing for Independence Day and school scouting events.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Audio & Animation -->
-            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/creative/audio-01.webp,assets/img/creative/audio-02.webp">
+            <div class="card visual-card" onclick="openProject(this)">
                 <div class="img-container">
                     <img src="assets/img/creative/audio-01.webp" alt="Spotify & Animation" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">View Gallery</div>
+                    <div class="gallery-indicator">Open Projects</div>
                 </div>
                 <div class="content">
                     <span class="badge">Music & AI Animation</span>
-                    <h3>Original Songs & Short Films</h3>
-                    <p>Independent artist on Spotify (tracks: <em>Manusia Tangguh</em>, <em>Setapak</em>) handling full audio production. Also directed and produced the short animated film <em>Tamashi no Senshi</em> assisted by Generative AI.</p>
+                    <h3 class="card-title">Original Songs & Short Films</h3>
+                    <div class="card-desc">
+                        <p>Independent artist on Spotify (tracks: <em>Manusia Tangguh</em>, <em>Setapak</em>). Also directed and produced the short animated film <em>Tamashi no Senshi</em> assisted by Generative AI.</p>
+                    </div>
+                </div>
+
+                <div class="hidden-details">
+                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/creative/audio-01.webp,assets/img/creative/audio-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/creative/audio-01.webp" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View Gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Spotify Releases & Animation</h4>
+                            <p class="sub-desc">Full music production and experimental short animated film creation utilizing Generative AI.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -512,96 +772,133 @@
         </div>
     </footer>
 
-    <!-- MODAL GALLERY (CARD STYLE DENGAN DESKRIPSI) -->
-    <div id="gallery-modal" class="modal">
-        <div class="modal-content">
-            <div class="close-btn" onclick="closeGallery()">&times;</div>
+    <!-- MODAL 1: PROJECT (Sub-Postcards List) -->
+    <div id="project-modal" class="modal-project">
+        <div class="modal-project-content">
+            <div class="close-btn" onclick="closeProject()">&times;</div>
             
-            <div class="modal-image-wrapper">
-                <div class="prev" onclick="changeSlide(-1)">&#10094;</div>
-                <img id="gallery-img" src="" alt="Gallery Preview">
-                <div class="next" onclick="changeSlide(1)">&#10095;</div>
-                <div id="gallery-counter" class="counter">1 / 1</div>
+            <div class="modal-header">
+                <h2 id="modal-title">Project Title</h2>
+                <div id="modal-desc">Project description.</div>
             </div>
-
-            <div class="modal-text">
-                <h3 id="modal-title">Project Title</h3>
-                <p id="modal-desc">Project description goes here.</p>
+            
+            <div class="modal-body">
+                <!-- Sub-cards rendered here -->
+                <div id="modal-sub-grid" class="sub-grid"></div>
             </div>
         </div>
     </div>
 
-    <!-- SCRIPT UNTUK MODAL GALLERY -->
+    <!-- MODAL 2: IMAGE GALLERY SLIDER -->
+    <div id="gallery-modal" class="modal-gallery">
+        <div class="gallery-close" onclick="closeGallery()">&times;</div>
+        
+        <div class="gallery-wrapper">
+            <div class="gallery-nav prev" onclick="changeSlide(-1)">&#10094;</div>
+            <img id="gallery-img" src="" alt="Gallery Image">
+            <div class="gallery-nav next" onclick="changeSlide(1)">&#10095;</div>
+        </div>
+
+        <div class="gallery-info">
+            <h3 id="gallery-title">Image Title</h3>
+            <p id="gallery-desc">Image Description</p>
+            <div id="gallery-counter" class="gallery-counter">1 / 1</div>
+        </div>
+    </div>
+
+    <!-- SCRIPT (DUAL MODAL SYSTEM) -->
     <script>
-        let currentImages = [];
-        let currentIndex = 0;
-        const modal = document.getElementById('gallery-modal');
-        const modalImg = document.getElementById('gallery-img');
-        const counter = document.getElementById('gallery-counter');
+        // --- MODAL 1 (PROJECT LIST) ---
+        const modalProject = document.getElementById('project-modal');
         const modalTitle = document.getElementById('modal-title');
         const modalDesc = document.getElementById('modal-desc');
+        const modalGrid = document.getElementById('modal-sub-grid');
 
-        function openGallery(cardElement) {
-            const galleryData = cardElement.getAttribute('data-gallery');
+        function openProject(cardElement) {
+            const title = cardElement.querySelector('.card-title').innerHTML;
+            const desc = cardElement.querySelector('.card-desc').innerHTML;
+            const hiddenHTML = cardElement.querySelector('.hidden-details').innerHTML;
+            
+            modalTitle.innerHTML = title;
+            modalDesc.innerHTML = desc;
+            modalGrid.innerHTML = hiddenHTML;
+            
+            modalProject.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeProject() {
+            modalProject.style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+            modalGrid.innerHTML = ''; 
+        }
+
+        modalProject.addEventListener('click', function(e) {
+            if (e.target === modalProject) closeProject();
+        });
+
+
+        // --- MODAL 2 (IMAGE GALLERY) ---
+        let currentImages = [];
+        let currentIndex = 0;
+        const modalGallery = document.getElementById('gallery-modal');
+        const galleryImg = document.getElementById('gallery-img');
+        const galleryCounter = document.getElementById('gallery-counter');
+        const galleryTitle = document.getElementById('gallery-title');
+        const galleryDesc = document.getElementById('gallery-desc');
+
+        function openGallery(subCardElement) {
+            const galleryData = subCardElement.getAttribute('data-gallery');
             if (!galleryData) return;
             
-            // Ambil data teks dari kartu yang diklik
-            const titleText = cardElement.querySelector('h3').innerHTML;
-            const descText = cardElement.querySelector('p').innerHTML;
+            const titleText = subCardElement.querySelector('.sub-title').innerHTML;
+            const descText = subCardElement.querySelector('.sub-desc').innerHTML;
             
             currentImages = galleryData.split(',').map(item => item.trim());
             
             if (currentImages.length > 0) {
                 currentIndex = 0;
+                galleryTitle.innerHTML = titleText;
+                galleryDesc.innerHTML = descText;
                 
-                // Isi judul dan deskripsi ke dalam modal
-                modalTitle.innerHTML = titleText;
-                modalDesc.innerHTML = descText;
-                
-                updateModalContent();
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden'; // Kunci scroll halaman belakang
+                updateGalleryContent();
+                modalGallery.style.display = 'flex';
             }
         }
 
         function closeGallery() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Buka kembali scroll
+            modalGallery.style.display = 'none';
         }
 
         function changeSlide(direction) {
             currentIndex += direction;
-            if (currentIndex >= currentImages.length) {
-                currentIndex = 0;
-            } else if (currentIndex < 0) {
-                currentIndex = currentImages.length - 1;
-            }
-            updateModalContent();
+            if (currentIndex >= currentImages.length) currentIndex = 0;
+            else if (currentIndex < 0) currentIndex = currentImages.length - 1;
+            updateGalleryContent();
         }
 
-        function updateModalContent() {
-            modalImg.style.opacity = '0';
+        function updateGalleryContent() {
+            galleryImg.style.opacity = '0';
             setTimeout(() => {
-                modalImg.src = currentImages[currentIndex];
-                modalImg.style.opacity = '1';
+                galleryImg.src = currentImages[currentIndex];
+                galleryImg.style.opacity = '1';
             }, 150);
-            
-            counter.innerText = (currentIndex + 1) + " / " + currentImages.length;
+            galleryCounter.innerText = (currentIndex + 1) + " / " + currentImages.length;
         }
 
-        // Tutup modal jika area luar kartu diklik
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeGallery();
-            }
+        modalGallery.addEventListener('click', function(e) {
+            if (e.target === modalGallery) closeGallery();
         });
 
-        // Navigasi Keyboard
+        // --- KEYBOARD NAVIGATION ---
         document.addEventListener('keydown', function(e) {
-            if (modal.style.display === 'flex') {
+            if (modalGallery.style.display === 'flex') {
                 if (e.key === 'ArrowRight') changeSlide(1);
                 if (e.key === 'ArrowLeft') changeSlide(-1);
                 if (e.key === 'Escape') closeGallery();
+            } 
+            else if (modalProject.style.display === 'flex') {
+                if (e.key === 'Escape') closeProject();
             }
         });
     </script>
