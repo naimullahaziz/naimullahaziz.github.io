@@ -1,829 +1,609 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Na'imullah Aziz — Digital Operations, Web &amp; Visual Communications</title>
-<meta name="description" content="Digital operations, web and visual communications. Based in Cilacap, Central Java, working with teams in London and San Francisco.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Na'imullah Aziz | Digital & Creative Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Black Navy Color Palette */
+            --bg-color: #070B14;        
+            --surface-color: #0D1424;   
+            --surface-hover: #152036;   
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;  
+            --accent-color: #00e5ff;
+            --accent-glow: rgba(0, 229, 255, 0.15);
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
 
-<!--
-  ==========================================================================
-  CARA ISI GAMBAR / VIDEO
-  --------------------------------------------------------------------------
-  Struktur folder di repo:
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    index.html
-    assets/
-      img/
-        hero/    hero-01.webp  hero-02.webp  hero-03.webp  hero-04.webp
-        work/    pwb-01.webp   web-01.webp   dst.
-        creative/music-01.webp dst.
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-  Aturan:
-  - Semua <img> di bawah sudah menunjuk ke path itu. Begitu file-nya ada,
-    gambarnya muncul sendiri. Kalau belum ada, kotaknya otomatis jadi
-    placeholder bergaris putus-putus. Halaman tetap rapi.
-  - Video: JANGAN ditaruh di repo. Upload ke YouTube (boleh Unlisted),
-    lalu isi data-yt="ID_VIDEO" pada <figure class="media vid">.
-  - Nama file huruf kecil semua, tanpa spasi. GitHub Pages case-sensitive.
-  ==========================================================================
--->
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-<style>
-:root{
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top, 0px);
-  padding-bottom:env(safe-area-inset-bottom, 0px);
+        /* --- NAVBAR --- */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(7, 11, 20, 0.85); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: -0.02em; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
 
-  --accent:#0E7C7B;
-  --accent-light:#19A7A0;
-  --deep:#11405E;
-  --ink:#16202A;
-  --body:#3A424C;
-  --muted:#6E7A85;
-  --panel:#F1F6F6;
-  --blush:#E9F3F2;
-  --line:#DFE7E8;
-  --bg:#FFFFFF;
-  --card:#FFFFFF;
-  --ease:cubic-bezier(.22,.61,.36,1);
-}
-*,*::before,*::after{ box-sizing:inherit; }
-html{ scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top, 0px) + 72px); }
-body{
-  margin:0; background:var(--bg); color:var(--body);
-  font-family:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  font-size:16px; line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-img{ max-width:100%; display:block; }
-a{ color:var(--accent); text-decoration:none; }
-a:hover{ text-decoration:underline; }
-:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+        /* --- HERO SECTION --- */
+        .hero { padding: 12vh 0 8vh; text-align: left; }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5.5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 30%, #7a8b99);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--text-primary);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+            color: #000;
+        }
 
-/* ---------- scroll progress ---------- */
-.topbar{
-  position:fixed; top:0; left:0; right:0; height:6px; z-index:60;
-  background:var(--line);
-}
-.topbar span{
-  display:block; height:100%; width:100%;
-  background:linear-gradient(90deg,var(--accent-light) 0%,var(--accent) 46%,var(--deep) 100%);
-  transform:scaleX(0); transform-origin:0 50%;
-}
+        /* --- BENTO GRID SECTION --- */
+        /* UPDATE: Padding top ditambah agar spasi lebih lega (breathing room) */
+        section { 
+            padding-top: 8rem; 
+            padding-bottom: 5rem; 
+            border-top: 1px solid var(--border-color); 
+        }
+        .section-header { margin-bottom: 3.5rem; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; }
+        .section-header span {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
 
-/* ---------- nav ---------- */
-.nav{
-  position:sticky; top:env(safe-area-inset-top, 0px); z-index:40;
-  background:rgba(255,255,255,.88);
-  -webkit-backdrop-filter:saturate(180%) blur(12px);
-  backdrop-filter:saturate(180%) blur(12px);
-  border-bottom:1px solid var(--line);
-}
-.nav .wrap{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0; }
-.nav .me{ font-weight:800; color:var(--ink); font-size:15px; letter-spacing:-.01em; white-space:nowrap; }
-.nav ul{ display:flex; gap:20px; list-style:none; margin:0; padding:0; overflow-x:auto; -ms-overflow-style:none; scrollbar-width:none; }
-.nav ul::-webkit-scrollbar{ display:none; }
-.nav li{ flex:0 0 auto; }
-.nav a{ position:relative; display:block; color:var(--muted); font-size:13.5px; font-weight:600; padding:4px 0; }
-.nav a::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
-  background:var(--accent); transform:scaleX(0); transform-origin:0 50%;
-}
-.nav a:hover{ color:var(--accent); text-decoration:none; }
-.nav a.on{ color:var(--ink); }
-.nav a.on::after{ transform:scaleX(1); }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .bento-grid.large {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
 
-.wrap{ width:min(1020px, calc(100% - 44px)); margin:0 auto; }
+        .card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer; 
+        }
+        .card:hover {
+            background: var(--surface-hover);
+            border-color: rgba(0, 229, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 40px var(--accent-glow);
+        }
 
-.mono{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
-h1,h2,h3{ color:var(--ink); letter-spacing:-.022em; margin:0; }
-h1{ font-size:clamp(34px, 6.2vw, 58px); font-weight:900; line-height:1.03; }
-h2{ font-size:clamp(24px, 3.6vw, 34px); font-weight:900; line-height:1.15; }
-h3{ font-size:19px; font-weight:800; line-height:1.3; }
+        .badge {
+            align-self: flex-start;
+            padding: 0.4rem 1rem;
+            background: rgba(255,255,255,0.05);
+            color: #cbd5e1;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-section{ padding:64px 0; border-top:1px solid var(--line); }
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
 
-/* ---------- hero ---------- */
-.hero{ padding:64px 0 56px; }
-.hero-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:52px; align-items:center; }
-.hero .sub{ margin-top:20px; font-size:clamp(17px, 2.2vw, 21px); font-weight:800;
-  color:var(--accent); line-height:1.35; max-width:22ch; }
-.rule{ margin-top:22px; width:84px; height:3px; background:linear-gradient(90deg,var(--accent-light),var(--deep)); }
-.hero p{ margin:22px 0 0; max-width:54ch; font-size:17px; }
-.meta{ margin-top:30px; display:flex; flex-wrap:wrap; gap:10px 28px; font-size:14.5px; color:var(--muted); }
-.meta strong{ color:var(--ink); font-weight:700; }
+        /* --- VISUAL CARDS (For Images) --- */
+        .visual-card .img-container {
+            width: 100%;
+            height: 220px;
+            background: var(--surface-hover);
+            overflow: hidden;
+            position: relative;
+        }
+        .visual-card.tall .img-container { height: 320px; }
+        .visual-card .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s ease, transform 0.5s ease;
+        }
+        .visual-card:hover .img-container img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        /* Indikator Gallery Hover */
+        .gallery-indicator {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .visual-card:hover .gallery-indicator { opacity: 1; }
+        .visual-card .content { padding: 2rem; }
 
-.lines{ display:block; }
-.lines span{ display:block; overflow:hidden; }
-.lines b{ display:block; font-weight:inherit; }
+        /* --- GALLERY MODAL (CARD STYLE) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .modal-content {
+            position: relative;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            max-height: 90vh; /* Agar tidak melewati layar */
+        }
+        .modal-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-image-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 15px;
+            width: 40px; height: 40px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .close-btn:hover { background: var(--accent-color); color: #000; }
+        
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px; height: 44px;
+            display: flex; justify-content: center; align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            user-select: none;
+            transition: 0.3s ease;
+        }
+        .prev { left: 15px; }
+        .next { right: 15px; }
+        .prev:hover, .next:hover { background-color: var(--accent-color); color: #000; }
+        
+        .counter {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
 
-.btnrow{ margin-top:30px; display:flex; flex-wrap:wrap; gap:12px; }
-.btn{
-  display:inline-block; padding:13px 24px; font-size:14px; font-weight:700;
-  letter-spacing:.04em; text-transform:uppercase;
-  background:var(--accent); color:#fff; border:1px solid var(--accent);
-}
-.btn:hover{ background:var(--deep); border-color:var(--deep); text-decoration:none; }
-.btn.ghost{ background:transparent; color:var(--accent); }
-.btn.ghost:hover{ background:var(--panel); color:var(--accent); border-color:var(--accent); }
+        .modal-text {
+            padding: 2rem;
+            background: var(--surface-color);
+            overflow-y: auto;
+        }
+        .modal-text h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .modal-text p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
 
-/* ---------- hero stage / slideshow ---------- */
-.stage{
-  position:relative; aspect-ratio:4/5; overflow:hidden;
-  background:var(--panel); border:1px solid var(--line);
-}
-.slide{ position:absolute; inset:0; opacity:0; visibility:hidden; }
-.slide.on{ opacity:1; visibility:visible; }
-.slide img{ width:100%; height:100%; object-fit:cover; }
-.slide .cap{
-  position:absolute; left:0; right:0; bottom:0; padding:16px 18px;
-  color:#fff; font-size:13px; font-weight:600; line-height:1.4;
-  background:linear-gradient(to top, rgba(17,64,94,.94), rgba(17,64,94,.55) 55%, rgba(17,64,94,0));
-}
-.slide.empty img{ display:none; }
-.slide.empty{ background:linear-gradient(135deg,var(--blush),var(--panel)); }
-.slide.empty:nth-child(2){ background:linear-gradient(135deg,#E4EFF3,var(--panel)); }
-.slide.empty:nth-child(3){ background:linear-gradient(135deg,#EAF2EF,var(--blush)); }
-.slide.empty .cap{ background:none; color:var(--muted); font-weight:600;
-  top:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; }
-.slide.empty .cap::before{
-  content:""; position:absolute; inset:14px; border:1px dashed var(--line);
-}
-.dots{ position:absolute; right:14px; top:14px; display:flex; flex-direction:column; gap:8px; z-index:3; }
-.dots button{
-  width:9px; height:9px; padding:0; border:1px solid rgba(255,255,255,.85);
-  background:rgba(255,255,255,.28); cursor:pointer;
-  box-shadow:0 0 0 1px rgba(17,64,94,.25);
-}
-.dots button[aria-current="true"]{ background:#fff; }
+        /* --- FOOTER --- */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
 
-/* ---------- capability grid ---------- */
-.grid{ display:grid; gap:16px; margin-top:34px; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); }
-.cap{ background:var(--panel); border-top:3px solid var(--accent); padding:20px 22px 24px; }
-.cap:nth-child(3n-1){ border-top-color:var(--deep); }
-.cap:nth-child(3n){ border-top-color:var(--accent-light); }
-.cap h3{ font-size:16px; }
-.cap p{ margin:8px 0 0; font-size:14.5px; color:var(--muted); line-height:1.5; }
-
-/* ---------- case studies ---------- */
-.case{ margin-top:44px; padding-top:34px; border-top:1px solid var(--line); }
-.case:first-of-type{ border-top:none; padding-top:0; }
-.case .num{ font-size:13px; font-weight:800; letter-spacing:.18em;
-  text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
-.case h3{ font-size:clamp(21px, 2.8vw, 27px); font-weight:900; }
-.case .role{ margin-top:8px; font-size:15px; font-weight:700; color:var(--deep); }
-.case .role span{ font-weight:400; color:var(--muted); }
-.case p{ margin:16px 0 0; max-width:64ch; }
-.case ul{ margin:16px 0 0; padding:0; list-style:none;
-  display:grid; gap:8px 26px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); }
-.case li{ position:relative; padding-left:18px; font-size:15px; }
-.case li::before{ content:""; position:absolute; left:0; top:9px; width:7px; height:7px; background:var(--accent-light); }
-
-.callout{ margin-top:22px; background:var(--blush); border-left:4px solid var(--accent); padding:18px 22px; }
-.callout .h{ font-size:11.5px; font-weight:800; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
-.callout p{ margin:0; font-size:15px; }
-
-/* ---------- media grid ---------- */
-.slots{ display:grid; gap:14px; margin-top:26px; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); }
-.media{
-  position:relative; aspect-ratio:4/3; overflow:hidden; margin:0;
-  background:var(--panel); border:1px solid var(--line); cursor:pointer;
-}
-.media img{ width:100%; height:100%; object-fit:cover; }
-.media figcaption{
-  position:absolute; left:0; right:0; bottom:0; padding:12px 14px;
-  color:#fff; font-size:12.5px; font-weight:600; line-height:1.4;
-  background:linear-gradient(to top, rgba(17,64,94,.94), rgba(17,64,94,0));
-  opacity:0;
-}
-.media:hover figcaption,.media:focus-visible figcaption{ opacity:1; }
-.media.empty{ border-style:dashed; cursor:default; }
-.media.empty img{ display:none; }
-.media.empty figcaption{
-  position:static; opacity:1; background:none; color:var(--muted); font-weight:400;
-  height:100%; display:flex; align-items:center; justify-content:center;
-  text-align:center; padding:16px; font-size:12.5px; line-height:1.45;
-}
-.media .play{
-  position:absolute; left:50%; top:50%; width:58px; height:58px; margin:-29px 0 0 -29px;
-  background:rgba(14,124,123,.94); z-index:2;
-  clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
-}
-.media .play::after{
-  content:""; position:absolute; left:22px; top:18px;
-  border-left:18px solid #fff; border-top:11px solid transparent; border-bottom:11px solid transparent;
-}
-.media iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
-
-/* ---------- background rows ---------- */
-.row{ display:flex; gap:24px; padding:18px 0; border-top:1px solid var(--line); flex-wrap:wrap; }
-.row:last-of-type{ border-bottom:1px solid var(--line); }
-.row .when{ flex:0 0 132px; font-size:12.5px; font-weight:700;
-  letter-spacing:.09em; text-transform:uppercase; color:var(--muted); padding-top:4px; }
-.row .what{ flex:1 1 300px; }
-.row h3{ font-size:17px; }
-.row .org{ margin-top:4px; font-size:14.5px; font-weight:600; color:var(--accent); }
-.row .org span{ font-weight:400; color:var(--muted); }
-.row p{ margin:8px 0 0; font-size:15px; }
-
-.tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
-.tag{ background:var(--blush); color:var(--deep); font-size:13px; font-weight:600; padding:7px 14px; }
-
-footer{ padding:56px 0 72px; border-top:1px solid var(--line); background:var(--panel); }
-footer h2{ font-size:clamp(22px, 3vw, 30px); }
-footer p{ margin:14px 0 0; max-width:54ch; }
-.fnote{ margin-top:38px; font-size:13px; color:var(--muted); }
-
-/* ---------- lightbox ---------- */
-.lb{
-  position:fixed; inset:0; z-index:90; display:none;
-  background:rgba(12,32,44,.94); padding:24px;
-  align-items:center; justify-content:center;
-}
-.lb.open{ display:flex; }
-.lb img{ max-width:min(1100px,100%); max-height:82vh; object-fit:contain; }
-.lb .lbcap{ position:absolute; left:0; right:0; bottom:26px; text-align:center;
-  color:rgba(255,255,255,.86); font-size:13.5px; padding:0 24px; }
-.lb .x{ position:absolute; top:calc(18px + env(safe-area-inset-top,0px)); right:18px;
-  width:42px; height:42px; background:none; border:1px solid rgba(255,255,255,.4);
-  color:#fff; font-size:20px; line-height:1; cursor:pointer; }
-
-/* ==========================================================
-   MOTION — semua gerak hidup hanya kalau user tidak minta
-   "reduce motion" di setelan perangkatnya.
-   ========================================================== */
-@media (prefers-reduced-motion: no-preference){
-  .topbar span{ transition:transform .12s linear; }
-  .nav a::after{ transition:transform .3s var(--ease); }
-  .btn{ transition:background .25s var(--ease), border-color .25s var(--ease), transform .2s var(--ease); }
-  .btn:active{ transform:translateY(1px); }
-
-  .slide{ transition:opacity 1.1s var(--ease), visibility 1.1s; }
-  .slide.on img{ animation:kenburns 9s ease-out both; }
-  @keyframes kenburns{ from{ transform:scale(1.001) } to{ transform:scale(1.085) } }
-  .dots button{ transition:background .3s var(--ease); }
-
-  .media img{ transition:transform .85s var(--ease); }
-  .media:hover img{ transform:scale(1.055); }
-  .media figcaption{ transition:opacity .35s var(--ease); }
-  .cap-hover .play{ transition:transform .3s var(--ease); }
-  .media:hover .play{ transform:scale(1.08); }
-
-  .cap, .row, .tag{ transition:transform .3s var(--ease), box-shadow .3s var(--ease); }
-  .cap:hover{ transform:translateY(-3px); box-shadow:0 10px 24px -14px rgba(17,64,94,.45); }
-
-  /* reveal saat discroll */
-  .reveal{ opacity:0; transform:translateY(20px);
-    transition:opacity .75s var(--ease), transform .75s var(--ease);
-    transition-delay:var(--d, 0s); }
-  .reveal.in{ opacity:1; transform:none; }
-
-  /* pembuka halaman */
-  .lines b{ transform:translateY(105%); animation:lineup .9s var(--ease) both; }
-  .lines span:nth-child(1) b{ animation-delay:.05s }
-  .lines span:nth-child(2) b{ animation-delay:.16s }
-  @keyframes lineup{ to{ transform:none } }
-  .intro{ opacity:0; animation:fadeup .8s var(--ease) both; }
-  .intro:nth-of-type(1){ animation-delay:.30s }
-  .hero .sub{ opacity:0; animation:fadeup .8s var(--ease) .30s both; }
-  .hero .rule{ transform-origin:0 50%; animation:grow .7s var(--ease) .42s both; }
-  .hero > .hero-grid > div > p{ opacity:0; animation:fadeup .8s var(--ease) .48s both; }
-  .hero .meta{ opacity:0; animation:fadeup .8s var(--ease) .58s both; }
-  .hero .btnrow{ opacity:0; animation:fadeup .8s var(--ease) .66s both; }
-  .stage{ opacity:0; animation:fadeup .9s var(--ease) .22s both; }
-  @keyframes fadeup{ from{ opacity:0; transform:translateY(16px) } to{ opacity:1; transform:none } }
-  @keyframes grow{ from{ transform:scaleX(0) } to{ transform:scaleX(1) } }
-}
-
-@media (max-width:880px){
-  .hero-grid{ grid-template-columns:1fr; gap:36px; }
-  .stage{ aspect-ratio:16/10; order:-1; }
-  .dots{ flex-direction:row; right:auto; left:14px; top:auto; bottom:14px; }
-}
-@media (max-width:640px){
-  section{ padding:48px 0; }
-  .hero{ padding:48px 0 40px; }
-  .nav ul{ gap:16px; }
-  .nav .me{ display:none; }
-  .row .when{ flex:0 0 100%; }
-}
-</style>
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            section { padding: 5rem 0 4rem; } /* Penyesuaian spasi mobile */
+            .hero h1 { font-size: 2.5rem; }
+            .modal-image-wrapper { height: 40vh; }
+            .modal-text { padding: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="topbar"><span id="prog"></span></div>
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">Na'imullah Aziz</div>
+            <div class="nav-links">
+                <a href="#work">Work & Web</a>
+                <a href="#campaigns">Campaigns & Social</a>
+                <a href="#multimedia">Multimedia & Video</a>
+            </div>
+        </div>
+    </nav>
 
-<nav class="nav">
-  <div class="wrap">
-    <div class="me">Na&rsquo;imullah Aziz</div>
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#capabilities">Capabilities</a></li>
-      <li><a href="#background">Background</a></li>
-      <li><a href="#creative">Creative</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+    <header class="container hero">
+        <h1>Crafting Digital Experiences &<br>Creative Solutions.</h1>
+        <p>Combining technical IT expertise with creative storytelling. From managing robust web operations to designing high-impact visual campaigns, short-form videos, and original music.</p>
+        <a href="mailto:naimullahaziz@gmail.com" class="btn">Let's Collaborate</a>
+    </header>
 
-<header class="wrap hero">
-  <div class="hero-grid">
-    <div>
-      <span class="mono intro">Portfolio</span>
-      <h1 class="lines"><span><b>Na&rsquo;imullah</b></span><span><b>Aziz</b></span></h1>
-      <div class="sub">Digital Operations &middot; Web &amp; Visual Communications &middot; Creative Development</div>
-      <div class="rule"></div>
-      <p>I look after the digital side of organisations: websites, communications, visual materials, and the day-to-day operations that keep them moving. I work from Cilacap in Central Java with teams in London and San Francisco, and I came to this through ten years in Indonesian education.</p>
-      <div class="meta">
-        <div><strong>Based in</strong> Cilacap, Central Java, Indonesia</div>
-        <div><strong>Working with</strong> teams in the UK and the US</div>
-        <div><strong>Available for</strong> remote and hybrid roles</div>
-      </div>
-      <div class="btnrow">
-        <a class="btn" href="mailto:naimullahaziz@gmail.com">Get in touch</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/naimullahaziz">LinkedIn</a>
-      </div>
+    <!-- SECTION 1: PROFESSIONAL WORK & WEB MANAGEMENT -->
+    <section id="work" class="container">
+        <div class="section-header">
+            <span>Operations & Web</span>
+            <h2>Professional Experience</h2>
+        </div>
+        
+        <div class="bento-grid">
+            <!-- Kartu 1 -->
+            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/work/live-01.webp,assets/img/work/live-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/work/live-01.webp" alt="Live Play Mobile" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Production</span>
+                    <h3>Live Play Mobile Inc.</h3>
+                    <p><strong>Jr. Producer</strong><br>Managing the production of live host-led bingo shows. Guiding hosts, preparing scripts, and monitoring real-time technical operations to ensure an immersive gaming experience.</p>
+                </div>
+            </div>
+            
+            <!-- Kartu 2 -->
+            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/work/maytech-01.webp,assets/img/work/maytech-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/work/maytech-01.webp" alt="Maytech E-Commerce" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">E-Commerce</span>
+                    <h3>Maytech Digital Provider</h3>
+                    <p><strong>Digital Content Specialist</strong><br>Supported online store management for school IT equipment via SIPLah. Handled product photography, visual layouts, and streamlined digital storefronts.</p>
+                </div>
+            </div>
+
+            <!-- Kartu 3 -->
+            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/work/web-01.webp,assets/img/work/web-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/work/web-01.webp" alt="Web Development" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Web Management</span>
+                    <h3>Freelance Web Specialist</h3>
+                    <p><strong>WordPress & Database</strong><br>Expertise in building and managing WordPress sites, configuring cPanel/Niagahoster, and utilizing basic PHP & SQL to solve technical challenges and enhance website functionality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: SOCIAL MEDIA & CAMPAIGNS -->
+    <section id="campaigns" class="container">
+        <div class="section-header">
+            <span>Visual Strategy</span>
+            <h2>Campaigns & Social Media</h2>
+        </div>
+        <div class="bento-grid large">
+            
+            <!-- InstaCilacap -->
+            <div class="card visual-card tall" onclick="openGallery(this)" data-gallery="assets/img/work/instacilacap-01.webp,assets/img/work/instacilacap-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/work/instacilacap-01.webp" alt="InstaCilacap Feed" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Founder</span>
+                    <h3>InstaCilacap (13.4K Followers)</h3>
+                    <p>Built a dedicated platform showcasing the vibrant culture and attractions of Cilacap, creating high-quality engaging content to connect local businesses and residents.</p>
+                </div>
+            </div>
+
+            <!-- Prowibo Campaigns -->
+            <div class="card visual-card tall" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-01.webp,assets/img/work/prowibo-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/work/prowibo-01.webp" alt="Global Poetry Showcase" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Professors Without Borders</span>
+                    <h3>Global Campaigns & Posters</h3>
+                    <p>Creative Lead & Communication Assistant. Designed campaign visuals for the <strong>Global Poetry Showcase 2025</strong> and the <strong>"Educate, Inspire, Empower"</strong> brochure, maintaining branding consistency across platforms.</p>
+                </div>
+            </div>
+
+            <!-- Freelance Client Content -->
+            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/work/client-01.webp,assets/img/work/client-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/work/client-01.webp" alt="Let's Move & SMK Content" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Creative Developer</span>
+                    <h3>Client Social Media & Brands</h3>
+                    <p>Developed digital identities and social media feeds for various clients, including health campaigns ("Let's Move") and full digital makeovers for institutions like SMK Muhammadiyah 1 Cilacap.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: MULTIMEDIA, VIDEO, & AUDIO -->
+    <section id="multimedia" class="container">
+        <div class="section-header">
+            <span>Production Hub</span>
+            <h2>Video, Audio & Animation</h2>
+        </div>
+        <div class="bento-grid">
+            
+            <!-- Video Editing -->
+            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/creative/video-01.webp,assets/img/creative/video-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/creative/video-01.webp" alt="Short Form Video" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Video Editor</span>
+                    <h3>Short-Form & Multi-Angle Video</h3>
+                    <p>3+ years experience creating trendy short-form content (Reels/Shorts) using Premiere, CapCut, and Filmora. Projects range from product ads (MUD WTR), podcast edits, to multi-angle lifestyle shoots.</p>
+                </div>
+            </div>
+
+            <!-- Documentary -->
+            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/creative/doc-01.webp,assets/img/creative/doc-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/creative/doc-01.webp" alt="Documentary" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Documentary</span>
+                    <h3>Event & Remote Village Coverage</h3>
+                    <p>Filmed and edited the "17 Agustus 2024" Independence Day documentary and school scouting activities. Transforming raw, modest setups into vibrant, emotionally powerful visual stories.</p>
+                </div>
+            </div>
+
+            <!-- Audio & Animation -->
+            <div class="card visual-card" onclick="openGallery(this)" data-gallery="assets/img/creative/audio-01.webp,assets/img/creative/audio-02.webp">
+                <div class="img-container">
+                    <img src="assets/img/creative/audio-01.webp" alt="Spotify & Animation" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">View Gallery</div>
+                </div>
+                <div class="content">
+                    <span class="badge">Music & AI Animation</span>
+                    <h3>Original Songs & Short Films</h3>
+                    <p>Independent artist on Spotify (tracks: <em>Manusia Tangguh</em>, <em>Setapak</em>) handling full audio production. Also directed and produced the short animated film <em>Tamashi no Senshi</em> assisted by Generative AI.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Na'imullah Aziz. Built with passion in Central Java, Indonesia.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL GALLERY (CARD STYLE DENGAN DESKRIPSI) -->
+    <div id="gallery-modal" class="modal">
+        <div class="modal-content">
+            <div class="close-btn" onclick="closeGallery()">&times;</div>
+            
+            <div class="modal-image-wrapper">
+                <div class="prev" onclick="changeSlide(-1)">&#10094;</div>
+                <img id="gallery-img" src="" alt="Gallery Preview">
+                <div class="next" onclick="changeSlide(1)">&#10095;</div>
+                <div id="gallery-counter" class="counter">1 / 1</div>
+            </div>
+
+            <div class="modal-text">
+                <h3 id="modal-title">Project Title</h3>
+                <p id="modal-desc">Project description goes here.</p>
+            </div>
+        </div>
     </div>
 
-    <!-- SLIDESHOW: ganti src dengan gambar terbaikmu, 4 buah, potret 4:5 -->
-    <div class="stage" id="stage" aria-label="Selected work">
-      <div class="slide">
-        <img src="assets/img/hero/hero-01.webp" alt="">
-        <div class="cap">Professors Without Borders programme pages</div>
-      </div>
-      <div class="slide">
-        <img src="assets/img/hero/hero-02.webp" alt="">
-        <div class="cap">Global Poetry Showcase 2025 campaign set</div>
-      </div>
-      <div class="slide">
-        <img src="assets/img/hero/hero-03.webp" alt="">
-        <div class="cap">WordPress builds for schools and local clients</div>
-      </div>
-      <div class="slide">
-        <img src="assets/img/hero/hero-04.webp" alt="">
-        <div class="cap">Tamashi no Senshi, short animated film</div>
-      </div>
-      <div class="dots" id="dots"></div>
-    </div>
-  </div>
-</header>
+    <!-- SCRIPT UNTUK MODAL GALLERY -->
+    <script>
+        let currentImages = [];
+        let currentIndex = 0;
+        const modal = document.getElementById('gallery-modal');
+        const modalImg = document.getElementById('gallery-img');
+        const counter = document.getElementById('gallery-counter');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
 
-<section id="capabilities" class="wrap">
-  <span class="mono reveal">What I do</span>
-  <h2 class="reveal">Six things I am usually brought in for</h2>
-  <div class="grid stagger">
-    <div class="cap reveal">
-      <h3>Digital Operations</h3>
-      <p>Programme support, coordination, documentation and the workflows that hold a small team together.</p>
-    </div>
-    <div class="cap reveal">
-      <h3>Web</h3>
-      <p>WordPress builds and upkeep, themes and plugins, hosting and domains, with enough HTML, CSS, PHP and SQL to fix things myself.</p>
-    </div>
-    <div class="cap reveal">
-      <h3>Visual Communication</h3>
-      <p>Campaign and programme materials, layouts and graphics, built to sit consistently across a brand.</p>
-    </div>
-    <div class="cap reveal">
-      <h3>Content &amp; Communications</h3>
-      <p>LinkedIn and social content, website copy, editing, and turning programme information into something people will actually read.</p>
-    </div>
-    <div class="cap reveal">
-      <h3>Production</h3>
-      <p>Live production support, scripting, host coordination and real-time troubleshooting under time pressure.</p>
-    </div>
-    <div class="cap reveal">
-      <h3>Education</h3>
-      <p>Ten years of teaching, curriculum development and training, which is where the communication habits come from.</p>
-    </div>
-  </div>
-</section>
-
-<section id="work" class="wrap">
-  <span class="mono reveal">Selected work</span>
-  <h2 class="reveal">Four pieces of work that show how I operate</h2>
-
-  <div class="case">
-    <div class="num reveal">Case study 01</div>
-    <h3 class="reveal">Professors Without Borders</h3>
-    <div class="role reveal">Operations Assistant, previously Communication Assistant <span>&middot; London, remote &middot; Dec 2024 to present</span></div>
-    <p class="reveal">Professors Without Borders is an international education non-profit that connects university educators with students in underserved communities. I started on communications and moved into operations, which now covers the website, digital materials and the running of programmes alongside colleagues in several countries.</p>
-    <ul class="reveal">
-      <li>Website content and programme pages</li>
-      <li>LinkedIn and social media, from planning to publishing</li>
-      <li>Visual materials for programmes and campaigns</li>
-      <li>Programme documentation and online sessions</li>
-      <li>Day-to-day operational support across projects</li>
-      <li>Coordination with colleagues across roles and time zones</li>
-    </ul>
-    <div class="callout reveal">
-      <div class="h">Why this one matters</div>
-      <p>It is the clearest example of the combination I am actually good at: someone who can hold the operational thread of a programme and also build and publish the thing that communicates it, without needing two separate people.</p>
-    </div>
-    <div class="slots stagger">
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/pwb-01.webp" alt="" loading="lazy">
-        <figcaption>Programme page you built or updated</figcaption>
-      </figure>
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/pwb-02.webp" alt="" loading="lazy">
-        <figcaption>LinkedIn post or campaign visual</figcaption>
-      </figure>
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/pwb-03.webp" alt="" loading="lazy">
-        <figcaption>Poster or programme material</figcaption>
-      </figure>
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/pwb-04.webp" alt="" loading="lazy">
-        <figcaption>Before and after, if you have one</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <div class="case">
-    <div class="num reveal">Case study 02</div>
-    <h3 class="reveal">Websites, hosting and online stores</h3>
-    <div class="role reveal">Independent and in-house <span>&middot; Central Java &middot; 2015 to 2025</span></div>
-    <p class="reveal">Web work has run through everything I have done, long before it was anyone's job title for me. I built and ran a vocational school's website and digital channels from nothing, supplied IT equipment to schools through Indonesia's government procurement platform while managing the store and the company site, and ran an independent web and design service for local clients.</p>
-    <ul class="reveal">
-      <li>WordPress builds, themes and plugin configuration</li>
-      <li>Hosting, domains, cPanel and database upkeep</li>
-      <li>Product listings, pricing and store presentation</li>
-      <li>Brand and graphic materials to match each site</li>
-      <li>Client brief through to launch and maintenance</li>
-      <li>School website and channels handed over still running</li>
-    </ul>
-    <div class="slots stagger">
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/web-01.webp" alt="" loading="lazy">
-        <figcaption>A website you built, full page view</figcaption>
-      </figure>
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/web-02.webp" alt="" loading="lazy">
-        <figcaption>Hosting or cPanel view</figcaption>
-      </figure>
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/web-03.webp" alt="" loading="lazy">
-        <figcaption>Online store or product listing</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <div class="case">
-    <div class="num reveal">Case study 03</div>
-    <h3 class="reveal">Digital communications and campaigns</h3>
-    <div class="role reveal">Professors Without Borders and earlier work <span>&middot; 2019 to present</span></div>
-    <p class="reveal">Campaign work is where the visual side and the writing side meet. The Global Poetry Showcase 2025 ran across several platforms and needed one consistent look, a schedule that held, and copy that sounded like the organisation rather than like an advert. Earlier, I grew a school's social channels from nothing to a presence that outlasted my time there.</p>
-    <ul class="reveal">
-      <li>Content planning and publishing schedules</li>
-      <li>Campaign visuals and brand consistency</li>
-      <li>Copywriting and editing for a global audience</li>
-      <li>Channel growth from a standing start</li>
-    </ul>
-    <div class="slots stagger">
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/campaign-01.webp" alt="" loading="lazy">
-        <figcaption>Three to five of your strongest posts</figcaption>
-      </figure>
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/campaign-02.webp" alt="" loading="lazy">
-        <figcaption>Global Poetry Showcase visuals</figcaption>
-      </figure>
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/campaign-03.webp" alt="" loading="lazy">
-        <figcaption>A campaign set, shown as a series</figcaption>
-      </figure>
-    </div>
-  </div>
-
-  <div class="case">
-    <div class="num reveal">Case study 04</div>
-    <h3 class="reveal">Live production</h3>
-    <div class="role reveal">Jr. Producer, Live Play Mobile <span>&middot; San Francisco, remote &middot; Jul to Oct 2025</span></div>
-    <p class="reveal">Live host-led shows leave no room to fix things afterwards. I prepared scripts and content, briefed hosts, coordinated pre-show and real-time operations, watched the technical side and solved problems while the show was running, working with content and design teams to bring visuals and interactive elements into each broadcast.</p>
-    <ul class="reveal">
-      <li>Scripting and show content preparation</li>
-      <li>Host briefing and live coordination</li>
-      <li>Real-time monitoring and troubleshooting</li>
-      <li>Working across content and design teams</li>
-    </ul>
-    <div class="callout reveal">
-      <div class="h">A note on what is shown</div>
-      <p>Most material from this role is covered by confidentiality, so only general views are included here. I am happy to talk through the work in detail.</p>
-    </div>
-    <div class="slots stagger">
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/live-01.webp" alt="" loading="lazy">
-        <figcaption>Production view, sensitive parts blurred</figcaption>
-      </figure>
-      <figure class="media reveal" tabindex="0">
-        <img src="assets/img/work/live-02.webp" alt="" loading="lazy">
-        <figcaption>Show graphic or interactive element</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section id="background" class="wrap">
-  <span class="mono reveal">Background</span>
-  <h2 class="reveal">Ten years in education, three in digital and remote work</h2>
-  <p class="reveal" style="max-width:62ch; margin-top:18px;">The teaching years are not a detour. They are where I learned to explain complicated things simply, plan a term's worth of work, and stand in front of a room and hold it. That is most of what communications and operations turn out to be.</p>
-
-  <div class="stagger">
-  <div class="row reveal">
-    <div class="when">2025 to present</div>
-    <div class="what">
-      <h3>Operations Assistant</h3>
-      <div class="org">Professors Without Borders <span>London, remote</span></div>
-    </div>
-  </div>
-  <div class="row reveal">
-    <div class="when">2025</div>
-    <div class="what">
-      <h3>Jr. Producer</h3>
-      <div class="org">Live Play Mobile Inc. <span>San Francisco, remote</span></div>
-    </div>
-  </div>
-  <div class="row reveal">
-    <div class="when">2024 to 2025</div>
-    <div class="what">
-      <h3>Communication Assistant</h3>
-      <div class="org">Professors Without Borders <span>London, remote</span></div>
-    </div>
-  </div>
-  <div class="row reveal">
-    <div class="when">2024 to 2025</div>
-    <div class="what">
-      <h3>Indonesian Linguist</h3>
-      <div class="org">Alignerr and Outlier <span>United States, remote</span></div>
-      <p>Reviewing and correcting AI-generated Indonesian for accuracy and natural phrasing.</p>
-    </div>
-  </div>
-  <div class="row reveal">
-    <div class="when">2023 to 2025</div>
-    <div class="what">
-      <h3>Web &amp; Design Services</h3>
-      <div class="org">Vaeleon, formerly Divity <span>Central Java, independent</span></div>
-    </div>
-  </div>
-  <div class="row reveal">
-    <div class="when">2023 to 2024</div>
-    <div class="what">
-      <h3>Elementary School Teacher</h3>
-      <div class="org">Dinas Pendidikan Pemuda &amp; Olahraga <span>Central Java</span></div>
-    </div>
-  </div>
-  <div class="row reveal">
-    <div class="when">2022 to 2023</div>
-    <div class="what">
-      <h3>E-Commerce Manager</h3>
-      <div class="org">Maytech <span>Central Java</span></div>
-    </div>
-  </div>
-  <div class="row reveal">
-    <div class="when">2015 to 2023</div>
-    <div class="what">
-      <h3>Vocational High School Teacher, IT &amp; Curriculum</h3>
-      <div class="org">Muhammadiyah <span>Central Java</span></div>
-    </div>
-  </div>
-  <div class="row reveal">
-    <div class="when">2009 to 2014</div>
-    <div class="what">
-      <h3>Bachelor of Education, English Language Education</h3>
-      <div class="org">Universitas Pendidikan Indonesia (UPI) <span>Bandung, Indonesia</span></div>
-    </div>
-  </div>
-  </div>
-
-  <div class="tags reveal">
-    <div class="tag">Indonesian &middot; Native</div>
-    <div class="tag">English &middot; Professional working proficiency</div>
-  </div>
-</section>
-
-<section id="creative" class="wrap">
-  <span class="mono reveal">Creative work</span>
-  <h2 class="reveal">What I make when nobody is asking</h2>
-  <p class="reveal" style="max-width:62ch; margin-top:18px;">These are not client projects and they are not asking to be judged as such. They are where ideas get tested before they show up in the professional work, and they are the reason I am comfortable taking something from a rough thought to a finished thing.</p>
-  <div class="grid stagger">
-    <div class="cap reveal">
-      <h3>Original music</h3>
-      <p>I write, arrange and perform my own songs, released on Spotify. Lyrics through to final master.</p>
-    </div>
-    <div class="cap reveal">
-      <h3>Short animated film</h3>
-      <p>Tamashi no Senshi, written, directed and edited on my own, using generative AI as an assistant rather than an author.</p>
-    </div>
-    <div class="cap reveal">
-      <h3>Documentary and video</h3>
-      <p>Short films made with whatever was to hand, including an Independence Day piece shot on a phone in a single morning.</p>
-    </div>
-  </div>
-
-  <!-- VIDEO: ganti data-yt="YOUTUBE_ID" dengan ID video YouTube-mu -->
-  <div class="slots stagger">
-    <figure class="media reveal" tabindex="0">
-      <img src="assets/img/creative/music-01.webp" alt="" loading="lazy">
-      <figcaption>Spotify artist page or album art</figcaption>
-    </figure>
-    <figure class="media vid reveal" data-yt="YOUTUBE_ID" tabindex="0">
-      <figcaption>Tamashi no Senshi, trailer</figcaption>
-    </figure>
-    <figure class="media vid reveal" data-yt="YOUTUBE_ID" tabindex="0">
-      <figcaption>Documentary, Independence Day short</figcaption>
-    </figure>
-  </div>
-  <p class="reveal" style="margin-top:22px; font-size:15px; color:var(--muted);">Further creative work is available on request.</p>
-</section>
-
-<footer id="contact">
-  <div class="wrap">
-    <span class="mono reveal">Contact</span>
-    <h2 class="reveal">If any of this is useful to you, say hello</h2>
-    <p class="reveal">I am open to roles that bring together digital work, creative thinking and practical problem-solving, particularly with organisations doing something worth doing.</p>
-    <div class="btnrow reveal">
-      <a class="btn" href="mailto:naimullahaziz@gmail.com">naimullahaziz@gmail.com</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/naimullahaziz">LinkedIn</a>
-    </div>
-    <div class="fnote">Na&rsquo;imullah Aziz &middot; Cilacap, Central Java, Indonesia</div>
-  </div>
-</footer>
-
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button class="x" id="lbx" aria-label="Close">&times;</button>
-  <img id="lbimg" src="" alt="">
-  <div class="lbcap" id="lbcap"></div>
-</div>
-
-<script>
-(function(){
-  "use strict";
-  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- 1. progress bar ---------- */
-  var prog = document.getElementById('prog'), ticking = false;
-  function draw(){
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(window.scrollY / h, 1) : 0) + ')';
-    ticking = false;
-  }
-  window.addEventListener('scroll', function(){
-    if(!ticking){ ticking = true; requestAnimationFrame(draw); }
-  }, {passive:true});
-  draw();
-
-  /* ---------- 2. gambar hilang jadi placeholder ---------- */
-  function markEmpty(img){
-    var box = img.closest('.media') || img.closest('.slide');
-    if(box) box.classList.add('empty');
-  }
-  Array.prototype.forEach.call(document.querySelectorAll('.media img, .slide img'), function(img){
-    img.addEventListener('error', function(){ markEmpty(img); });
-    if(img.complete && img.naturalWidth === 0) markEmpty(img);
-  });
-
-  /* ---------- 3. slideshow hero ---------- */
-  var stage = document.getElementById('stage');
-  if(stage){
-    var slides = stage.querySelectorAll('.slide'),
-        dots   = document.getElementById('dots'),
-        cur = 0, timer = null;
-
-    slides[0].classList.add('on');
-
-    Array.prototype.forEach.call(slides, function(s, i){
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.setAttribute('aria-label', 'Slide ' + (i + 1));
-      b.setAttribute('aria-current', i === 0 ? 'true' : 'false');
-      b.addEventListener('click', function(){ go(i); restart(); });
-      dots.appendChild(b);
-    });
-
-    function go(i){
-      slides[cur].classList.remove('on');
-      dots.children[cur].setAttribute('aria-current','false');
-      cur = (i + slides.length) % slides.length;
-      slides[cur].classList.add('on');
-      dots.children[cur].setAttribute('aria-current','true');
-    }
-    function start(){ if(!still && !timer) timer = setInterval(function(){ go(cur + 1); }, 5200); }
-    function stop(){ clearInterval(timer); timer = null; }
-    function restart(){ stop(); start(); }
-
-    stage.addEventListener('mouseenter', stop);
-    stage.addEventListener('mouseleave', start);
-    stage.addEventListener('focusin', stop);
-    stage.addEventListener('focusout', start);
-    document.addEventListener('visibilitychange', function(){
-      document.hidden ? stop() : start();
-    });
-    /* geser dengan jari di HP */
-    var x0 = null;
-    stage.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; stop(); }, {passive:true});
-    stage.addEventListener('touchend', function(e){
-      if(x0 === null) return;
-      var d = e.changedTouches[0].clientX - x0;
-      if(Math.abs(d) > 45) go(cur + (d < 0 ? 1 : -1));
-      x0 = null; start();
-    }, {passive:true});
-
-    start();
-  }
-
-  /* ---------- 4. reveal saat discroll ---------- */
-  var reveals = document.querySelectorAll('.reveal');
-  if(still || !('IntersectionObserver' in window)){
-    Array.prototype.forEach.call(reveals, function(el){ el.classList.add('in'); });
-  } else {
-    Array.prototype.forEach.call(document.querySelectorAll('.stagger'), function(group){
-      Array.prototype.forEach.call(group.querySelectorAll('.reveal'), function(el, i){
-        el.style.setProperty('--d', Math.min(i, 6) * 0.07 + 's');
-      });
-    });
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
-      });
-    }, {rootMargin:'0px 0px -12% 0px', threshold:0.08});
-    Array.prototype.forEach.call(reveals, function(el){ io.observe(el); });
-  }
-
-  /* ---------- 5. menu aktif mengikuti posisi ---------- */
-  var links = {}, targets = [];
-  Array.prototype.forEach.call(document.querySelectorAll('.nav a[href^="#"]'), function(a){
-    var t = document.getElementById(a.getAttribute('href').slice(1));
-    if(t){ links[t.id] = a; targets.push(t); }
-  });
-  if(targets.length && 'IntersectionObserver' in window){
-    var spy = new IntersectionObserver(function(entries){
-      entries.forEach(function(en){
-        if(en.isIntersecting){
-          for(var k in links) links[k].classList.remove('on');
-          links[en.target.id].classList.add('on');
+        function openGallery(cardElement) {
+            const galleryData = cardElement.getAttribute('data-gallery');
+            if (!galleryData) return;
+            
+            // Ambil data teks dari kartu yang diklik
+            const titleText = cardElement.querySelector('h3').innerHTML;
+            const descText = cardElement.querySelector('p').innerHTML;
+            
+            currentImages = galleryData.split(',').map(item => item.trim());
+            
+            if (currentImages.length > 0) {
+                currentIndex = 0;
+                
+                // Isi judul dan deskripsi ke dalam modal
+                modalTitle.innerHTML = titleText;
+                modalDesc.innerHTML = descText;
+                
+                updateModalContent();
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Kunci scroll halaman belakang
+            }
         }
-      });
-    }, {rootMargin:'-45% 0px -50% 0px'});
-    targets.forEach(function(t){ spy.observe(t); });
-  }
 
-  /* ---------- 6. video YouTube, dimuat hanya saat diklik ---------- */
-  Array.prototype.forEach.call(document.querySelectorAll('.media.vid'), function(fig){
-    var id = fig.getAttribute('data-yt');
-    if(!id || id === 'YOUTUBE_ID'){ fig.classList.add('empty'); return; }
-    var thumb = new Image();
-    thumb.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
-    thumb.alt = '';
-    thumb.loading = 'lazy';
-    fig.insertBefore(thumb, fig.firstChild);
-    var play = document.createElement('div');
-    play.className = 'play';
-    fig.appendChild(play);
-    function load(){
-      fig.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
-        '?autoplay=1&rel=0" title="Video" allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
-    }
-    fig.addEventListener('click', load);
-    fig.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); load(); } });
-  });
+        function closeGallery() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Buka kembali scroll
+        }
 
-  /* ---------- 7. lightbox ---------- */
-  var lb = document.getElementById('lb'), lbimg = document.getElementById('lbimg'),
-      lbcap = document.getElementById('lbcap'), opener = null;
-  function open(fig){
-    var img = fig.querySelector('img'), cap = fig.querySelector('figcaption');
-    if(!img) return;
-    opener = fig;
-    lbimg.src = img.currentSrc || img.src;
-    lbcap.textContent = cap ? cap.textContent : '';
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('lbx').focus();
-  }
-  function close(){
-    lb.classList.remove('open');
-    lbimg.src = '';
-    document.body.style.overflow = '';
-    if(opener) opener.focus();
-  }
-  Array.prototype.forEach.call(document.querySelectorAll('.media:not(.vid)'), function(fig){
-    fig.addEventListener('click', function(){ if(!fig.classList.contains('empty')) open(fig); });
-    fig.addEventListener('keydown', function(e){
-      if((e.key === 'Enter' || e.key === ' ') && !fig.classList.contains('empty')){ e.preventDefault(); open(fig); }
-    });
-  });
-  lb.addEventListener('click', function(e){ if(e.target !== lbimg) close(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && lb.classList.contains('open')) close(); });
-})();
-</script>
+        function changeSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex >= currentImages.length) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = currentImages.length - 1;
+            }
+            updateModalContent();
+        }
 
+        function updateModalContent() {
+            modalImg.style.opacity = '0';
+            setTimeout(() => {
+                modalImg.src = currentImages[currentIndex];
+                modalImg.style.opacity = '1';
+            }, 150);
+            
+            counter.innerText = (currentIndex + 1) + " / " + currentImages.length;
+        }
+
+        // Tutup modal jika area luar kartu diklik
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeGallery();
+            }
+        });
+
+        // Navigasi Keyboard
+        document.addEventListener('keydown', function(e) {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'ArrowRight') changeSlide(1);
+                if (e.key === 'ArrowLeft') changeSlide(-1);
+                if (e.key === 'Escape') closeGallery();
+            }
+        });
+    </script>
 </body>
 </html>
