@@ -1442,3 +1442,178 @@
             .page-head p { font-size: 1rem; }
         }
 
+
+        /* =========================================================
+           HALAMAN STUDI KASUS
+           ========================================================= */
+        .case-back { margin-top: 1.4rem; font-size: 0.95rem; }
+        .case-back a { color: var(--text-secondary); text-decoration: none; }
+        .case-back a:hover { color: var(--accent-color); }
+
+        .case-lead {
+            color: var(--text-secondary);
+            font-size: 1.06rem;
+            line-height: 1.75;
+            max-width: 760px;
+            margin-bottom: 2.4rem;
+        }
+        .case-sub {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin: 2.6rem 0 1.2rem;
+        }
+
+        /* Sekilas */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1px;
+            background: var(--border-color);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+        .meta-item {
+            background: var(--surface-color);
+            padding: 1.5rem 1.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .meta-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+        .meta-value { font-size: 1rem; font-weight: 500; line-height: 1.45; }
+
+        /* Kartu warna */
+        .swatch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.4rem;
+        }
+        .swatch {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+        .swatch-chip {
+            height: 108px;
+            background: var(--sw);
+        }
+        .swatch-meta {
+            padding: 1.2rem 1.3rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        .swatch-meta strong { font-size: 1rem; font-weight: 700; }
+        .swatch-meta code {
+            font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.02em;
+        }
+        .swatch-meta span { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* Skala netral */
+        .ramp {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .ramp span { flex: 1; height: 62px; background: var(--sw); }
+        .ramp-note {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-top: 0.9rem;
+            max-width: 760px;
+        }
+
+        /* Aturan kontras */
+        .rule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.4rem;
+        }
+        .rule-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--border-color);
+            border-radius: 0 16px 16px 0;
+            padding: 1.4rem 1.4rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .rule-card.pass { border-left-color: #027A48; }
+        .rule-card.warn { border-left-color: #A66A00; }
+        .rule-card.fail { border-left-color: #C41A00; }
+        .rule-chip {
+            display: inline-block;
+            padding: 0.55rem 1.1rem;
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+        .rule-verdict { font-size: 0.92rem; font-weight: 700; }
+        .rule-card.pass .rule-verdict { color: #027A48; }
+        .rule-card.warn .rule-verdict { color: #A66A00; }
+        .rule-card.fail .rule-verdict { color: #C41A00; }
+        .rule-note { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* Proporsi 60-30-10 */
+        .split-bar {
+            display: flex;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .split {
+            padding: 1.1rem 1.2rem;
+            font-size: 0.86rem;
+            font-weight: 500;
+            line-height: 1.4;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        .split em { font-style: normal; font-weight: 900; font-size: 1.15rem; letter-spacing: -0.02em; }
+        .split.s60 { flex: 60; background: #001741; color: #FFFFFF; }
+        .split.s30 { flex: 30; background: #007BFF; color: #FFFFFF; }
+        .split.s10 { flex: 10; background: #FFD60A; color: #001741; }
+
+        /* Dokumen */
+        .doc-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+            background: var(--img-bg);
+        }
+        .doc-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+        .doc-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.6rem;
+        }
+
+        @media (max-width: 768px) {
+            .split-bar { flex-direction: column; }
+            .split { flex: none !important; }
+            .doc-frame { aspect-ratio: 3 / 4; }
+            .doc-actions .btn { flex: 1 1 100%; justify-content: center; }
+            .ramp span { height: 44px; }
+        }
