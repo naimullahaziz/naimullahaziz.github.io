@@ -1716,31 +1716,25 @@
 
         /* --- KARTU STUDI KASUS DENGAN PITA PREVIEW --- */
         .case-link { padding: 0; }
+        /* Rasio pita sama persis dengan rasio gambarnya, jadi logo tidak
+           pernah terpotong di lebar layar mana pun. */
         .case-link .case-strip {
             display: block;
             width: 100%;
-            height: 170px;
+            aspect-ratio: 1600 / 246;
             overflow: hidden;
             background: #001741;
             position: relative;
         }
         .case-link .case-strip img {
+            display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 24%;
             transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .case-link:hover .case-strip img,
         .case-link:focus-visible .case-strip img { transform: scale(1.05); }
-        .case-link .case-strip::after {
-            content: '';
-            position: absolute;
-            left: 0; right: 0; bottom: 0;
-            height: 40%;
-            background: linear-gradient(180deg, rgba(0, 23, 65, 0) 0%, rgba(0, 23, 65, 0.55) 100%);
-            pointer-events: none;
-        }
         .case-link .case-link-body {
             display: block;
             padding: 1.9rem 1.8rem 2rem;
@@ -1751,6 +1745,5 @@
         .case-link .case-link-body p { max-width: 720px; }
 
         @media (max-width: 768px) {
-            .case-link .case-strip { height: 120px; }
             .case-link .case-link-body { padding: 1.5rem 1.4rem 1.6rem; }
         }
