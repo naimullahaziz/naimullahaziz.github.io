@@ -122,13 +122,11 @@
             --accent-rgb: var(--c-blue-rgb);
             --on-pop: var(--c-blue-on);
         }
-        /* Navy dipakai sebagai selingan struktural, bukan penanda status,
-           supaya section berselang-seling tanpa meminjam makna amber/merah. */
         #campaigns {
-            --accent-color: var(--c-navy);
-            --accent-pop: var(--c-navy-pop);
-            --accent-rgb: var(--c-navy-rgb);
-            --on-pop: var(--c-navy-on);
+            --accent-color: var(--c-blue);
+            --accent-pop: var(--c-blue-pop);
+            --accent-rgb: var(--c-blue-rgb);
+            --on-pop: var(--c-blue-on);
         }
         #multimedia {
             --accent-color: var(--c-blue);
@@ -797,8 +795,8 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0.88);
-            background: var(--accent-pop);
-            color: var(--on-pop);
+            background: var(--c-yellow-pop);
+            color: var(--c-navy);
             padding: 11px 24px;
             border-radius: 50px;
             font-size: 0.84rem;
@@ -810,6 +808,14 @@
             letter-spacing: 0.04em;
             z-index: 3;
         }
+        /* Amber saat muncul, biru saat kartunya ditekan, mengikuti pola
+           tombol utama di hero. */
+        .visual-card:active .gallery-indicator,
+        .sub-card:active .sub-gallery-indicator {
+            background: var(--c-blue-pop);
+            color: #FFFFFF;
+        }
+
         .visual-card:hover .gallery-indicator,
         .visual-card:focus-visible .gallery-indicator {
             opacity: 1;
@@ -878,9 +884,10 @@
         .sub-card:hover .sub-card-img img { transform: scale(1.05); }
 
         .sub-gallery-indicator {
-            position: absolute; bottom: 12px; right: 12px; background: rgba(10, 10, 14, 0.8);
-            color: #FFFFFF; padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700;
-            border: 1px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(4px); opacity: 0; transition: 0.3s; z-index: 2;
+            position: absolute; bottom: 12px; right: 12px;
+            background: var(--c-yellow-pop);
+            color: var(--c-navy); padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700;
+            border: none; opacity: 0; transition: 0.3s; z-index: 3;
         }
         .sub-card:hover .sub-gallery-indicator,
         .sub-card:focus-visible .sub-gallery-indicator { opacity: 1; }
