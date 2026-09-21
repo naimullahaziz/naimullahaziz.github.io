@@ -1,1008 +1,232 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Na'imullah Aziz | Digital & Creative Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Black Navy Color Palette */
-            --bg-color: #070B14;        
-            --surface-color: #0D1424;   
-            --surface-hover: #152036;   
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;  
-            --accent-color: #00e5ff;
-            --accent-glow: rgba(0, 229, 255, 0.15);
-            --border-color: rgba(255, 255, 255, 0.08);
-        }
+    <title>Na'imullah Aziz | Digital &amp; Creative Portfolio</title>
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    <!-- TODO: ganti example.com dengan domain aslimu sebelum publish -->
+    <meta name="description" content="Operations and communications, visual design, and multimedia production. Based in Central Java, Indonesia.">
+    <link rel="canonical" href="https://example.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/">
+    <meta property="og:title" content="Na'imullah Aziz | Digital &amp; Creative Portfolio">
+    <meta property="og:description" content="Operations and communications, visual design, and multimedia production. Based in Central Java, Indonesia.">
+    <meta property="og:image" content="https://example.com/assets/img/og-cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Na'imullah Aziz | Digital &amp; Creative Portfolio">
+    <meta name="twitter:description" content="Operations and communications, visual design, and multimedia production. Based in Central Java, Indonesia.">
+    <meta name="twitter:image" content="https://example.com/assets/img/og-cover.jpg">
+    <meta name="theme-color" content="#FBFAF8">
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E7490'/%3E%3Ctext x='32' y='43' font-family='Inter,Arial,sans-serif' font-size='30' font-weight='900' fill='%23ffffff' text-anchor='middle'%3ENA%3C/text%3E%3C/svg%3E">
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+    <script>document.documentElement.classList.add('js');</script>
 
-        /* --- NAVBAR --- */
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(7, 11, 20, 0.85); 
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 100;
-            padding: 1.2rem 0;
-            animation: fadeInDown 0.8s ease forwards;
-        }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: -0.02em; }
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin-left: 2.5rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--accent-color); }
-
-        /* --- HERO SECTION --- */
-        .hero { 
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            padding: 14vh calc((100vw - 1200px) / 2 + 2rem) 12vh;
-            background: linear-gradient(180deg, rgba(13, 20, 36, 0.5) 0%, rgba(7, 11, 20, 0) 100%);
-            border-bottom: 1px solid var(--border-color);
-            overflow: hidden;
-            animation: fadeInUp 1s ease forwards;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, rgba(7, 11, 20, 0) 65%);
-            animation: lightBeamMove 12s linear infinite;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 10%; right: 15%;
-            width: 40vw; height: 40vw;
-            max-width: 450px; max-height: 450px;
-            background: var(--accent-glow);
-            filter: blur(130px);
-            border-radius: 50%;
-            animation: pulseGlow 7s ease-in-out infinite alternate;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5.5vw, 4.8rem);
-            font-weight: 900;
-            line-height: 1.15;
-            letter-spacing: -0.04em;
-            margin-bottom: 1.8rem;
-            background: linear-gradient(135deg, #ffffff 20%, #7a8b99 50%, #ffffff 80%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShine 5s linear infinite;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 750px;
-            margin-bottom: 3rem;
-            font-weight: 300;
-            line-height: 1.8;
-        }
-        .btn {
-            display: inline-block;
-            padding: 1.1rem 2.8rem;
-            background-color: var(--text-primary);
-            color: var(--bg-color);
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: var(--accent-color);
-            box-shadow: 0 0 25px var(--accent-glow);
-            transform: translateY(-3px);
-            color: #000;
-        }
-
-        @keyframes lightBeamMove {
-            0% { transform: translate(-30%, -30%) rotate(0deg); }
-            50% { transform: translate(10%, 10%) rotate(180deg); }
-            100% { transform: translate(-30%, -30%) rotate(360deg); }
-        }
-        @keyframes gradientShine {
-            to { background-position: 200% center; }
-        }
-        @keyframes pulseGlow {
-            0% { transform: scale(0.9); opacity: 0.4; }
-            100% { transform: scale(1.15); opacity: 0.8; }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- BENTO GRID SECTION --- */
-        section { 
-            padding-top: 12rem; 
-            padding-bottom: 8rem; 
-            border-top: 1px solid var(--border-color); 
-        }
-        
-        .section-header { 
-            margin-bottom: 4rem; 
-        }
-        .section-header h2 { 
-            font-size: 2.6rem; 
-            font-weight: 700; 
-            letter-spacing: -0.03em; 
-            margin-top: 0.6rem;
-        }
-        .section-header span {
-            color: var(--accent-color);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-weight: 700;
-            display: block;
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-        .bento-grid.large {
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        }
-
-        .card {
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer; 
-        }
-        .card:hover {
-            background: var(--surface-hover);
-            border-color: rgba(0, 229, 255, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 40px var(--accent-glow);
-        }
-
-        .badge {
-            align-self: flex-start;
-            padding: 0.5rem 1.2rem;
-            background: rgba(255,255,255,0.05);
-            color: #cbd5e1;
-            border-radius: 100px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem; 
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem; 
-            letter-spacing: -0.02em;
-            line-height: 1.35;
-        }
-        .card p {
-            color: var(--text-secondary);
-            font-size: 1.02rem;
-            font-weight: 300;
-            line-height: 1.85; 
-        }
-
-        .visual-card .img-container {
-            width: 100%;
-            height: 240px;
-            background: var(--surface-hover);
-            overflow: hidden;
-            position: relative;
-        }
-        .visual-card.tall .img-container { height: 340px; }
-        .visual-card .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.85;
-            transition: opacity 0.3s ease, transform 0.5s ease;
-        }
-        .visual-card:hover .img-container img {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-        
-        .gallery-indicator {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(6px);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            border: 1px solid rgba(255,255,255,0.2);
-            letter-spacing: 0.05em;
-        }
-        .visual-card:hover .gallery-indicator { opacity: 1; }
-        
-        .visual-card .content { padding: 3rem; }
-
-        .hidden-details { display: none; }
-
-        /* =========================================
-           MODAL 1: PROJECT DETAILS (Sub-Postcards)
-           ========================================= */
-        .modal-project {
-            display: none; position: fixed; z-index: 9998; top: 0; left: 0;
-            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px); justify-content: center; align-items: center; padding: 2rem;
-        }
-        .modal-project-content {
-            position: relative; background: var(--bg-color); border: 1px solid var(--border-color);
-            border-radius: 24px; max-width: 1100px; width: 100%; display: flex; flex-direction: column;
-            overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.8); max-height: 90vh;
-            animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .modal-header { padding: 3rem; background: var(--surface-color); border-bottom: 1px solid var(--border-color); }
-        .modal-header h2 { font-size: 2.2rem; color: var(--text-primary); margin-bottom: 1.2rem; letter-spacing: -0.02em; }
-        .modal-header p { font-size: 1.1rem; color: var(--text-secondary); max-width: 950px; line-height: 1.8; }
-        
-        .modal-body { padding: 3rem; overflow-y: auto; background: var(--bg-color); }
-        
-        .sub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2.2rem; }
-        .sub-card {
-            background: var(--surface-color); border: 1px solid var(--border-color);
-            border-radius: 20px; overflow: hidden; transition: all 0.3s ease; cursor: pointer;
-            position: relative;
-        }
-        .sub-card:hover { transform: translateY(-4px); border-color: rgba(0, 229, 255, 0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
-        
-        .sub-card-img { width: 100%; height: 220px; background: #111; position: relative; overflow: hidden; }
-        .sub-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-        .sub-card:hover .sub-card-img img { transform: scale(1.05); }
-        
-        .sub-gallery-indicator {
-            position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.8);
-            color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: bold;
-            border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px); opacity: 0; transition: 0.3s;
-        }
-        .sub-card:hover .sub-gallery-indicator { opacity: 1; }
-
-        .sub-card-content { padding: 2rem; }
-        .sub-card-content h4 { font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.8rem; line-height: 1.35; }
-        .sub-card-content p { font-size: 0.98rem; color: var(--text-secondary); line-height: 1.8; }
-
-        .link-btn {
-            background: none; border: none; padding: 0; margin-top: 1rem;
-            color: var(--accent-color); font-size: 0.95rem; font-weight: 700;
-            cursor: pointer; transition: opacity 0.3s; display: inline-flex; align-items: center; gap: 6px;
-        }
-        .link-btn:hover { opacity: 0.7; }
-
-        .close-btn {
-            position: absolute; top: 25px; right: 30px; width: 44px; height: 44px;
-            background: rgba(255,255,255,0.05); border-radius: 50%; color: #fff; font-size: 26px;
-            display: flex; justify-content: center; align-items: center; cursor: pointer;
-            transition: all 0.3s; z-index: 10; border: 1px solid rgba(255,255,255,0.1);
-        }
-        .close-btn:hover { background: var(--accent-color); color: #000; }
-
-        /* =========================================
-           MODAL 2: IMAGE GALLERY SLIDER
-           ========================================= */
-        .modal-gallery {
-            display: none; position: fixed; z-index: 9999; top: 0; left: 0;
-            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95);
-            justify-content: center; align-items: center; flex-direction: column;
-        }
-        .gallery-wrapper {
-            position: relative; width: 100%; max-width: 1200px; height: 75vh;
-            display: flex; justify-content: center; align-items: center; padding: 0 2rem;
-        }
-        .gallery-wrapper img {
-            max-width: 100%; max-height: 100%; object-fit: contain;
-            transition: opacity 0.2s ease; border-radius: 8px;
-        }
-        .gallery-close {
-            position: absolute; top: 35px; right: 45px; color: #fff; font-size: 40px;
-            cursor: pointer; z-index: 100; transition: color 0.3s;
-        }
-        .gallery-close:hover { color: var(--accent-color); }
-        
-        .gallery-nav {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;
-            color: white; font-size: 24px; background: rgba(255,255,255,0.1); border-radius: 50%;
-            cursor: pointer; transition: 0.3s ease; border: 1px solid rgba(255,255,255,0.2);
-        }
-        .gallery-nav.prev { left: 30px; }
-        .gallery-nav.next { right: 30px; }
-        .gallery-nav:hover { background-color: var(--accent-color); color: #000; }
-        
-        .gallery-info { text-align: center; margin-top: 25px; max-width: 900px; padding: 0 20px; }
-        .gallery-info h3 { color: #fff; font-size: 1.7rem; margin-bottom: 12px; }
-        .gallery-info p { color: #aaa; font-size: 1.05rem; margin-bottom: 18px; line-height: 1.8; }
-        .gallery-counter { color: #fff; font-weight: bold; background: rgba(255,255,255,0.15); padding: 6px 18px; border-radius: 20px; font-size: 0.9rem; }
-
-        /* =========================================
-           MODAL 3: IFRAME POPUP (WEB VIEWER)
-           ========================================= */
-        .modal-iframe {
-            display: none; position: fixed; z-index: 10000; top: 0; left: 0;
-            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(8px); justify-content: center; align-items: center;
-        }
-        .iframe-container {
-            position: relative; width: 90%; max-width: 1300px; height: 85vh;
-            background: var(--bg-color); border-radius: 16px; overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8); border: 1px solid var(--border-color);
-            animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .iframe-container iframe { width: 100%; height: 100%; border: none; }
-        
-        .iframe-close {
-            position: absolute; top: -50px; right: 0; color: #fff; font-size: 40px;
-            cursor: pointer; z-index: 100; transition: color 0.3s;
-        }
-        .iframe-close:hover { color: var(--accent-color); }
-
-        /* --- FOOTER --- */
-        footer {
-            padding: 5rem 0;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            section { padding-top: 8rem; padding-bottom: 5rem; } 
-            
-            .hero { padding: 8vh 1.5rem; }
-            .hero h1 { font-size: 2.3rem; }
-            .hero p { font-size: 1.05rem; }
-            
-            .modal-project-content { max-height: 95vh; }
-            .modal-header { padding: 2rem; }
-            .modal-body { padding: 2rem; }
-            .sub-grid { grid-template-columns: 1fr; }
-            .gallery-wrapper { height: 60vh; }
-            .gallery-nav { width: 40px; height: 40px; font-size: 18px; }
-            .gallery-close { top: 15px; right: 20px; font-size: 30px; }
-            .visual-card.tall .img-container { height: 220px; }
-            
-            .iframe-container { width: 95%; height: 80vh; margin-top: 40px; }
-            .iframe-close { top: -45px; right: 10px; font-size: 35px; }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <nav>
         <div class="container nav-content">
-            <div class="logo">Na'imullah Aziz</div>
-            <div class="nav-links">
-                <a href="#work">Work & Web</a>
-                <a href="#campaigns">Campaigns & Social</a>
-                <a href="#multimedia">Multimedia & Video</a>
+            <a class="logo" href="index.html" style="text-decoration:none;color:inherit;">Na'imullah Aziz</a>
+            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" aria-current="page">Home</a>
+                <a href="work.html">Work</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="#" class="nav-accent" data-iframe="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?embed">Full deck</a>
             </div>
         </div>
     </nav>
+    <header class="hero" id="top">
+        <div class="hero-glow one" aria-hidden="true"></div>
+        <div class="hero-glow two" aria-hidden="true"></div>
+        <div class="hero-glow three" aria-hidden="true"></div>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">Operations &amp; Communications · Design · Multimedia</span>
+            <h1>Crafting Digital Experiences &amp;<br>Creative Solutions.</h1>
+            <p>I work across digital operations, visual communications, and multimedia production, turning organisational needs into clear documents, campaigns, and stories people actually engage with. Currently based in Central Java, Indonesia.</p>
+            <div class="hero-actions">
+                <a href="work.html" class="btn">View my work</a>
+                <button type="button" class="btn btn-ghost" data-iframe="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?embed">
+                    Open full portfolio deck
+                </button>
+            </div>
+          </div>
 
-    <header class="hero">
-        <h1>Crafting Digital Experiences &<br>Creative Solutions.</h1>
-        <p>Your time is truly valuable, and thank you for taking the time to explore this space. I designed this portfolio to be clean and straightforward; there's plenty more happening behind the scenes that isn't featured here just yet!</p>
-        <a href="https://www.linkedin.com/in/naimullahaziz/" target="_blank" rel="noopener noreferrer" class="btn">Let's Connect</a>
+          <div class="hero-visual">
+            <div class="orbit-wrap" aria-hidden="true">
+              <div class="orbit r1"><span class="dot b"></span><span class="dot y right"></span></div>
+              <div class="orbit r2"><span class="dot r"></span><span class="dot v right"></span></div>
+              <div class="orbit r3"><span class="dot t"></span></div>
+              <div class="orbit-core">
+                <span class="rotator">
+                  <span>Operations</span>
+                  <span>Web</span>
+                  <span>Design</span>
+                  <span>Video</span>
+                  <span>Music</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
     </header>
 
-    <!-- ==========================================
-         TEMPORARY PORTFOLIO NOTICE (UNDER CONSTRUCTION)
-         ========================================== -->
-    <section class="container" style="padding-top: 4rem; padding-bottom: 3rem; border-top: none;">
-        <div style="background: var(--surface-color); border: 1px dashed var(--accent-color); border-radius: 24px; padding: 3rem; text-align: center; box-shadow: 0 10px 40px rgba(0, 229, 255, 0.08);">
-            <span class="badge" style="margin: 0 auto 1.2rem; display: inline-block;">Work In Progress</span>
-            <h2 style="font-size: 2.2rem; margin-bottom: 1rem; color: var(--text-primary); letter-spacing: -0.02em;">Pardon the Dust! 🚧</h2>
-            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin: 0 auto 2.5rem; line-height: 1.8;">
-                Updating this website one by one takes a little bit of time! While I am actively migrating my newest projects to this web format, you can easily view my complete previous portfolio right here.
-            </p>
-            
-            <!-- Canva Embed -->
-            <div style="position: relative; width: 100%; padding-top: 56.25%; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); background: #000;">
-                <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
-                        src="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?embed" 
-                        allowfullscreen="allowfullscreen" allow="fullscreen">
-                </iframe>
+    <main id="main">
+    <!-- SECTION: PENGUMUMAN + DECK LAMA -->
+    <section id="deck" class="container">
+        <div class="archive-box reveal">
+            <span class="badge">Previous portfolio</span>
+            <h2>Migration in progress</h2>
+            <p>I am moving everything into this site right now, and there are plenty of new projects still waiting to be added. In the meantime, here is my previous portfolio in full.</p>
+
+            <div class="embed-frame">
+                <iframe src="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?embed"
+                        title="Na'imullah Aziz previous portfolio deck"
+                        loading="lazy"
+                        allowfullscreen allow="fullscreen"></iframe>
             </div>
-            
-            <!-- Fallback Link -->
+
             <div style="margin-top: 1.5rem;">
-                <a href="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?utm_content=DAGU3RvRqQU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h632df97047" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary); font-size: 0.95rem; text-decoration: none; transition: 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-                    Can't see the preview? <span style="color: var(--accent-color); font-weight: bold;">Click here to open it in a new tab &#8599;</span>
+                <a class="archive-link" href="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?utm_content=DAGU3RvRqQU&amp;utm_campaign=designshare&amp;utm_medium=link2&amp;utm_source=uniquelinks&amp;utlId=h632df97047" target="_blank" rel="noopener noreferrer">
+                    Prefer a new tab? <span>Open it on Canva &#8599;</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 1: PROFESSIONAL WORK & WEB MANAGEMENT -->
-    <section id="work" class="container">
-        <div class="section-header">
-            <span>Operations, Comms & Web</span>
-            <h2>Professional Experience</h2>
-        </div>
-        
-        <div class="bento-grid large">
-            <!-- MAIN CARD: Prowibo Operations & Comms -->
-            <div class="card visual-card tall" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/work/prowibo-annual.webp" alt="Prowibo Operations & Design" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Operations & Visual Comms</span>
-                    <h3 class="card-title">Professors Without Borders (Prowibo)</h3>
-                    <div class="card-desc">
-                        <p><strong>Operations & Communication Assistant</strong><br>End-to-end digital operations and visual communications. Designing Annual Reports and One-Pagers, managing organizational documents, setting up Monday.com automations, and executing comprehensive LinkedIn and social media content strategies.</p>
-                    </div>
-                </div>
-                
-                <!-- HIDDEN SUB-PROJECTS FOR PROWIBO -->
-                <div class="hidden-details">
-                    
-                    <div class="sub-card" onclick="openIframe('https://www.canva.com/design/DAGyDAiIg2k/X76gJWvzY64e9pefuEFtXg/view?embed', event)">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/prowibo-annual1.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Project</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Annual Report Design</h4>
-                            <p class="sub-desc">Visual layout and infographics for global organizational annual reports.</p>
-                        </div>
-                    </div>
-
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-onepager1.webp,assets/img/work/prowibo-onepager2.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/prowibo-onepager1.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">One-Pager Documents</h4>
-                            <p class="sub-desc">Designing one-page executive documents for presentations and partnerships.</p>
-                        </div>
-                    </div>
-
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-monday1.webp,assets/img/work/prowibo-monday2.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/prowibo-monday1.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Monday.com Automation</h4>
-                            <p class="sub-desc">Building workflows and automations for international team task management.</p>
-                        </div>
-                    </div>
-
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-linkedin1.webp,assets/img/work/prowibo-linkedin2.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/prowibo-linkedin1.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">LinkedIn Strategy</h4>
-                            <p class="sub-desc">Managing content calendars, copywriting, and visual asset design for Prowibo's LinkedIn.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card: Live Play Mobile -->
-            <div class="card visual-card tall" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/work/live-01.webp" alt="Live Play Mobile" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Production</span>
-                    <h3 class="card-title">Live Play Mobile Inc.</h3>
-                    <div class="card-desc">
-                        <p><strong>Jr. Producer</strong><br>Managing the production of live host-led bingo shows. Guiding hosts, preparing scripts, and monitoring real-time technical operations to ensure an immersive gaming experience.</p>
-                    </div>
-                </div>
-                
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/live-01.webp,assets/img/work/live-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/live-01.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Live Show Production</h4>
-                            <p class="sub-desc">Directing hosts in real-time and ensuring smooth technical broadcasts.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- SECTION: CREATIVE WORKS
+         Untuk mengganti video: tukar ID di dalam src iframe.
+         ID adalah bagian setelah youtu.be/ atau setelah watch?v= -->
+    <section id="featured" class="container">
+        <div class="section-header reveal">
+            <span>Creative works</span>
+            <h2>Best collection</h2>
         </div>
 
-        <div class="bento-grid" style="margin-top: 2.5rem;">
-            <!-- Card: Maytech -->
-            <div class="card visual-card" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/work/maytech-01.webp" alt="Maytech E-Commerce" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">E-Commerce</span>
-                    <h3 class="card-title">Maytech Digital Provider</h3>
-                    <div class="card-desc">
-                        <p><strong>Digital Content Specialist</strong><br>Supported online store management for school IT equipment via SIPLah. Handled product photography, visual layouts, and streamlined digital storefronts.</p>
-                    </div>
-                </div>
+        <div class="video-grid">
 
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/maytech-01.webp,assets/img/work/maytech-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/maytech-01.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">SIPLah Storefront</h4>
-                            <p class="sub-desc">Product listing management for school digital procurement platforms.</p>
-                        </div>
-                    </div>
+            <div class="video-card hue-red reveal">
+                <div class="embed-frame">
+                    <iframe src="https://www.youtube.com/embed/2QRPN7Cj9MU"
+                            title="Tamash&#299; no Senshi, episode 1"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
+                </div>
+                <div class="video-card-body">
+                    <span class="badge">Short film &middot; Generative AI</span>
+                    <h3>&#39746;&#12398;&#25126;&#22763; (Tamash&#299; no Senshi) | #1</h3>
+                    <p>An animated short I directed and produced with the help of generative AI, paired with an original soundtrack.</p>
                 </div>
             </div>
 
-            <!-- Card: Web Freelance -->
-            <div class="card visual-card" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/work/web-01.webp" alt="Web Development" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
+            <div class="video-card hue-violet reveal">
+                <div class="embed-frame">
+                    <iframe src="https://www.youtube.com/embed/6uYwWIo1lJg"
+                            title="Creative work by Na'imullah Aziz"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
                 </div>
-                <div class="content">
-                    <span class="badge">Web Management</span>
-                    <h3 class="card-title">Freelance Web Specialist</h3>
-                    <div class="card-desc">
-                        <p><strong>WordPress & Database</strong><br>Expertise in building and managing WordPress sites, configuring cPanel/Niagahoster, and utilizing PHP & SQL to solve technical challenges.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/web-01.webp,assets/img/work/web-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/web-01.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">WordPress Builds & Database</h4>
-                            <p class="sub-desc">Custom website builds, cPanel management, and SQL database optimization.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 2: SOCIAL MEDIA & CAMPAIGNS -->
-    <section id="campaigns" class="container">
-        <div class="section-header">
-            <span>Visual Strategy</span>
-            <h2>Campaigns & Social Media</h2>
-        </div>
-        <div class="bento-grid large">
-            
-            <!-- InstaCilacap -->
-            <div class="card visual-card tall" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/work/instacilacap-01.webp" alt="InstaCilacap Feed" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Founder</span>
-                    <h3 class="card-title">InstaCilacap (13.4K Followers)</h3>
-                    <div class="card-desc">
-                        <p>Built a dedicated platform showcasing the vibrant culture and attractions of Cilacap, creating high-quality engaging content to connect local businesses and residents.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/instacilacap-01.webp,assets/img/work/instacilacap-02.webp,assets/img/work/instacilacap-03.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/instacilacap-01.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Content Curation & Partnerships</h4>
-                            <p class="sub-desc">Curating local landscape photography and executing paid business collaboration campaigns.</p>
-                        </div>
-                    </div>
+                <div class="video-card-body">
+                    <span class="badge">Music release</span>
+                    <h3>Pisang Ambon - &#27874;&#12424; &#27874;&#12424; (Nami Yo Nami Yo)</h3>
+                    <p>A release under the Pisang Ambon project, with visuals built using generative AI.</p>
                 </div>
             </div>
 
-            <!-- Prowibo Showcase Campaign -->
-            <div class="card visual-card tall" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/work/prowibo-01.webp" alt="Global Poetry Showcase" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
+            <div class="video-card hue-blue reveal">
+                <div class="embed-frame">
+                    <iframe src="https://www.youtube.com/embed/gM6KjFTIxJw"
+                            title="Creative work by Na'imullah Aziz"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen></iframe>
                 </div>
-                <div class="content">
-                    <span class="badge">Event Campaign</span>
-                    <h3 class="card-title">Global Poetry Showcase 2025</h3>
-                    <div class="card-desc">
-                        <p>Designed targeted campaign visuals, brochures, and promotional social media assets for the Global Poetry Showcase to maintain branding consistency and drive global engagement.</p>
-                    </div>
-                </div>
-                
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/prowibo-poetry1.webp,assets/img/work/prowibo-poetry2.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/prowibo-poetry1.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Campaign Assets</h4>
-                            <p class="sub-desc">Poster design, digital brochures, and Instagram feed curation for Prowibo's poetry event.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Freelance Client Content -->
-            <div class="card visual-card" style="grid-column: 1 / -1; flex-direction: row;" onclick="openProject(this)">
-                <div class="img-container" style="width: 50%; height: auto;">
-                    <img src="assets/img/work/client-01.webp" alt="Let's Move & SMK Content" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
-                </div>
-                <div class="content" style="width: 50%; display: flex; flex-direction: column; justify-content: center;">
-                    <span class="badge">Creative Developer</span>
-                    <h3 class="card-title">Client Social Media & Brands</h3>
-                    <div class="card-desc">
-                        <p>Developed digital identities and social media feeds for various clients, including health campaigns ("Let's Move") and full digital makeovers for educational institutions.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/work/client-01.webp,assets/img/work/client-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/client-01.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Let's Move & SMK Campaign</h4>
-                            <p class="sub-desc">Visual feed branding for educational campaigns and new student admissions.</p>
-                        </div>
-                    </div>
+                <div class="video-card-body">
+                    <span class="badge">Collaboration</span>
+                    <h3>Little Longer | Maya Inc &amp; Na'imullah Aziz feat. Juminah</h3>
+                    <p>A collaborative music release with Maya Inc, featuring Juminah.</p>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- SECTION 3: MULTIMEDIA, VIDEO, & AUDIO -->
-    <section id="multimedia" class="container">
-        <div class="section-header">
-            <span>Production Hub</span>
-            <h2>Video, Audio & Animation</h2>
+    <!-- SECTION: RINGKASAN -->
+    <section id="summary" class="container">
+        <div class="section-header reveal">
+            <span>What I do</span>
+            <h2>Three places my work lives</h2>
         </div>
-        <div class="bento-grid">
-            
-            <!-- Video Editing -->
-            <div class="card visual-card" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/creative/video-01.webp" alt="Short Form Video" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Video Editor</span>
-                    <h3 class="card-title">Short-Form & Multi-Angle Video</h3>
-                    <div class="card-desc">
-                        <p>3+ years experience creating trendy short-form content (Reels/Shorts) using Premiere, CapCut, and Filmora. Projects range from product ads (MUD WTR), podcast edits, to multi-angle shoots.</p>
-                    </div>
-                </div>
 
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/creative/video-01.webp,assets/img/creative/video-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/creative/video-01.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Commercials & Multi-Cam</h4>
-                            <p class="sub-desc">Fast-paced editing with motion text (MUD WTR) and color grading for multi-angle shoots (KFC).</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="home-cards">
+            <a class="home-card hue-blue reveal" href="work.html#work">
+                <span class="blob" aria-hidden="true"></span>
+                <h3>Operations &amp; Web</h3>
+                <p>Annual reports, one-pagers, Monday.com automations, WordPress builds and database work.</p>
+                <span class="go">See the work <span class="arrow" aria-hidden="true">&#8594;</span></span>
+            </a>
+            <a class="home-card hue-yellow reveal" href="work.html#campaigns">
+                <span class="blob" aria-hidden="true"></span>
+                <h3>Campaigns &amp; Social</h3>
+                <p>Content strategy, campaign visuals and feed design, from a 13.4K community to global events.</p>
+                <span class="go">See the campaigns <span class="arrow" aria-hidden="true">&#8594;</span></span>
+            </a>
+            <a class="home-card hue-violet reveal" href="work.html#multimedia">
+                <span class="blob" aria-hidden="true"></span>
+                <h3>Video, Audio &amp; Animation</h3>
+                <p>Short-form editing, documentary work, original music, and AI-assisted animation.</p>
+                <span class="go">See the productions <span class="arrow" aria-hidden="true">&#8594;</span></span>
+            </a>
+        </div>
+
+        <div class="stat-row" style="margin-top: 2.4rem;">
+            <div class="stat reveal">
+                <div class="num" data-count="13.4" data-suffix="K">13.4K</div>
+                <div class="label">Followers built on InstaCilacap</div>
             </div>
-
-            <!-- Documentary -->
-            <div class="card visual-card" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/creative/doc-01.webp" alt="Documentary" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Documentary</span>
-                    <h3 class="card-title">Event & Remote Village Coverage</h3>
-                    <div class="card-desc">
-                        <p>Filmed and edited the August 17th Independence Day documentary and school scouting activities. Transforming raw, modest setups into vibrant, emotionally powerful visual stories.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/creative/doc-01.webp,assets/img/creative/doc-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/creative/doc-01.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Event Documentary</h4>
-                            <p class="sub-desc">Cinematography and emotional editing for Independence Day and school scouting events.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="stat reveal">
+                <div class="num" data-count="7" data-suffix="+">7+</div>
+                <div class="label">Years in editing and visual design</div>
             </div>
-
-            <!-- Audio & Animation -->
-            <div class="card visual-card" onclick="openProject(this)">
-                <div class="img-container">
-                    <img src="assets/img/creative/audio-01.webp" alt="Spotify & Animation" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open Projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Music & AI Animation</span>
-                    <h3 class="card-title">Original Songs & Short Films</h3>
-                    <div class="card-desc">
-                        <p>Independent artist on Spotify (tracks: <em>Manusia Tangguh</em>, <em>Setapak</em>). Also directed and produced the short animated film <em>Tamashi no Senshi</em> assisted by Generative AI.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" onclick="openGallery(this)" data-gallery="assets/img/creative/audio-01.webp,assets/img/creative/audio-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/creative/audio-01.webp" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View Gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Spotify Releases & Animation</h4>
-                            <p class="sub-desc">Full music production and experimental short animated film creation utilizing Generative AI.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="stat reveal">
+                <div class="num" data-count="100" data-suffix="+">100+</div>
+                <div class="label">Creative works delivered</div>
             </div>
-
         </div>
     </section>
+
+    </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Na'imullah Aziz. Built with passion in Central Java, Indonesia.</p>
+        <div class="container footer-inner">
+            <p>&copy; 2026 Na'imullah Aziz. Built in Central Java, Indonesia.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="work.html">Work</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="#" data-iframe="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?embed">Full deck</a>
+            </div>
         </div>
     </footer>
 
-
-    <!-- MODAL 1: PROJECT (Sub-Postcards List) -->
-    <div id="project-modal" class="modal-project">
-        <div class="modal-project-content">
-            <div class="close-btn" onclick="closeProject()">&times;</div>
-            
-            <div class="modal-header">
-                <h2 id="modal-title">Project Title</h2>
-                <div id="modal-desc">Project description.</div>
-            </div>
-            
-            <div class="modal-body">
-                <!-- Sub-cards rendered here -->
-                <div id="modal-sub-grid" class="sub-grid"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL 2: IMAGE GALLERY SLIDER -->
-    <div id="gallery-modal" class="modal-gallery">
-        <div class="gallery-close" onclick="closeGallery()">&times;</div>
-        
-        <div class="gallery-wrapper">
-            <div class="gallery-nav prev" onclick="changeSlide(-1)">&#10094;</div>
-            <img id="gallery-img" src="" alt="Gallery Image">
-            <div class="gallery-nav next" onclick="changeSlide(1)">&#10095;</div>
-        </div>
-
-        <div class="gallery-info">
-            <h3 id="gallery-title">Image Title</h3>
-            <p id="gallery-desc">Image Description</p>
-            <div id="gallery-counter" class="gallery-counter">1 / 1</div>
-        </div>
-    </div>
-
-    <!-- MODAL 3: IFRAME POPUP (Khusus Untuk Link URL) -->
-    <div id="iframe-modal" class="modal-iframe">
-        <div class="iframe-container">
-            <div class="iframe-close" onclick="closeIframe()">&times;</div>
-            <iframe id="modal-iframe" src="" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-        </div>
-    </div>
-
-
-    <!-- SCRIPT LOGIC -->
-    <script>
-        // --- MODAL 1 (PROJECT LIST) ---
-        const modalProject = document.getElementById('project-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalDesc = document.getElementById('modal-desc');
-        const modalGrid = document.getElementById('modal-sub-grid');
-
-        function openProject(cardElement) {
-            const title = cardElement.querySelector('.card-title').innerHTML;
-            const desc = cardElement.querySelector('.card-desc').innerHTML;
-            const hiddenHTML = cardElement.querySelector('.hidden-details').innerHTML;
-            
-            modalTitle.innerHTML = title;
-            modalDesc.innerHTML = desc;
-            modalGrid.innerHTML = hiddenHTML;
-            
-            modalProject.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function closeProject() {
-            modalProject.style.display = 'none';
-            document.body.style.overflow = 'auto'; 
-            modalGrid.innerHTML = ''; 
-        }
-
-        modalProject.addEventListener('click', function(e) {
-            if (e.target === modalProject) closeProject();
-        });
-
-
-        // --- MODAL 2 (IMAGE GALLERY) ---
-        let currentImages = [];
-        let currentIndex = 0;
-        const modalGallery = document.getElementById('gallery-modal');
-        const galleryImg = document.getElementById('gallery-img');
-        const galleryCounter = document.getElementById('gallery-counter');
-        const galleryTitle = document.getElementById('gallery-title');
-        const galleryDesc = document.getElementById('gallery-desc');
-
-        function openGallery(subCardElement) {
-            const galleryData = subCardElement.getAttribute('data-gallery');
-            if (!galleryData) return;
-            
-            const titleText = subCardElement.querySelector('.sub-title').innerHTML;
-            const descText = subCardElement.querySelector('.sub-desc').innerHTML;
-            
-            currentImages = galleryData.split(',').map(item => item.trim());
-            
-            if (currentImages.length > 0) {
-                currentIndex = 0;
-                galleryTitle.innerHTML = titleText;
-                galleryDesc.innerHTML = descText;
-                
-                updateGalleryContent();
-                modalGallery.style.display = 'flex';
-            }
-        }
-
-        function closeGallery() {
-            modalGallery.style.display = 'none';
-        }
-
-        function changeSlide(direction) {
-            currentIndex += direction;
-            if (currentIndex >= currentImages.length) currentIndex = 0;
-            else if (currentIndex < 0) currentIndex = currentImages.length - 1;
-            updateGalleryContent();
-        }
-
-        function updateGalleryContent() {
-            galleryImg.style.opacity = '0';
-            setTimeout(() => {
-                galleryImg.src = currentImages[currentIndex];
-                galleryImg.style.opacity = '1';
-            }, 150);
-            galleryCounter.innerText = (currentIndex + 1) + " / " + currentImages.length;
-        }
-
-        modalGallery.addEventListener('click', function(e) {
-            if (e.target === modalGallery) closeGallery();
-        });
-
-
-        // --- MODAL 3 (IFRAME URL POPUP) ---
-        const iframeModal = document.getElementById('iframe-modal');
-        const modalIframe = document.getElementById('modal-iframe');
-
-        function openIframe(url, event) {
-            if (event) event.stopPropagation(); 
-            modalIframe.src = url;
-            iframeModal.style.display = 'flex';
-        }
-
-        function closeIframe() {
-            iframeModal.style.display = 'none';
-            modalIframe.src = ''; 
-        }
-
-        iframeModal.addEventListener('click', function(e) {
-            if (e.target === iframeModal) closeIframe();
-        });
-
-
-        // --- KEYBOARD NAVIGATION ---
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                if (iframeModal.style.display === 'flex') {
-                    closeIframe();
-                } else if (modalGallery.style.display === 'flex') {
-                    closeGallery();
-                } else if (modalProject.style.display === 'flex') {
-                    closeProject();
-                }
-            }
-            if (modalGallery.style.display === 'flex') {
-                if (e.key === 'ArrowRight') changeSlide(1);
-                if (e.key === 'ArrowLeft') changeSlide(-1);
-            }
-        });
-    </script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
