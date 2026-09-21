@@ -38,9 +38,9 @@
                menyatakan warna isian penuh gagal kontras pada teks seukuran body.
                "rgb" tetap memakai warna terang aslinya, karena hanya dipakai
                untuk glow dan tint yang tidak memuat teks. */
-            --c-navy: #001741;
-
+            --c-navy:   #001741;  --c-navy-pop:   #001741;  --c-navy-rgb:   0, 23, 65;     --c-navy-on:   #FFFFFF;
             --c-blue:   #0062CC;  --c-blue-pop:   #0062CC;  --c-blue-rgb:   0, 123, 255;   --c-blue-on:   #FFFFFF;
+            --c-green:  #027A48;  --c-green-pop:  #027A48;  --c-green-rgb:  18, 183, 106;  --c-green-on:  #FFFFFF;
             --c-yellow: #A66A00;  --c-yellow-pop: #FFB800;  --c-yellow-rgb: 255, 184, 0;   --c-yellow-on: #001741;
             --c-red:    #C41A00;  --c-red-pop:    #C41A00;  --c-red-rgb:    255, 42, 0;    --c-red-on:    #FFFFFF;
 
@@ -50,8 +50,8 @@
 
             /* Tiga cahaya di hero: biru, kuning, merah */
             --glow-a: rgba(var(--c-blue-rgb), 0.20);
-            --glow-b: rgba(var(--c-red-rgb), 0.14);
-            --glow-c: rgba(var(--c-yellow-rgb), 0.22);
+            --glow-b: rgba(var(--c-green-rgb), 0.16);
+            --glow-c: rgba(var(--c-yellow-rgb), 0.18);
 
             /* Aksen default (About, Contact, Full deck) */
             --accent-color: var(--c-blue);
@@ -93,9 +93,9 @@
             --on-accent: #06080F;
             --headline-gradient: linear-gradient(115deg, #ffffff 0%, #ffffff 20%, #60A5FA 42%, #A78BFA 58%, #ffffff 82%);
 
-            --c-navy: #001741;
-
+            --c-navy:   #7FA8FF;  --c-navy-pop:   #7FA8FF;  --c-navy-rgb:   127, 168, 255; --c-navy-on:  #001741;
             --c-blue:   #4DA3FF;  --c-blue-pop:   #4DA3FF;  --c-blue-rgb:   0, 123, 255;  --c-blue-on:   #001741;
+            --c-green:  #3DD68C;  --c-green-pop:  #3DD68C;  --c-green-rgb:  18, 183, 106; --c-green-on:  #00291A;
             --c-yellow: #FFB800;  --c-yellow-pop: #FFB800;  --c-yellow-rgb: 255, 184, 0;  --c-yellow-on: #001741;
             --c-red:    #FF7A5C;  --c-red-pop:    #FF7A5C;  --c-red-rgb:    255, 42, 0;   --c-red-on:    #2B0900;
 
@@ -111,10 +111,10 @@
         /* Satu warna per section. Cukup ganti empat baris ini untuk menukar
            warna sebuah section; glow, badge, border dan link ikut sendiri. */
         #featured {
-            --accent-color: var(--c-red);
-            --accent-pop: var(--c-red-pop);
-            --accent-rgb: var(--c-red-rgb);
-            --on-pop: var(--c-red-on);
+            --accent-color: var(--c-blue);
+            --accent-pop: var(--c-blue-pop);
+            --accent-rgb: var(--c-blue-rgb);
+            --on-pop: var(--c-blue-on);
         }
         #work {
             --accent-color: var(--c-blue);
@@ -122,17 +122,19 @@
             --accent-rgb: var(--c-blue-rgb);
             --on-pop: var(--c-blue-on);
         }
+        /* Navy dipakai sebagai selingan struktural, bukan penanda status,
+           supaya section berselang-seling tanpa meminjam makna amber/merah. */
         #campaigns {
-            --accent-color: var(--c-yellow);
-            --accent-pop: var(--c-yellow-pop);
-            --accent-rgb: var(--c-yellow-rgb);
-            --on-pop: var(--c-yellow-on);
+            --accent-color: var(--c-navy);
+            --accent-pop: var(--c-navy-pop);
+            --accent-rgb: var(--c-navy-rgb);
+            --on-pop: var(--c-navy-on);
         }
         #multimedia {
-            --accent-color: var(--c-red);
-            --accent-pop: var(--c-red-pop);
-            --accent-rgb: var(--c-red-rgb);
-            --on-pop: var(--c-red-on);
+            --accent-color: var(--c-blue);
+            --accent-pop: var(--c-blue-pop);
+            --accent-rgb: var(--c-blue-rgb);
+            --on-pop: var(--c-blue-on);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -304,11 +306,13 @@
             top: -7px; left: 50%;
             margin-left: -6.5px;
         }
+        /* Titik orbit murni dekorasi dan tidak mengklaim status apa pun,
+           jadi di sinilah kelima warna boleh tampil bersama. */
         .orbit .dot.b { background: var(--c-blue); }
         .orbit .dot.y { background: var(--c-yellow-pop); }
         .orbit .dot.r { background: var(--c-red); }
-        .orbit .dot.v { background: var(--c-red); }
-        .orbit .dot.t { background: var(--c-blue); }
+        .orbit .dot.v { background: var(--c-green-rgb); background: #12B76A; }
+        .orbit .dot.t { background: var(--c-navy); }
         .orbit .dot.right { top: 50%; left: auto; right: -7px; margin: -6.5px 0 0 0; }
 
         .orbit-core {
@@ -344,10 +348,10 @@
             animation: rotateWord 15s infinite;
         }
         .orbit-core .rotator span:nth-child(1) { color: var(--c-blue);   animation-delay: 0s; }
-        .orbit-core .rotator span:nth-child(2) { color: var(--c-yellow); animation-delay: 3s; }
-        .orbit-core .rotator span:nth-child(3) { color: var(--c-red);    animation-delay: 6s; }
-        .orbit-core .rotator span:nth-child(4) { color: var(--c-blue);   animation-delay: 9s; }
-        .orbit-core .rotator span:nth-child(5) { color: var(--c-yellow); animation-delay: 12s; }
+        .orbit-core .rotator span:nth-child(2) { color: var(--c-navy);   animation-delay: 3s; }
+        .orbit-core .rotator span:nth-child(3) { color: var(--c-green);  animation-delay: 6s; }
+        .orbit-core .rotator span:nth-child(4) { color: var(--c-yellow); animation-delay: 9s; }
+        .orbit-core .rotator span:nth-child(5) { color: var(--c-red);    animation-delay: 12s; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes rotateWord {
@@ -457,6 +461,18 @@
             box-shadow: 0 0 25px var(--accent-glow);
             transform: translateY(-3px);
         }
+        /* Satu ajakan utama per halaman. Panduannya menyebut amber berteks
+           Deep Navy mencapai 10,3:1 dan justru mengalahkan tombol biru. */
+        .btn-cta {
+            background-color: var(--c-yellow-pop);
+            color: var(--c-navy);
+        }
+        .btn-cta:hover {
+            background-color: var(--c-yellow);
+            color: #FFFFFF;
+            box-shadow: 0 0 25px rgba(var(--c-yellow-rgb), 0.35);
+        }
+
         .btn-ghost {
             background: transparent;
             color: var(--text-primary);
@@ -532,9 +548,6 @@
             border-radius: 18px;
             padding: 1.6rem 1.8rem;
         }
-        .stat-stack .stat:nth-child(1) .num { color: var(--c-blue); }
-        .stat-stack .stat:nth-child(2) .num { color: var(--c-yellow); }
-        .stat-stack .stat:nth-child(3) .num { color: var(--c-red); }
         .stat .num {
             font-size: 2.1rem;
             font-weight: 900;
@@ -1241,7 +1254,9 @@
 
         /* Kelas bantu warna: tempelkan ke elemen apa pun untuk
            mengganti aksennya beserta semua turunannya. */
+        .hue-navy   { --accent-color: var(--c-navy);   --accent-pop: var(--c-navy-pop);   --accent-rgb: var(--c-navy-rgb);   --on-pop: var(--c-navy-on); }
         .hue-blue   { --accent-color: var(--c-blue);   --accent-pop: var(--c-blue-pop);   --accent-rgb: var(--c-blue-rgb);   --on-pop: var(--c-blue-on); }
+        .hue-green  { --accent-color: var(--c-green);  --accent-pop: var(--c-green-pop);  --accent-rgb: var(--c-green-rgb);  --on-pop: var(--c-green-on); }
         .hue-yellow { --accent-color: var(--c-yellow); --accent-pop: var(--c-yellow-pop); --accent-rgb: var(--c-yellow-rgb); --on-pop: var(--c-yellow-on); }
         .hue-red    { --accent-color: var(--c-red);    --accent-pop: var(--c-red-pop);    --accent-rgb: var(--c-red-rgb);    --on-pop: var(--c-red-on); }
 
@@ -1402,15 +1417,13 @@
         .stat .num { position: relative; z-index: 1; }
         .stat .label { position: relative; z-index: 1; }
 
-        /* Tiap kartu statistik mewarisi hue-nya sendiri */
-        .stat-row .stat:nth-child(1), .stat-stack .stat:nth-child(1) {
-            --accent-color: var(--c-blue);   --accent-pop: var(--c-blue-pop);   --accent-rgb: var(--c-blue-rgb);
-        }
-        .stat-row .stat:nth-child(2), .stat-stack .stat:nth-child(2) {
-            --accent-color: var(--c-yellow); --accent-pop: var(--c-yellow-pop); --accent-rgb: var(--c-yellow-rgb);
-        }
-        .stat-row .stat:nth-child(3), .stat-stack .stat:nth-child(3) {
-            --accent-color: var(--c-red);    --accent-pop: var(--c-red-pop);    --accent-rgb: var(--c-red-rgb);
+        /* Statistik memakai hijau. Dalam panduannya hijau berarti
+           pertumbuhan dan target tercapai, dan itu persis isi angka-angka ini. */
+        .stat-row .stat, .stat-stack .stat {
+            --accent-color: var(--c-green);
+            --accent-pop: var(--c-green-pop);
+            --accent-rgb: var(--c-green-rgb);
+            --on-pop: var(--c-green-on);
         }
         /* Baris statistik mendatar untuk beranda */
         .stat-row {
@@ -1418,9 +1431,6 @@
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.4rem;
         }
-        .stat-row .stat:nth-child(1) .num { color: var(--c-blue); }
-        .stat-row .stat:nth-child(2) .num { color: var(--c-yellow); }
-        .stat-row .stat:nth-child(3) .num { color: var(--c-red); }
 
         @media (max-width: 768px) {
             .page-head { padding: 2.8rem 0 2.2rem; }
