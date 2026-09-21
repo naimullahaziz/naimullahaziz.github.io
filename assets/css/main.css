@@ -430,7 +430,7 @@
         .hero p {
             font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 740px;
+
             margin-bottom: 2.4rem;
             font-weight: 400;
             line-height: 1.65;
@@ -857,7 +857,7 @@
 
         .modal-header { padding: 3rem; background: var(--surface-color); border-bottom: 1px solid var(--border-color); }
         .modal-header h2 { font-size: 2.1rem; color: var(--text-primary); margin-bottom: 1.1rem; letter-spacing: -0.02em; padding-right: 3rem; line-height: 1.25; }
-        .modal-header p { font-size: 1.05rem; color: var(--text-secondary); max-width: 950px; line-height: 1.65; }
+        .modal-header p { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.65; }
         .modal-header strong { color: var(--text-primary); }
 
         .modal-body { padding: 3rem; overflow-y: auto; background: var(--bg-color); }
@@ -1049,7 +1049,7 @@
             color: var(--text-secondary);
             font-size: 0.96rem;
             line-height: 1.6;
-            max-width: 780px;
+
         }
         .iframe-head .archive-link { display: inline-block; margin-top: 0.9rem; }
 
@@ -1078,7 +1078,7 @@
         }
         .archive-box h2 { font-size: 1.85rem; margin-bottom: 0.9rem; letter-spacing: -0.02em; line-height: 1.25; }
         .archive-box > p {
-            color: var(--text-secondary); font-size: 1.02rem; max-width: 760px;
+            color: var(--text-secondary); font-size: 1.02rem;
             margin: 0 0 2rem; line-height: 1.65;
         }
         .embed-frame {
@@ -1303,7 +1303,7 @@
         .page-head p {
             color: var(--text-secondary);
             font-size: 1.1rem;
-            max-width: 660px;
+
             line-height: 1.65;
         }
         .page-head .head-glow {
@@ -1456,7 +1456,7 @@
             color: var(--text-secondary);
             font-size: 1.06rem;
             line-height: 1.75;
-            max-width: 760px;
+
             margin-bottom: 2.4rem;
         }
         .case-sub {
@@ -1536,7 +1536,7 @@
             font-size: 0.92rem;
             line-height: 1.6;
             margin-top: 0.9rem;
-            max-width: 760px;
+
         }
 
         /* Aturan kontras, dibuat sebagai kartu mini mengikuti bahasa kartu
@@ -1704,7 +1704,7 @@
             color: rgba(255, 255, 255, 0.72);
             font-size: 1.05rem;
             line-height: 1.7;
-            max-width: 600px;
+
             margin-bottom: 2.2rem;
         }
         .case-hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
@@ -1771,7 +1771,7 @@
             z-index: 1;
         }
         .case-link .case-link-body .badge { margin-bottom: 1.1rem; }
-        .case-link .case-link-body p { max-width: 720px; }
+
 
         @media (max-width: 768px) {
             .case-link .case-link-body { padding: 1.5rem 1.4rem 1.6rem; }
