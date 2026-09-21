@@ -16,7 +16,7 @@
             --nav-solid: #FBFAF8;
             --hero-wash: linear-gradient(180deg, rgba(109, 40, 217, 0.06) 0%, rgba(251, 250, 248, 0) 100%);
             --chip-bg: rgba(18, 19, 26, 0.04);
-            --ghost-border: rgba(18, 19, 26, 0.18);
+            --ghost-border: rgba(0, 23, 65, 0.20);
             --img-bg: #ECE8E1;
             --placeholder-stripe: rgba(18, 19, 26, 0.04);
             --scrim: rgba(18, 19, 26, 0.45);
@@ -32,11 +32,17 @@
                "deep"  dipakai untuk teks di atas latar terang (butuh 4.5:1).
                "pop"   dipakai untuk isian badge dan glow (boleh menyala).
                "on"    warna teks di atas isian pop itu. */
-            --c-blue:   #1E56C8;  --c-blue-pop:   #1E56C8;  --c-blue-rgb:   30, 86, 200;   --c-blue-on:   #FFFFFF;
-            --c-yellow: #8A6206;  --c-yellow-pop: #E6A50A;  --c-yellow-rgb: 230, 165, 10;  --c-yellow-on: #1F1500;
-            --c-red:    #C02A36;  --c-red-pop:    #C02A36;  --c-red-rgb:    192, 42, 54;   --c-red-on:    #FFFFFF;
-            --c-violet: #6B3FD4;  --c-violet-pop: #6B3FD4;  --c-violet-rgb: 107, 63, 212;  --c-violet-on: #FFFFFF;
-            --c-teal:   #10776E;  --c-teal-pop:   #10776E;  --c-teal-rgb:   16, 119, 110;  --c-teal-on:   #FFFFFF;
+            /* Vaeleon: Electric Blue #007BFF, Vibrant Amber #FFB800,
+               Dynamic Red #FF2A00, Deep Navy #001741.
+               "deep" memakai varian Text yang lebih gelap karena panduannya
+               menyatakan warna isian penuh gagal kontras pada teks seukuran body.
+               "rgb" tetap memakai warna terang aslinya, karena hanya dipakai
+               untuk glow dan tint yang tidak memuat teks. */
+            --c-navy: #001741;
+
+            --c-blue:   #0062CC;  --c-blue-pop:   #0062CC;  --c-blue-rgb:   0, 123, 255;   --c-blue-on:   #FFFFFF;
+            --c-yellow: #A66A00;  --c-yellow-pop: #FFB800;  --c-yellow-rgb: 255, 184, 0;   --c-yellow-on: #001741;
+            --c-red:    #C41A00;  --c-red-pop:    #C41A00;  --c-red-rgb:    255, 42, 0;    --c-red-on:    #FFFFFF;
 
             --a-glow: 0.18;
             --a-soft: 0.08;
@@ -48,10 +54,10 @@
             --glow-c: rgba(var(--c-yellow-rgb), 0.22);
 
             /* Aksen default (About, Contact, Full deck) */
-            --accent-color: var(--c-teal);
-            --accent-pop: var(--c-teal-pop);
-            --accent-rgb: var(--c-teal-rgb);
-            --on-pop: var(--c-teal-on);
+            --accent-color: var(--c-blue);
+            --accent-pop: var(--c-blue-pop);
+            --accent-rgb: var(--c-blue-rgb);
+            --on-pop: var(--c-blue-on);
 
             /* Turunan ini otomatis ikut --accent-rgb tiap section */
             --accent-glow: rgba(var(--accent-rgb), var(--a-glow));
@@ -87,11 +93,11 @@
             --on-accent: #06080F;
             --headline-gradient: linear-gradient(115deg, #ffffff 0%, #ffffff 20%, #60A5FA 42%, #A78BFA 58%, #ffffff 82%);
 
-            --c-blue:   #60A5FA;  --c-blue-pop:   #60A5FA;  --c-blue-rgb:   96, 165, 250;  --c-blue-on:   #04122E;
-            --c-yellow: #FACC15;  --c-yellow-pop: #FACC15;  --c-yellow-rgb: 250, 204, 21;  --c-yellow-on: #1A1300;
-            --c-red:    #F87171;  --c-red-pop:    #F87171;  --c-red-rgb:    248, 113, 113; --c-red-on:    #2A0606;
-            --c-violet: #A78BFA;  --c-violet-pop: #A78BFA;  --c-violet-rgb: 167, 139, 250; --c-violet-on: #17062E;
-            --c-teal:   #22D3EE;  --c-teal-pop:   #22D3EE;  --c-teal-rgb:   34, 211, 238;  --c-teal-on:   #042F35;
+            --c-navy: #001741;
+
+            --c-blue:   #4DA3FF;  --c-blue-pop:   #4DA3FF;  --c-blue-rgb:   0, 123, 255;  --c-blue-on:   #001741;
+            --c-yellow: #FFB800;  --c-yellow-pop: #FFB800;  --c-yellow-rgb: 255, 184, 0;  --c-yellow-on: #001741;
+            --c-red:    #FF7A5C;  --c-red-pop:    #FF7A5C;  --c-red-rgb:    255, 42, 0;   --c-red-on:    #2B0900;
 
             --a-glow: 0.16;
             --a-soft: 0.14;
@@ -123,10 +129,10 @@
             --on-pop: var(--c-yellow-on);
         }
         #multimedia {
-            --accent-color: var(--c-violet);
-            --accent-pop: var(--c-violet-pop);
-            --accent-rgb: var(--c-violet-rgb);
-            --on-pop: var(--c-violet-on);
+            --accent-color: var(--c-red);
+            --accent-pop: var(--c-red-pop);
+            --accent-rgb: var(--c-red-rgb);
+            --on-pop: var(--c-red-on);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -274,8 +280,8 @@
         .orbit .dot.b { background: var(--c-blue); }
         .orbit .dot.y { background: var(--c-yellow-pop); }
         .orbit .dot.r { background: var(--c-red); }
-        .orbit .dot.v { background: var(--c-violet); }
-        .orbit .dot.t { background: var(--c-teal); }
+        .orbit .dot.v { background: var(--c-red); }
+        .orbit .dot.t { background: var(--c-blue); }
         .orbit .dot.right { top: 50%; left: auto; right: -7px; margin: -6.5px 0 0 0; }
 
         .orbit-core {
@@ -310,11 +316,11 @@
             opacity: 0;
             animation: rotateWord 15s infinite;
         }
-        .orbit-core .rotator span:nth-child(1) { color: var(--c-teal);   animation-delay: 0s; }
-        .orbit-core .rotator span:nth-child(2) { color: var(--c-blue);   animation-delay: 3s; }
-        .orbit-core .rotator span:nth-child(3) { color: var(--c-yellow); animation-delay: 6s; }
-        .orbit-core .rotator span:nth-child(4) { color: var(--c-red);    animation-delay: 9s; }
-        .orbit-core .rotator span:nth-child(5) { color: var(--c-violet); animation-delay: 12s; }
+        .orbit-core .rotator span:nth-child(1) { color: var(--c-blue);   animation-delay: 0s; }
+        .orbit-core .rotator span:nth-child(2) { color: var(--c-yellow); animation-delay: 3s; }
+        .orbit-core .rotator span:nth-child(3) { color: var(--c-red);    animation-delay: 6s; }
+        .orbit-core .rotator span:nth-child(4) { color: var(--c-blue);   animation-delay: 9s; }
+        .orbit-core .rotator span:nth-child(5) { color: var(--c-yellow); animation-delay: 12s; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes rotateWord {
@@ -407,8 +413,8 @@
             align-items: center;
             gap: 8px;
             padding: 1.05rem 2.4rem;
-            background-color: var(--text-primary);
-            color: var(--bg-color);
+            background-color: var(--c-navy);
+            color: #FFFFFF;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.98rem;
@@ -419,8 +425,8 @@
             font-family: inherit;
         }
         .btn:hover {
-            background-color: var(--accent-color);
-            color: var(--on-accent);
+            background-color: var(--accent-pop);
+            color: var(--on-pop);
             box-shadow: 0 0 25px var(--accent-glow);
             transform: translateY(-3px);
         }
@@ -1143,8 +1149,6 @@
         .hue-blue   { --accent-color: var(--c-blue);   --accent-pop: var(--c-blue-pop);   --accent-rgb: var(--c-blue-rgb);   --on-pop: var(--c-blue-on); }
         .hue-yellow { --accent-color: var(--c-yellow); --accent-pop: var(--c-yellow-pop); --accent-rgb: var(--c-yellow-rgb); --on-pop: var(--c-yellow-on); }
         .hue-red    { --accent-color: var(--c-red);    --accent-pop: var(--c-red-pop);    --accent-rgb: var(--c-red-rgb);    --on-pop: var(--c-red-on); }
-        .hue-violet { --accent-color: var(--c-violet); --accent-pop: var(--c-violet-pop); --accent-rgb: var(--c-violet-rgb); --on-pop: var(--c-violet-on); }
-        .hue-teal   { --accent-color: var(--c-teal);   --accent-pop: var(--c-teal-pop);   --accent-rgb: var(--c-teal-rgb);   --on-pop: var(--c-teal-on); }
 
         /* Halaman aktif di navbar */
         .nav-links a[aria-current="page"] {
