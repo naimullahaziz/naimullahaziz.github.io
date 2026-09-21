@@ -311,7 +311,7 @@
         .orbit .dot.b { background: var(--c-blue); }
         .orbit .dot.y { background: var(--c-yellow-pop); }
         .orbit .dot.r { background: var(--c-red); }
-        .orbit .dot.v { background: var(--c-green-rgb); background: #12B76A; }
+        .orbit .dot.v { background: #12B76A; }
         .orbit .dot.t { background: var(--c-navy); }
         .orbit .dot.right { top: 50%; left: auto; right: -7px; margin: -6.5px 0 0 0; }
 
@@ -468,9 +468,9 @@
             color: var(--c-navy);
         }
         .btn-cta:hover {
-            background-color: var(--c-yellow);
+            background-color: var(--c-blue-pop);
             color: #FFFFFF;
-            box-shadow: 0 0 25px rgba(var(--c-yellow-rgb), 0.35);
+            box-shadow: 0 0 25px rgba(var(--c-blue-rgb), 0.35);
         }
 
         .btn-ghost {
@@ -1417,13 +1417,11 @@
         .stat .num { position: relative; z-index: 1; }
         .stat .label { position: relative; z-index: 1; }
 
-        /* Statistik memakai hijau. Dalam panduannya hijau berarti
-           pertumbuhan dan target tercapai, dan itu persis isi angka-angka ini. */
         .stat-row .stat, .stat-stack .stat {
-            --accent-color: var(--c-green);
-            --accent-pop: var(--c-green-pop);
-            --accent-rgb: var(--c-green-rgb);
-            --on-pop: var(--c-green-on);
+            --accent-color: var(--c-blue);
+            --accent-pop: var(--c-blue-pop);
+            --accent-rgb: var(--c-blue-rgb);
+            --on-pop: var(--c-blue-on);
         }
         /* Baris statistik mendatar untuk beranda */
         .stat-row {
