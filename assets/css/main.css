@@ -1307,8 +1307,9 @@
             line-height: 1.65;
         }
         .page-head p + p { margin-top: 1.2rem; }
-        .page-head p.emphasis {
-            color: var(--text-primary);
+        /* Navy, bukan biru, supaya tidak tertukar dengan tautan. */
+        .page-head .emphasis {
+            color: var(--c-navy);
             font-weight: 700;
         }
 
