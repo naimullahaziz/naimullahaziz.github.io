@@ -727,6 +727,16 @@
             border: 1px solid transparent;
         }
 
+        .role-period {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
         .card h3 {
             font-size: 1.45rem;
             font-weight: 700;
