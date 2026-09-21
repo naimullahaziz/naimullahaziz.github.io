@@ -329,7 +329,7 @@ document.addEventListener('keydown', (e) => {
 
 
 // --- SOROT YANG MENGIKUTI KURSOR DI KARTU ---
-const spotlightCards = document.querySelectorAll('.card, .sub-card, .home-card, .video-card, .stat');
+const spotlightCards = document.querySelectorAll('.card, .sub-card, .home-card, .video-card, .rule-card, .stat');
 spotlightCards.forEach(card => {
     card.addEventListener('pointermove', (e) => {
         const r = card.getBoundingClientRect();
