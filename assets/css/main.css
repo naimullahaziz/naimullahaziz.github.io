@@ -41,7 +41,7 @@
             --c-navy:   #001741;  --c-navy-pop:   #001741;  --c-navy-rgb:   0, 23, 65;     --c-navy-on:   #FFFFFF;
             --c-blue:   #0062CC;  --c-blue-pop:   #0062CC;  --c-blue-rgb:   0, 123, 255;   --c-blue-on:   #FFFFFF;
             --c-green:  #027A48;  --c-green-pop:  #027A48;  --c-green-rgb:  18, 183, 106;  --c-green-on:  #FFFFFF;
-            --c-yellow: #A66A00;  --c-yellow-pop: #FFC400;  --c-yellow-rgb: 255, 196, 0;   --c-yellow-on: #001741;
+            --c-yellow: #A66A00;  --c-yellow-pop: #FFD60A;  --c-yellow-rgb: 255, 214, 10;  --c-yellow-on: #001741;
             --c-red:    #C41A00;  --c-red-pop:    #C41A00;  --c-red-rgb:    255, 42, 0;    --c-red-on:    #FFFFFF;
 
             --a-glow: 0.18;
@@ -464,7 +464,6 @@
         .btn-cta {
             background-color: var(--c-yellow-pop);
             color: var(--c-navy);
-            box-shadow: 0 8px 28px rgba(255, 196, 0, 0.45);
         }
         .btn-cta:hover {
             background-color: var(--c-blue-pop);
@@ -798,7 +797,6 @@
             transform: translate(-50%, -50%) scale(0.88);
             background: var(--c-yellow-pop);
             color: var(--c-navy);
-            box-shadow: 0 6px 24px rgba(255, 196, 0, 0.55);
             padding: 11px 24px;
             border-radius: 50px;
             font-size: 0.84rem;
