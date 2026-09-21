@@ -193,6 +193,36 @@
             transition: color 0.3s ease;
         }
         .nav-links a:hover { color: var(--accent-color); }
+
+        /* Garis bawah yang ditarik dari kiri, dan menetap di halaman aktif */
+        .nav-links a { position: relative; }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: -7px;
+            height: 2px;
+            background: var(--accent-pop);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .nav-links a:hover::after,
+        .nav-links a:focus-visible::after,
+        .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+        /* Menu masuk satu per satu saat halaman dimuat */
+        .js .nav-links a { animation: navIn 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+        .js .nav-links a:nth-child(1) { animation-delay: 0.18s; }
+        .js .nav-links a:nth-child(2) { animation-delay: 0.26s; }
+        .js .nav-links a:nth-child(3) { animation-delay: 0.34s; }
+        .js .nav-links a:nth-child(4) { animation-delay: 0.42s; }
+        .js .nav-links a:nth-child(5) { animation-delay: 0.50s; }
+        .js .nav-links a:nth-child(6) { animation-delay: 0.58s; }
+        @keyframes navIn {
+            from { opacity: 0; transform: translateY(-9px); }
+            to   { opacity: 1; transform: none; }
+        }
         .nav-links a.nav-accent { color: var(--c-blue); font-weight: 700; }
         .nav-links a.nav-accent:hover { color: var(--text-primary); }
 
@@ -949,7 +979,30 @@
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); border: 1px solid var(--border-color);
             animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .iframe-container iframe { width: 100%; height: 100%; border: none; }
+        .iframe-container { display: flex; flex-direction: column; }
+        .iframe-container iframe { width: 100%; flex: 1; min-height: 0; border: none; }
+
+        .iframe-head {
+            padding: 1.6rem 2rem 1.5rem;
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .iframe-head[hidden] { display: none; }
+        .iframe-head .badge { margin-bottom: 0.9rem; }
+        .iframe-head h2 {
+            font-size: 1.35rem;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin-bottom: 0.5rem;
+        }
+        .iframe-head p {
+            color: var(--text-secondary);
+            font-size: 0.96rem;
+            line-height: 1.6;
+            max-width: 780px;
+        }
+        .iframe-head .archive-link { display: inline-block; margin-top: 0.9rem; }
 
         .iframe-close {
             position: absolute; top: -50px; right: 0; color: #fff; font-size: 34px;
@@ -1095,6 +1148,9 @@
                 display: block;
             }
             .nav-links a:last-child { border-bottom: none; }
+            .nav-links a::after { display: none; }
+            .iframe-head { padding: 1.2rem 1.3rem; }
+            .iframe-head h2 { font-size: 1.15rem; }
 
             .hero { padding: 6vh 0 5vh; }
             .hero p { font-size: 1.02rem; }

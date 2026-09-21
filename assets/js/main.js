@@ -38,6 +38,18 @@ document.body.insertAdjacentHTML('beforeend', `
     <div id="iframe-modal" class="modal-iframe" role="dialog" aria-modal="true" aria-label="Embedded project viewer" aria-hidden="true">
         <div class="iframe-container">
             <button type="button" class="iframe-close" data-close="iframe" aria-label="Close viewer">&times;</button>
+
+            <!-- Teks pengumuman deck. Hanya tampil untuk pemicu ber-atribut
+                 data-deck. Ubah kalimatnya di sini, berlaku di semua halaman. -->
+            <div class="iframe-head" id="iframe-head" hidden>
+                <span class="badge">Previous portfolio</span>
+                <h2>Migration in progress</h2>
+                <p>I am moving everything into this site right now, and there are plenty of new projects still waiting to be added. In the meantime, here is my previous portfolio in full.</p>
+                <a class="archive-link" href="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?utm_content=DAGU3RvRqQU&amp;utm_campaign=designshare&amp;utm_medium=link2&amp;utm_source=uniquelinks&amp;utlId=h632df97047" target="_blank" rel="noopener noreferrer">
+                    Prefer a new tab? <span>Open it on Canva &#8599;</span>
+                </a>
+            </div>
+
             <iframe id="modal-iframe" src="" title="Embedded project viewer" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
         </div>
     </div>
@@ -222,8 +234,10 @@ const modalIframe = document.getElementById('modal-iframe');
 
 let iframeOpener = null;
 
-function openIframe(url, opener) {
+function openIframe(url, opener, isDeck) {
     iframeOpener = opener || document.activeElement;
+    const head = document.getElementById('iframe-head');
+    if (head) head.hidden = !isDeck;
     modalIframe.src = url;
     iframeModal.style.display = 'flex';
     iframeModal.setAttribute('aria-hidden', 'false');
@@ -273,7 +287,7 @@ document.addEventListener('click', (e) => {
     if (frameTrigger) {
         // Pemicu bisa berupa <a href="#">, jadi lompatan default dicegah.
         e.preventDefault();
-        openIframe(frameTrigger.dataset.iframe);
+        openIframe(frameTrigger.dataset.iframe, frameTrigger, frameTrigger.hasAttribute('data-deck'));
         return;
     }
     const target = e.target.closest('.sub-card, .card[role="button"]');
