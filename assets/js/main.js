@@ -50,7 +50,9 @@ document.body.insertAdjacentHTML('beforeend', `
                 </a>
             </div>
 
-            <iframe id="modal-iframe" src="" title="Embedded project viewer" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            <div class="iframe-stage">
+                <iframe id="modal-iframe" src="" title="Embedded project viewer" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            </div>
         </div>
     </div>
 `);
@@ -241,6 +243,7 @@ function openIframe(url, opener, isDeck) {
     modalIframe.src = url;
     iframeModal.style.display = 'flex';
     iframeModal.setAttribute('aria-hidden', 'false');
+
     lockScroll();
     iframeModal.querySelector('.iframe-close').focus();
 }

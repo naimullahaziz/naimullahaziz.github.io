@@ -187,29 +187,26 @@
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            margin-left: 1.9rem;
+            margin-left: 0.35rem;
             font-size: 0.9rem;
             font-weight: 500;
             transition: color 0.3s ease;
         }
         .nav-links a:hover { color: var(--accent-color); }
 
-        /* Garis bawah yang ditarik dari kiri, dan menetap di halaman aktif */
-        .nav-links a { position: relative; }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 0; right: 0; bottom: -7px;
-            height: 2px;
-            background: var(--accent-pop);
-            border-radius: 2px;
-            transform: scaleX(0);
-            transform-origin: left center;
-            transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+        /* Pil lembut yang memudar masuk, dan menetap di halaman aktif */
+        .nav-links a {
+            position: relative;
+            padding: 0.4rem 0.85rem;
+            border-radius: 100px;
+            transition: color 0.3s ease, background-color 0.35s ease;
         }
-        .nav-links a:hover::after,
-        .nav-links a:focus-visible::after,
-        .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+        .nav-links a:hover,
+        .nav-links a:focus-visible,
+        .nav-links a[aria-current="page"] {
+            background: var(--accent-soft);
+            color: var(--accent-color);
+        }
 
         /* Menu masuk satu per satu saat halaman dimuat */
         .js .nav-links a { animation: navIn 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
@@ -970,23 +967,53 @@
         /* --- MODAL 3: IFRAME --- */
         .modal-iframe {
             display: none; position: fixed; z-index: 10000; inset: 0;
-            background-color: rgba(8, 8, 11, 0.9);
-            backdrop-filter: blur(8px); justify-content: center; align-items: center;
+            background-color: var(--scrim);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            justify-content: center; align-items: center;
+            padding: 2rem;
+            --head-h: 0px;
         }
         .iframe-container {
-            position: relative; width: 90%; max-width: 1300px; height: 85vh;
-            background: var(--bg-color); border-radius: 16px; overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); border: 1px solid var(--border-color);
+            position: relative;
+            width: min(100%, 1180px);
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-color); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); border: 1px solid var(--border-color);
             animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .iframe-container { display: flex; flex-direction: column; }
-        .iframe-container iframe { width: 100%; flex: 1; min-height: 0; border: none; }
+        /* Panggung mengambil sisa ruang. Iframe di dalamnya dikunci 16:9,
+           jadi sisa bidang di sekelilingnya memakai warna terang milik kita,
+           bukan latar hitam bawaan Canva. */
+        .iframe-stage {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            background: var(--surface-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .iframe-stage iframe {
+            aspect-ratio: 16 / 9;
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+            border: none;
+        }
 
         .iframe-head {
             padding: 1.6rem 2rem 1.5rem;
             background: var(--surface-color);
             border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
+            max-height: 45%;
+            overflow-y: auto;
         }
         .iframe-head[hidden] { display: none; }
         .iframe-head .badge { margin-bottom: 0.9rem; }
@@ -1004,12 +1031,20 @@
         }
         .iframe-head .archive-link { display: inline-block; margin-top: 0.9rem; }
 
+        /* Tombol silang duduk di dalam kotak, pakai kaca gelap supaya
+           terbaca di atas isi apa pun. */
         .iframe-close {
-            position: absolute; top: -50px; right: 0; color: #fff; font-size: 34px;
-            cursor: pointer; z-index: 100; transition: color 0.3s; background: none; border: none;
-            font-family: inherit; line-height: 1; padding: 8px;
+            position: absolute; top: 14px; right: 16px;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #fff; font-size: 24px;
+            background: rgba(10, 10, 14, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            backdrop-filter: blur(6px);
+            cursor: pointer; z-index: 100; transition: all 0.3s;
+            font-family: inherit; line-height: 1; padding: 0;
         }
-        .iframe-close:hover { color: var(--accent-color); }
+        .iframe-close:hover { background: var(--accent-pop); color: var(--on-pop); border-color: var(--accent-pop); }
 
         /* --- FULL DECK --- */
         .archive-box {
@@ -1148,7 +1183,10 @@
                 display: block;
             }
             .nav-links a:last-child { border-bottom: none; }
-            .nav-links a::after { display: none; }
+            .nav-links a { padding: 0.9rem 0; border-radius: 0; }
+            .nav-links a:hover,
+            .nav-links a:focus-visible,
+            .nav-links a[aria-current="page"] { background: transparent; }
             .iframe-head { padding: 1.2rem 1.3rem; }
             .iframe-head h2 { font-size: 1.15rem; }
 
@@ -1176,8 +1214,9 @@
             .gallery-info { padding: 1.2rem 1.3rem 1.4rem; }
             .gallery-info h3 { font-size: 1.08rem; }
 
-            .iframe-container { width: 95%; height: 78vh; margin-top: 40px; }
-            .iframe-close { top: -45px; right: 6px; }
+            .modal-iframe { padding: 1rem; }
+            .iframe-container { width: 100%; border-radius: 16px; }
+            .iframe-close { top: 10px; right: 10px; width: 36px; height: 36px; font-size: 21px; }
 
             .archive-box, .contact-card { padding: 2.2rem 1.6rem; }
             .footer-inner { justify-content: center; text-align: center; }
@@ -1208,7 +1247,7 @@
 
         /* Halaman aktif di navbar */
         .nav-links a[aria-current="page"] {
-            color: var(--text-primary);
+            color: var(--accent-color);
             font-weight: 700;
         }
 
