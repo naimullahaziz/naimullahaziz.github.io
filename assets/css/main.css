@@ -1459,6 +1459,14 @@
 
             margin-bottom: 2.4rem;
         }
+        /* Paragraf yang menyusul sebuah blok butuh jarak di atasnya.
+           .case-lead hanya punya margin bawah, jadi tanpa ini dia menempel. */
+        .stat-row + .case-lead,
+        .swatch-grid + .case-lead,
+        .ramp-note + .case-lead,
+        .split-bar + .case-lead,
+        .doc-frame + .case-lead { margin-top: 2.6rem; }
+
         .case-sub {
             font-size: 1.1rem;
             font-weight: 700;
