@@ -1801,3 +1801,214 @@
         @media (max-width: 768px) {
             .case-link .case-link-body { padding: 1.5rem 1.4rem 1.6rem; }
         }
+
+        /* =========================================================
+           HALAMAN MUSIK
+           Grid sampul album, daftar lagu, dan pita ajakan di beranda.
+           Semua warna lewat --accent-*, jadi kelas hue-* tetap berlaku.
+           ========================================================= */
+
+        /* Baris tautan platform di bawah judul halaman */
+        .platform-row {
+            display: flex; flex-wrap: wrap; gap: 0.7rem;
+            margin-top: 1.8rem;
+        }
+
+        /* --- GRID RILIS --- */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 2rem 1.8rem;
+        }
+        .release {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+        .release-art {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--img-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 22px rgba(18, 19, 26, 0.10);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        border-color 0.4s;
+        }
+        .release-art img {
+            display: block;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .release:hover .release-art,
+        .release:focus-visible .release-art {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-feature);
+            border-color: var(--accent-line);
+        }
+        .release:hover .release-art img,
+        .release:focus-visible .release-art img { transform: scale(1.06); }
+        .release:focus-visible { outline: none; }
+        .release:focus-visible .release-art { outline: 2px solid var(--accent-color); outline-offset: 3px; }
+
+        /* Tombol putar muncul saat kursor di atas sampul */
+        .release-art::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: var(--media-scrim);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .release:hover .release-art::after,
+        .release:focus-visible .release-art::after { opacity: 1; }
+        .release-play {
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 52px; height: 52px;
+            margin: -26px 0 0 -26px;
+            border-radius: 50%;
+            background: var(--accent-pop);
+            color: var(--on-pop);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.05rem;
+            z-index: 2;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.35s, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .release:hover .release-play,
+        .release:focus-visible .release-play { opacity: 1; transform: scale(1); }
+
+        .release-title {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+        }
+        .release:hover .release-title { color: var(--accent-color); }
+        .release-meta {
+            display: block;
+            margin-top: 0.35rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- DAFTAR LAGU --- */
+        .track-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 0.5rem 2rem;
+        }
+        .track {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.7rem 0.8rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.3s;
+        }
+        .track:hover, .track:focus-visible { background: var(--surface-hover); }
+        .track-num {
+            flex: 0 0 1.6rem;
+            font-size: 0.88rem;
+            font-variant-numeric: tabular-nums;
+            color: var(--text-muted);
+        }
+        .track:hover .track-num { color: var(--accent-color); }
+        .track-art {
+            flex: 0 0 48px;
+            width: 48px; height: 48px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--img-bg);
+        }
+        .track-art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .track-body { min-width: 0; }
+        .track-body h3 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+        .track:hover .track-body h3 { color: var(--accent-color); }
+        .track-body p {
+            margin: 0.2rem 0 0;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* --- PITA MUSIK DI BERANDA --- */
+        .music-band {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 2.6rem;
+            align-items: center;
+            padding: 2.8rem;
+            border-radius: 24px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-card);
+        }
+        .music-band h2 {
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin: 0.9rem 0 1rem;
+            color: var(--text-primary);
+        }
+        .music-band p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin: 0 0 1.8rem;
+        }
+        /* Sampul ditumpuk miring, berjajar dari kiri ke kanan */
+        .music-band-art {
+            display: flex;
+            justify-content: center;
+            /* Tanpa align-items: center, flex meregangkan tinggi gambar dan
+               aspect-ratio 1:1 diabaikan, jadi sampulnya jadi memanjang. */
+            align-items: center;
+        }
+        .music-band-art img {
+            flex: 0 0 24%;
+            width: 24%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid var(--surface-color);
+            box-shadow: 0 14px 30px rgba(18, 19, 26, 0.18);
+            margin-left: -5%;
+            transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .music-band-art img:first-child { margin-left: 0; }
+        .music-band-art img:nth-child(1) { transform: rotate(-6deg); }
+        .music-band-art img:nth-child(2) { transform: rotate(-3deg); }
+        .music-band-art img:nth-child(3) { transform: rotate(0deg); z-index: 1; }
+        .music-band-art img:nth-child(4) { transform: rotate(3deg); }
+        .music-band-art img:nth-child(5) { transform: rotate(6deg); }
+        .music-band:hover .music-band-art img { transform: rotate(0deg) translateY(-4px); }
+
+        @media (max-width: 900px) {
+            .music-band { grid-template-columns: 1fr; padding: 2.2rem 1.8rem; gap: 2rem; }
+            .music-band-art { order: -1; }
+        }
+        @media (max-width: 768px) {
+            .music-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.6rem 1.2rem; }
+            .release-title { font-size: 0.92rem; }
+            .track-list { grid-template-columns: 1fr; gap: 0.3rem; }
+            .track { padding: 0.6rem 0.5rem; }
+            .platform-row .btn { flex: 1 1 100%; justify-content: center; }
+        }
