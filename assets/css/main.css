@@ -2012,3 +2012,667 @@
             .track { padding: 0.6rem 0.5rem; }
             .platform-row .btn { flex: 1 1 100%; justify-content: center; }
         }
+
+
+
+        /* =========================================================
+           HALAMAN CV
+           Isi CV dituang sebagai HTML, PDF-nya tetap bisa diunduh.
+
+           Pratinjau dokumennya memakai .doc-frame milik halaman
+           Vaeleon, jangan dibuat ulang di sini. Versi awal halaman
+           ini sempat mendeklarasikan .doc-frame sendiri dan itu
+           menimpa rasio 4/3 milik Vaeleon.
+           ========================================================= */
+
+        /* Keterangan kenapa nomor telepon ditahan */
+        .cv-note {
+            border-left: 3px solid var(--accent-color);
+            background: var(--surface-color);
+            border-radius: 0 16px 16px 0;
+            padding: 1.5rem 1.7rem;
+            margin-bottom: 2rem;
+        }
+        .cv-note p {
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.98rem;
+        }
+        .cv-note strong { color: var(--text-primary); }
+
+        /* --- DAFTAR PENGALAMAN --- */
+        .cv-list { display: block; }
+        .cv-entry {
+            display: grid;
+            grid-template-columns: 9.5rem 1fr;
+            gap: 0 2rem;
+            padding: 1.7rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        .cv-entry:first-child { border-top: none; padding-top: 0; }
+        .cv-when {
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            line-height: 1.5;
+            padding-top: 0.3rem;
+        }
+        .cv-role {
+            font-size: 1.22rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            margin: 0;
+        }
+        .cv-org {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0.3rem 0 0.9rem;
+        }
+        .cv-org b { color: var(--accent-color); font-weight: 700; }
+
+        /* Pil angka. Hijau memang disisihkan untuk angka hasil,
+           dan isi pil ini persis angka itu. */
+        .cv-scope {
+            display: inline-block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--c-green);
+            background: rgba(var(--c-green-rgb), 0.10);
+            border-radius: 999px;
+            padding: 0.3rem 0.8rem;
+            margin-bottom: 0.9rem;
+        }
+        .cv-entry ul { list-style: none; padding: 0; margin: 0; }
+        .cv-entry li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.98rem;
+            line-height: 1.65;
+            color: var(--text-secondary);
+        }
+        .cv-entry li:last-child { margin-bottom: 0; }
+        .cv-entry li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0.62rem;
+            width: 6px; height: 6px;
+            border-radius: 2px;
+            background: var(--accent-color);
+        }
+        .cv-entry li b { color: var(--text-primary); font-weight: 700; }
+
+        /* --- KETERAMPILAN, PENDIDIKAN, BAHASA --- */
+        .cv-skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+        .cv-skill {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 0 14px 14px 0;
+            padding: 1.2rem 1.3rem;
+        }
+        .cv-skill h3 {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin: 0 0 0.4rem;
+            line-height: 1.3;
+        }
+        .cv-skill p {
+            margin: 0;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .cv-degree {
+            margin-top: 2rem;
+            padding-top: 1.7rem;
+            border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 9.5rem 1fr;
+            gap: 0 2rem;
+        }
+        .cv-degree h3 {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .cv-entry, .cv-degree {
+                grid-template-columns: 1fr;
+                gap: 0.6rem 0;
+            }
+            .cv-when { padding-top: 0; }
+            .cv-note { padding: 1.3rem 1.4rem; }
+        }
+
+        /* =========================================================
+           TIMELINE KARIER DI BERANDA
+
+           Jalurnya SVG berkelok, bukan garis lurus. Titiknya ditaruh
+           di atas jalur oleh main.js lewat getPointAtLength, jadi
+           bentuk jalur boleh diubah tanpa menghitung ulang koordinat.
+
+           Warna titik datang dari kelas hue-* di .tl-item, jadi ikut
+           sistem palet yang sudah ada. Warnanya menandai bidang kerja,
+           bukan hiasan, dan legendanya ada di atas jalur.
+           ========================================================= */
+
+        .tl-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.6rem;
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.1rem;
+        }
+        .tl-legend li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .tl-key {
+            flex: 0 0 auto;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--accent-pop);
+        }
+        .tl-hint {
+            color: var(--text-muted);
+            font-size: 0.93rem;
+            line-height: 1.6;
+            margin-bottom: 2.2rem;
+        }
+
+        .tl-wrap { position: relative; }
+
+        .tl-track {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1200 / 420;
+            min-height: 260px;
+        }
+
+
+        /* --- PITA WILAYAH: LOKAL LALU INTERNASIONAL ---
+           Bidang kerja ditandai warna titik, tempat kerja ditandai pita ini.
+           Dua sumbu yang berbeda, jadi jangan digabung jadi satu warna. */
+        /* Garis pemisah jangkauan, plus nama kedua wilayahnya di tepi kiri.
+           Tingginya dari --divide yang dihitung main.js. */
+        .tl-divider {
+            position: absolute;
+            left: 0; right: 0;
+            top: var(--divide, 50%);
+            height: 0;
+            border-top: 1px dashed var(--border-color);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .tl-band {
+            position: absolute;
+            left: 0;
+            font-size: 0.68rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .tl-band-hi { top: calc(var(--divide, 50%) - 1.3rem); }
+        .tl-band-lo { top: calc(var(--divide, 50%) + 0.45rem); }
+
+        .tl-path {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            overflow: visible;
+        }
+        /* Satu warna dan tipis. Titik warna-warni itu yang jadi informasi,
+           garisnya cuma penghubung, jadi sengaja dibuat mundur. */
+        .tl-path path {
+            stroke: rgba(var(--c-navy-rgb), 0.32);
+            stroke-width: 2;
+            stroke-dasharray: var(--len, 2000);
+            stroke-dashoffset: 0;
+        }
+        .js .tl-path path { stroke-dashoffset: var(--len, 2000); }
+        .in-view .tl-path path {
+            animation: tlDraw 1.5s cubic-bezier(0.25, 0.7, 0.3, 1) 0.1s forwards;
+        }
+        @keyframes tlDraw { to { stroke-dashoffset: 0; } }
+
+        /* Titik ditaruh di koordinat yang dihitung JS. Sebelum JS jalan,
+           --x dan --y belum ada, jadi diberi nilai cadangan supaya tidak
+           menumpuk di pojok kiri atas. */
+        .tl-item {
+            position: absolute;
+            left: var(--x, 50%);
+            top: var(--y, 50%);
+            width: 0; height: 0;
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: 0; top: 0;
+            margin: -9px 0 0 -9px;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-color);
+            padding: 0;
+            background: var(--accent-pop);
+            cursor: pointer;
+            z-index: 2;
+            transition: box-shadow 0.3s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .js .tl-dot { opacity: 0; transform: scale(0.4); }
+        .in-view .tl-dot { animation: tlPop 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        @keyframes tlPop { to { opacity: 1; transform: scale(1); } }
+
+        .tl-item:nth-of-type(1) .tl-dot { animation-delay: 0.45s; }
+        .tl-item:nth-of-type(2) .tl-dot { animation-delay: 0.58s; }
+        .tl-item:nth-of-type(3) .tl-dot { animation-delay: 0.71s; }
+        .tl-item:nth-of-type(4) .tl-dot { animation-delay: 0.84s; }
+        .tl-item:nth-of-type(5) .tl-dot { animation-delay: 0.97s; }
+        .tl-item:nth-of-type(6) .tl-dot { animation-delay: 1.10s; }
+        .tl-item:nth-of-type(7) .tl-dot { animation-delay: 1.23s; }
+        .tl-item:nth-of-type(8) .tl-dot { animation-delay: 1.36s; }
+        .tl-item:nth-of-type(9) .tl-dot { animation-delay: 1.49s; }
+
+        /* Peran tempat dia memimpin orang: titik lebih besar, bercincin.
+           Warnanya tetap warna bidangnya, jadi dua informasi ini tidak
+           saling menimpa. */
+        .tl-dot.is-lead {
+            margin: -14px 0 0 -14px;
+            width: 28px; height: 28px;
+            box-shadow: 0 0 0 5px rgba(var(--accent-rgb), 0.22);
+        }
+        .tl-dot:hover, .tl-dot:focus-visible {
+            transform: scale(1.25);
+            box-shadow: 0 0 0 9px rgba(var(--accent-rgb), 0.26);
+            outline: none;
+        }
+        .tl-dot:focus-visible { box-shadow: 0 0 0 3px var(--bg-color), 0 0 0 6px var(--accent-color); }
+
+        .tl-year {
+            position: absolute;
+            left: 50%;
+            top: 0.85rem;
+            transform: translateX(-50%);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .tl-tag {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 9rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            line-height: 1.35;
+            text-align: center;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+        }
+        /* Label dikunci ke pita atas atau bawah lewat --label-dy yang
+           dihitung JS, lalu disambung garis tipis ke titiknya. */
+        .tl-item .tl-tag { top: var(--label-dy, 2rem); }
+        .tl-item.tl-below .tl-year { top: auto; bottom: 0.85rem; }
+
+        .tl-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 1px;
+            height: var(--connector, 0px);
+            background: rgba(var(--accent-rgb), 0.35);
+        }
+        .tl-item.tl-above::before { bottom: 11px; }
+        .tl-item.tl-below::before { top: 11px; }
+        .tl-item:hover .tl-tag { color: var(--accent-color); }
+
+        .tl-item.is-now .tl-dot::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            animation: tlPulse 2.4s ease-out infinite;
+        }
+        @keyframes tlPulse {
+            0%   { transform: scale(0.85); opacity: 0.9; }
+            70%  { transform: scale(1.6);  opacity: 0; }
+            100% { transform: scale(1.6);  opacity: 0; }
+        }
+
+        .tl-details { display: none; }
+
+        .tl-foot { margin-top: 2.4rem; }
+
+        /* --- JENDELA KETERANGAN --- */
+        .modal-timeline {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1200;
+            background: var(--scrim);
+            backdrop-filter: blur(3px);
+            padding: 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+        .tl-box {
+            position: relative;
+            width: 100%;
+            max-width: 620px;
+            max-height: 88vh;
+            overflow-y: auto;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            box-shadow: var(--shadow-feature);
+            padding: 2.6rem 2.6rem 2.4rem;
+            animation: revealUp 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+        }
+        .tl-close {
+            position: absolute;
+            top: 14px; right: 14px;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .tl-close:hover { background: var(--accent-color); color: var(--on-accent); border-color: var(--accent-color); }
+
+        #tl-modal-when {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin-bottom: 0.7rem;
+        }
+        #tl-modal-role {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            line-height: 1.22;
+            margin-bottom: 0.5rem;
+        }
+        #tl-modal-org {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            margin-bottom: 1.1rem;
+        }
+        #tl-modal-body ul { list-style: none; padding: 0; margin: 0; }
+        #tl-modal-body li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.7rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            font-size: 0.98rem;
+        }
+        #tl-modal-body li:last-child { margin-bottom: 0; }
+        #tl-modal-body li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0.62rem;
+            width: 6px; height: 6px;
+            border-radius: 2px;
+            background: var(--accent-color);
+        }
+        #tl-modal-body li b { color: var(--text-primary); font-weight: 700; }
+
+        /* --- LAYAR SEMPIT: JALUR BERKELOK JADI DAFTAR MENURUN ---
+               Kelokan tidak terbaca di kolom sempit, jadi SVG-nya
+               disembunyikan dan diganti garis tegak sederhana. */
+        @media (max-width: 900px) {
+            .tl-track {
+                aspect-ratio: auto;
+                min-height: 0;
+                padding-left: 2.6rem;
+            }
+            .tl-path { display: none; }
+            .tl-divider, .tl-band { display: none; }
+
+            /* Wilayahnya jadi penanda kecil di atas titik pertama tiap wilayah,
+               karena pita mendatar tidak ada artinya di kolom sempit.
+               ::before dipakai ulang di sini, karena garis penyambung yang
+               memakainya di layar lebar memang tidak dipakai di sini. */
+            .tl-item::before { display: none; }
+            .tl-item[data-zone]::before {
+                content: attr(data-zone);
+                display: block;
+                position: static;
+                width: auto;
+                height: auto;
+                background: none;
+                margin-bottom: 0.7rem;
+                font-size: 0.68rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                font-weight: 700;
+                color: var(--text-muted);
+            }
+            .tl-item[data-zone] { padding-top: 1.1rem; }
+            .tl-item[data-zone]:first-of-type { padding-top: 0; }
+
+            .tl-track::before {
+                content: '';
+                position: absolute;
+                left: 8px; top: 0.4rem; bottom: 0.4rem;
+                width: 2px;
+                border-radius: 2px;
+                background: linear-gradient(180deg,
+                    var(--c-red) 0%,
+                    var(--c-green) 28%,
+                    var(--c-yellow-pop) 50%,
+                    var(--c-navy) 68%,
+                    var(--c-blue) 100%);
+                opacity: 0.6;
+                transform-origin: top center;
+            }
+            .js .tl-track::before { transform: scaleY(0); }
+            .in-view .tl-track::before {
+                animation: tlDrawY 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s forwards;
+            }
+            @keyframes tlDrawY { to { transform: scaleY(1); } }
+
+            .tl-item {
+                position: relative;
+                left: auto; top: auto;
+                width: auto; height: auto;
+                padding-bottom: 1.8rem;
+            }
+            .tl-item:last-of-type { padding-bottom: 0; }
+
+            .tl-dot { left: -2.6rem; top: 0.15rem; margin: 0; }
+            .tl-dot.is-lead { left: calc(-2.6rem - 5px); top: 0; margin: 0; }
+
+            /* Tahun dan label jadi aliran biasa, tidak lagi ditempel ke titik */
+            .tl-year,
+            .tl-item.tl-below .tl-year {
+                position: static;
+                transform: none;
+                display: block;
+                top: auto; bottom: auto;
+                margin-bottom: 0.2rem;
+            }
+            .tl-tag,
+            .tl-item.tl-above .tl-tag,
+            .tl-item.tl-below .tl-tag {
+                position: static;
+                transform: none;
+                display: block;
+                width: auto;
+                text-align: left;
+                top: auto; bottom: auto;
+                font-size: 0.95rem;
+            }
+
+            .tl-legend { gap: 0.5rem 1.1rem; }
+            .tl-legend li { font-size: 0.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            .tl-box { padding: 2rem 1.5rem 1.8rem; border-radius: 18px; }
+            #tl-modal-role { font-size: 1.32rem; }
+            .tl-foot .btn { width: 100%; justify-content: center; }
+        }
+
+        /* =========================================================
+           KARTU PINTU DI BERANDA (.door-cards)
+
+           Kelasnya sendiri, BUKAN .home-cards, karena work.html juga
+           memakai .home-cards untuk kartu studi kasus Vaeleon. Aturan
+           warna di sini pernah ditulis dengan .home-cards saja dan
+           akibatnya kartu Vaeleon ikut terisi penuh biru.
+
+           Isiannya var(--accent-color), yaitu varian "deep" di palet,
+           bukan --accent-pop. Varian deep dirancang aman 4.5:1 terhadap
+           putih, jadi teks putih boleh dipakai di atasnya. Kartu kuning
+           satu-satunya pengecualian, dia memakai kuning terang dan
+           teks navy, karena putih di atas kuning cuma 1.7:1.
+           ========================================================= */
+        .door-cards .home-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--accent-color);
+            border-color: transparent;
+            border-radius: 24px;
+            padding: 2.1rem 2rem 1.8rem;
+            color: #FFFFFF;
+        }
+        .door-cards .home-card h3,
+        .door-cards .home-card .go {
+            color: #FFFFFF;
+        }
+        .door-cards .home-card h3 {
+            font-size: 1.22rem;
+            line-height: 1.25;
+            margin-bottom: 0.7rem;
+            /* Harus lebih besar dari (right + width) milik .door-no,
+               kalau tidak judul panjang menabrak nomornya. */
+            padding-right: 4.2rem;
+        }
+        /* Putih penuh dengan opacity, bukan putih tembus lewat rgba.
+           Alpha di warna teks menurunkan kontras nyatanya. */
+        .door-cards .home-card p {
+            color: #FFFFFF;
+            opacity: 0.9;
+            margin-bottom: 1.6rem;
+        }
+
+        /* Nomor urut, penanda bahwa ketiganya satu set */
+        .door-no {
+            position: absolute;
+            top: 1.4rem; right: 1.6rem;
+            width: 2.4rem;
+            text-align: right;
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: rgba(255, 255, 255, 0.22);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Bulatan keras diganti sapuan cahaya lembut, supaya kartunya
+           terasa punya kedalaman, bukan tempelan stiker. */
+        .door-cards .home-card .blob {
+            top: -34%; right: -16%;
+            width: 76%; height: 160%;
+            background: radial-gradient(circle at 50% 50%,
+                rgba(255, 255, 255, 0.22) 0%,
+                rgba(255, 255, 255, 0) 68%);
+            transform: scale(1);
+        }
+        .door-cards .home-card:hover .blob,
+        .door-cards .home-card:focus-visible .blob { transform: scale(1.12); }
+
+        /* Baris ajakan didorong ke dasar kartu, jadi tombol panahnya
+           sejajar di ketiga kartu berapa pun panjang teksnya. */
+        .door-cards .home-card .go {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            font-size: 0.88rem;
+        }
+        .door-cards .home-card .go .arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.18);
+            font-size: 1rem;
+            transition: background 0.3s ease,
+                        transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .door-cards .home-card:hover .go .arrow,
+        .door-cards .home-card:focus-visible .go .arrow {
+            background: rgba(255, 255, 255, 0.32);
+            transform: translateX(4px);
+        }
+
+        .door-cards .home-card::before { background: rgba(255, 255, 255, 0.75); }
+        .door-cards .home-card:hover,
+        .door-cards .home-card:focus-visible {
+            transform: translateY(-6px);
+            border-color: transparent;
+            box-shadow: 0 22px 44px rgba(var(--accent-rgb), 0.3);
+        }
+
+        /* --- KARTU KUNING: SEMUA DIBALIK JADI NAVY --- */
+        .door-cards .home-card.hue-yellow { background: var(--c-yellow-pop); }
+        .door-cards .home-card.hue-yellow h3,
+        .door-cards .home-card.hue-yellow p,
+        .door-cards .home-card.hue-yellow .go { color: var(--c-yellow-on); }
+        .door-cards .home-card.hue-yellow p { opacity: 0.82; }
+        .door-cards .home-card.hue-yellow .door-no { color: rgba(0, 23, 65, 0.22); }
+        .door-cards .home-card.hue-yellow .blob {
+            background: radial-gradient(circle at 50% 50%,
+                rgba(0, 23, 65, 0.16) 0%,
+                rgba(0, 23, 65, 0) 68%);
+        }
+        .door-cards .home-card.hue-yellow .go .arrow { background: rgba(0, 23, 65, 0.14); }
+        .door-cards .home-card.hue-yellow:hover .go .arrow,
+        .door-cards .home-card.hue-yellow:focus-visible .go .arrow { background: rgba(0, 23, 65, 0.24); }
+        .door-cards .home-card.hue-yellow::before { background: rgba(0, 23, 65, 0.65); }
+
+        @media (max-width: 768px) {
+            .door-cards .home-card { padding: 1.8rem 1.6rem 1.5rem; border-radius: 20px; }
+            .door-no { font-size: 1.7rem; top: 1.1rem; right: 1.2rem; width: 2rem; }
+            .door-cards .home-card h3 { padding-right: 3.5rem; }
+        }

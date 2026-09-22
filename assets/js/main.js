@@ -55,6 +55,16 @@ document.body.insertAdjacentHTML('beforeend', `
             </div>
         </div>
     </div>
+
+    <div id="timeline-modal" class="modal-timeline" role="dialog" aria-modal="true" aria-labelledby="tl-modal-role" aria-hidden="true">
+        <div class="tl-box">
+            <button type="button" class="tl-close" data-close="timeline" aria-label="Close role details">&times;</button>
+            <span id="tl-modal-when"></span>
+            <h2 id="tl-modal-role">Role</h2>
+            <p id="tl-modal-org"></p>
+            <div id="tl-modal-body"></div>
+        </div>
+    </div>
 `);
 
 // --- MOBILE NAV ---
@@ -102,6 +112,7 @@ function trapFocus(container, e) {
 }
 
 function topmostModal() {
+    if (typeof modalTimeline !== "undefined" && modalTimeline && modalTimeline.style.display === "flex") return modalTimeline;
     if (iframeModal.style.display === 'flex') return iframeModal;
     if (modalGallery.style.display === 'flex') return modalGallery;
     if (modalProject.style.display === 'flex') return modalProject;
@@ -269,7 +280,8 @@ document.addEventListener('click', (e) => {
     if (!closer) return;
     if (closer.dataset.close === 'project') closeProject();
     if (closer.dataset.close === 'gallery') closeGallery();
-    if (closer.dataset.close === 'iframe') closeIframe();
+    if (closer.dataset.close === "iframe") closeIframe();
+    if (closer.dataset.close === "timeline") window.closeTimeline();
 });
 
 
@@ -314,6 +326,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         if (modal === iframeModal) closeIframe();
         else if (modal === modalGallery) closeGallery();
+        else if (typeof modalTimeline !== "undefined" && modal === modalTimeline) window.closeTimeline();
         else closeProject();
         return;
     }
@@ -390,3 +403,180 @@ try {
     revealAll();
     document.querySelectorAll('[data-count]').forEach(countUp);
 }
+
+
+// --- MODAL 4 (TIMELINE KARIER DI BERANDA) ---
+// Titiknya <button> sungguhan, jadi Enter dan Space jalan sendiri tanpa
+// handler keyboard tambahan. Isi jendelanya disalin dari .tl-details yang
+// tersembunyi di dalam tiap titik, supaya tidak ada data kembar antara
+// HTML dan JS: yang perlu diubah cukup HTML-nya.
+const modalTimeline = document.getElementById('timeline-modal');
+
+if (modalTimeline) {
+    const tlWhen = document.getElementById('tl-modal-when');
+    const tlRole = document.getElementById('tl-modal-role');
+    const tlOrg = document.getElementById('tl-modal-org');
+    const tlBody = document.getElementById('tl-modal-body');
+
+    window.openTimeline = function (item) {
+        if (!item) return;
+        const d = item.querySelector('.tl-details');
+        if (!d) return;
+
+        lastFocused = item.querySelector('.tl-dot');
+        tlWhen.textContent = d.querySelector('.tl-when').textContent;
+        tlRole.innerHTML = d.querySelector('.tl-role').innerHTML;
+        tlOrg.innerHTML = d.querySelector('.tl-org').innerHTML;
+
+        const scope = d.querySelector('.cv-scope');
+        const list = d.querySelector('ul');
+        tlBody.innerHTML = (scope ? scope.outerHTML : '') + (list ? list.outerHTML : '');
+
+        modalTimeline.style.display = 'flex';
+        modalTimeline.setAttribute('aria-hidden', 'false');
+        lockScroll();
+        modalTimeline.querySelector('.tl-close').focus();
+    };
+
+    window.closeTimeline = function () {
+        modalTimeline.style.display = 'none';
+        modalTimeline.setAttribute('aria-hidden', 'true');
+        tlBody.innerHTML = '';
+        unlockScroll();
+        if (lastFocused) { lastFocused.focus(); lastFocused = null; }
+    };
+
+    modalTimeline.addEventListener('click', (e) => {
+        if (e.target === modalTimeline) window.closeTimeline();
+    });
+
+    // Label di sebelah titik ikut bisa diklik, sasarannya jadi lebih lega.
+    document.addEventListener('click', (e) => {
+        const trigger = e.target.closest('.tl-dot, .tl-tag');
+        if (trigger) window.openTimeline(trigger.closest('.tl-item'));
+    });
+}
+
+
+
+
+// --- GRAFIK PERJALANAN KARIER ---
+// Datanya yang menggambar kurvanya, bukan sebaliknya. Tinggi tiap titik
+// diambil dari data-level (0 di dasar, 100 di puncak) pada elemennya,
+// lalu kurva mulus ditarik melewati titik-titik itu. Kalau mau mengubah
+// bentuk grafiknya, ubah data-level di index.html, jangan sentuh sini.
+//
+// Sumbu tegaknya JANGKAUAN DAN TANGGUNG JAWAB, bukan jumlah orang.
+// Semua peran global duduk di atas semua peran lokal. Jumlah orang
+// ditandai ukuran titik (.is-lead), supaya dua hal itu tidak tertukar.
+//
+// Labelnya dikunci ke dua pita tetap, atas dan bawah, lalu disambung
+// garis tipis. Kalau label ditempel ke titiknya, label di atas titik
+// rendah dan label di bawah titik tinggi bisa mendarat sama tinggi.
+(function () {
+    const route = document.getElementById('tl-route');
+    const track = document.querySelector('.tl-track');
+    if (!route || !track) return;
+
+    const items = Array.from(track.querySelectorAll('.tl-item'));
+    if (items.length < 2) return;
+
+    const VB_W = 1200;
+    const VB_H = 420;
+    // Tepi kiri disisakan lebar untuk nama sumbu Local dan International,
+    // kalau tidak, namanya bertabrakan dengan titik pertama.
+    const X0 = 155, X1 = 1110;
+    const Y_TOP = 95, Y_BOTTOM = 325;  // level 100 dan level 0
+    const EDGE = 4;                // jarak label dari tepi atas atau bawah
+
+    const levels = items.map(it => Number(it.dataset.level) || 0);
+    const pts = levels.map((lv, i) => ({
+        x: X0 + (X1 - X0) * (i / (items.length - 1)),
+        y: Y_BOTTOM - (Y_BOTTOM - Y_TOP) * (lv / 100)
+    }));
+
+    // Catmull-Rom diubah jadi kubik bezier, supaya kurvanya benar-benar
+    // lewat titiknya, bukan sekadar mendekat seperti bezier biasa.
+    function smooth(p) {
+        const T = 0.2;
+        let d = 'M ' + p[0].x.toFixed(1) + ' ' + p[0].y.toFixed(1);
+        for (let i = 0; i < p.length - 1; i++) {
+            const p0 = p[i - 1] || p[i];
+            const p1 = p[i];
+            const p2 = p[i + 1];
+            const p3 = p[i + 2] || p2;
+            const c1x = p1.x + (p2.x - p0.x) * T;
+            const c1y = p1.y + (p2.y - p0.y) * T;
+            const c2x = p2.x - (p3.x - p1.x) * T;
+            const c2y = p2.y - (p3.y - p1.y) * T;
+            d += ' C ' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
+                 ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
+                 ', ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1);
+        }
+        return d;
+    }
+
+    route.setAttribute('d', smooth(pts));
+    track.style.setProperty('--len', Math.ceil(route.getTotalLength()));
+
+    // Pemisah lokal dan global ditaruh di tengah celah antara peran lokal
+    // tertinggi dan peran global terendah, jadi ikut kalau datanya diubah.
+    const cross = items.findIndex((it, i) => i > 0 && it.hasAttribute('data-zone'));
+    if (cross > 0) {
+        const topLocal = Math.min.apply(null, pts.slice(0, cross).map(p => p.y));
+        const lowGlobal = Math.max.apply(null, pts.slice(cross).map(p => p.y));
+        track.style.setProperty('--divide', ((topLocal + lowGlobal) / 2 / VB_H * 100).toFixed(2) + '%');
+    }
+
+    // Tombolnya tanpa teks, jadi namanya diambil dari keterangannya.
+    items.forEach(it => {
+        const dot = it.querySelector('.tl-dot');
+        const role = it.querySelector('.tl-role');
+        const when = it.querySelector('.tl-when');
+        if (dot && role) {
+            dot.setAttribute('aria-label', role.textContent.trim() + (when ? ', ' + when.textContent.trim() : ''));
+        }
+    });
+
+    function place() {
+        if (window.matchMedia('(max-width: 900px)').matches) {
+            items.forEach(it => {
+                it.style.removeProperty('--x');
+                it.style.removeProperty('--y');
+                it.style.removeProperty('--label-dy');
+                it.style.removeProperty('--connector');
+            });
+            return;
+        }
+
+        const trackH = track.getBoundingClientRect().height;
+
+        items.forEach((it, i) => {
+            it.style.setProperty('--x', (pts[i].x / VB_W * 100).toFixed(3) + '%');
+            it.style.setProperty('--y', (pts[i].y / VB_H * 100).toFixed(3) + '%');
+            it.classList.toggle('tl-above', i % 2 === 0);
+            it.classList.toggle('tl-below', i % 2 === 1);
+        });
+
+        // Tinggi label baru bisa diukur setelah kelasnya terpasang.
+        items.forEach((it, i) => {
+            const tag = it.querySelector('.tl-tag');
+            if (!tag) return;
+            const h = tag.offsetHeight;
+            const dotY = pts[i].y / VB_H * trackH;
+            const dy = (i % 2 === 0) ? EDGE - dotY : trackH - h - EDGE - dotY;
+            it.style.setProperty('--label-dy', Math.round(dy) + 'px');
+            it.style.setProperty('--connector',
+                Math.max(0, Math.round(Math.abs(dy)) - (i % 2 === 0 ? h : 0) - 10) + 'px');
+        });
+    }
+
+    place();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(place, 120);
+    });
+})();
