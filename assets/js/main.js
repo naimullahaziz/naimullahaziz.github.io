@@ -483,8 +483,11 @@ try {
             const el = entry.target;
             if (!reduceMotion) el.style.animationDelay = (staggerIndex(el) * 0.11) + 's';
             el.classList.add('in-view');
-            const num = el.querySelector('[data-count]');
-            if (num) setTimeout(() => countUp(num), staggerIndex(el) * 110 + 180);
+            // Semua angka di dalam elemen ini, bukan hanya yang pertama: kartu
+            // melayang di beranda memuat tiga angka dalam satu .reveal.
+            el.querySelectorAll('[data-count]').forEach((num, i) => {
+                setTimeout(() => countUp(num), staggerIndex(el) * 110 + 180 + i * 110);
+            });
             observer.unobserve(el);
         });
     }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
@@ -607,11 +610,29 @@ if (modalTimeline) {
     // yang sembilan titik, label begini bisa mendarat sama tinggi dan saling
     // menimpa, jadi di sana labelnya tetap dikunci ke pita.
     const nearLabels = track.dataset.labels === "near";
+    // data-labels="minimal": nama peran disembunyikan saat diam dan baru
+    // muncul sebagai kartu di atas titik ketika ditunjuk. Letaknya diatur
+    // CSS sepenuhnya, jadi di sini cuma garis penyambungnya yang dimatikan.
+    const minimalLabels = track.dataset.labels === "minimal";
     const NEAR_GAP = 20;           // jarak label ke titiknya, mode near
 
     const levels = items.map(it => Number(it.dataset.level) || 0);
+    // Letak mendatar. Bawaannya rata. data-pivot="4" data-pivot-at="0.64"
+    // membagi plot jadi dua rentang: titik 0 sampai 4 menempati 64% lebar
+    // pertama, sisanya 36%, masing-masing rata di dalam rentangnya. Dipakai
+    // beranda supaya 2014-2023 (sembilan tahun) lebih panjang daripada
+    // 2023-sekarang (tiga tahun). Tidak dibuat benar-benar sebanding waktu,
+    // karena lima peran terakhir akan bertumpuk dan tidak bisa diklik.
+    const pivot = Number(track.dataset.pivot);
+    const pivotAt = Number(track.dataset.pivotAt);
+    const lastIdx = items.length - 1;
+    const frac = i => {
+        if (!(pivot > 0 && pivot < lastIdx && pivotAt > 0 && pivotAt < 1)) return i / lastIdx;
+        return i <= pivot ? pivotAt * (i / pivot)
+                          : pivotAt + (1 - pivotAt) * ((i - pivot) / (lastIdx - pivot));
+    };
     const pts = levels.map((lv, i) => ({
-        x: X0 + (X1 - X0) * (i / (items.length - 1)),
+        x: X0 + (X1 - X0) * frac(i),
         y: Y_BOTTOM - (Y_BOTTOM - Y_TOP) * (lv / 100)
     }));
 
@@ -645,6 +666,28 @@ if (modalTimeline) {
 
     route.setAttribute('d', smooth(pts));
     track.style.setProperty('--len', Math.ceil(route.getTotalLength()));
+
+    // Mode minimal: garisnya berganti warna mengikuti jenis kerja tiap titik.
+    // Warnanya dibaca dari --tl-ink di CSS, bukan ditulis di sini, supaya
+    // satu sumber saja yang menentukan palet grafik ini.
+    if (minimalLabels) {
+        const svg = route.ownerSVGElement;
+        const NS = "http://www.w3.org/2000/svg";
+        const defs = document.createElementNS(NS, "defs");
+        const grad = document.createElementNS(NS, "linearGradient");
+        grad.setAttribute("id", "tl-ink");
+        grad.setAttribute("gradientUnits", "userSpaceOnUse");
+        grad.setAttribute("x1", X0); grad.setAttribute("x2", X1);
+        grad.setAttribute("y1", 0);  grad.setAttribute("y2", 0);
+        items.forEach((it, i) => {
+            const stop = document.createElementNS(NS, "stop");
+            stop.setAttribute("offset", ((pts[i].x - X0) / (X1 - X0)).toFixed(3));
+            stop.setAttribute("stop-color", getComputedStyle(it).getPropertyValue("--tl-ink").trim() || "#0062CC");
+            grad.appendChild(stop);
+        });
+        defs.appendChild(grad);
+        svg.insertBefore(defs, svg.firstChild);
+    }
     // Garis pencapaian ditaruh di tengah celah antara peran lokal
     // tertinggi dan peran internasional terendah, jadi tingginya ikut
     // data. Kalau nanti ada level lokal yang melewati level
@@ -693,6 +736,20 @@ if (modalTimeline) {
             if (!tag) return;
             const h = tag.offsetHeight;
             const dotY = pts[i].y / VB_H * trackH;
+
+            if (minimalLabels) {
+                it.style.removeProperty("--label-dy");
+                it.style.setProperty("--connector", "0px");
+                // Label tipis di atas titik, kecuali di lembah: di situ kurva
+                // naik tajam di kedua sisinya dan akan memotong labelnya,
+                // jadi labelnya turun ke bawah tahun. data-label="below" di
+                // HTML memaksa hal yang sama untuk titik yang labelnya
+                // bertabrakan dengan tetangganya di rentang yang rapat.
+                const prev = pts[i - 1], next = pts[i + 1];
+                const valley = !!(prev && next && pts[i].y > prev.y && pts[i].y > next.y);
+                it.classList.toggle("tl-lbl-below", valley || it.dataset.label === "below");
+                return;
+            }
 
             if (nearLabels) {
                 it.style.setProperty("--label-dy",

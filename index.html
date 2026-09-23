@@ -101,15 +101,44 @@
     </header>
 
     <main id="main">
+    <!-- SECTION: ANGKA SEKILAS
+         Kartu melayang yang sama dengan halaman studi kasus (.meta-float),
+         menumpang tepi bawah hero. Versi tiga kolom lewat .meta-float-3.
+         Angkanya dihitung naik oleh main.js dari data-count; teks di dalam
+         elemennya adalah nilai akhirnya, jadi tanpa JavaScript pun angkanya
+         tetap benar. Semuanya harus sama dengan yang tertulis di about.html. -->
+    <section id="glance" class="container">
+        <div class="meta-grid meta-float meta-float-3 reveal">
+            <div class="meta-item">
+                <span class="meta-label">Audience</span>
+                <span class="meta-value" data-count="10" data-suffix="K+">10K+</span>
+                <span class="meta-note">followers grown from zero at InstaCilacap, before handover</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Experience</span>
+                <span class="meta-value" data-count="10" data-suffix="+">10+</span>
+                <span class="meta-note">years across digital and multimedia work</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Creative work</span>
+                <span class="meta-value" data-count="100" data-suffix="+">100+</span>
+                <span class="meta-note">pieces delivered</span>
+            </div>
+        </div>
+    </section>
+
     <!-- SECTION: TIMELINE KARIER
          Sembilan titik, sama dengan sembilan peran di cv.html dan di
          assets/docs/naimullah-aziz-cv.pdf. Kalau salah satu berubah,
          ubah ketiganya.
 
-         Jaraknya rata, bukan proporsional terhadap waktu. Kalau dipaksa
-         proporsional, lima peran 2023-2025 akan bertumpuk jadi satu
-         gumpalan dan tidak bisa diklik. Tanggal aslinya tetap tertulis
-         di tiap titik dan di jendela keterangannya.
+         Jaraknya dua rentang, lewat data-pivot dan data-pivot-at: 2014
+         sampai 2023 menempati 64% lebar, 2023 sampai sekarang 36%, masing-
+         masing rata di dalam rentangnya. Rentang pertama memang sembilan
+         tahun dan yang kedua tiga, jadi yang pertama harus lebih panjang.
+         Tidak dibuat benar-benar sebanding waktu (itu akan 75:25), karena
+         lima peran terakhir akan bertumpuk dan tidak bisa diklik. Tanggal
+         aslinya tetap tertulis di tiap titik dan di jendela keterangannya.
 
          Kelas .is-lead menandai peran tempat dia memimpin orang.
          Jangan ditempel ke peran lain tanpa dasar. -->
@@ -119,7 +148,7 @@
             <h2>Where the work has taken me</h2>
         </div>
 
-        <ul class="tl-legend reveal">
+        <ul class="tl-legend tl-legend-ink reveal">
             <li class="hue-red"><span class="tl-key" aria-hidden="true"></span>Media &amp; community</li>
             <li class="hue-green"><span class="tl-key" aria-hidden="true"></span>Education</li>
             <li class="hue-yellow"><span class="tl-key" aria-hidden="true"></span>Commerce, systems &amp; data</li>
@@ -130,7 +159,7 @@
         <p class="tl-hint reveal">Nine roles since 2014. The line is how the work itself was going, the dashed line is where it went international, and the larger points are where I carried the most responsibility. Colour is the kind of work. Pick any point to read it.</p>
 
         <div class="tl-wrap reveal">
-            <div class="tl-track">
+            <div class="tl-track tl-minimal" data-labels="minimal" data-pivot="4" data-pivot-at="0.64">
                 <!-- Grafik naik turun. Tinggi tiap titik datang dari data-level
                      di elemennya, dan main.js yang menggambar kurvanya melewati
                      titik-titik itu. Jadi yang diubah cukup data-level.
@@ -274,7 +303,7 @@
                     </div>
                 </div>
 
-                <div class="tl-item hue-navy" data-level="74">
+                <div class="tl-item hue-navy" data-level="74" data-label="below">
                     <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
                         <span class="tl-year">2024</span>
                     <span class="tl-tag">Communication<br>Prowibo, UK</span>
@@ -324,9 +353,6 @@
             </div>
         </div>
 
-        <div class="tl-foot reveal">
-            <a href="cv.html" class="btn btn-ghost">Read my CV</a>
-        </div>
     </section>
 
 
@@ -364,20 +390,6 @@
             </a>
         </div>
 
-        <div class="stat-row" style="margin-top: 2.4rem;">
-            <div class="stat reveal">
-                <div class="num" data-count="10" data-suffix="K+">10K+</div>
-                <div class="label">Followers grown from zero at InstaCilacap, before handover</div>
-            </div>
-            <div class="stat reveal">
-                <div class="num" data-count="10" data-suffix="+">10+</div>
-                <div class="label">Years across digital and multimedia work</div>
-            </div>
-            <div class="stat reveal">
-                <div class="num" data-count="100" data-suffix="+">100+</div>
-                <div class="label">Creative works delivered</div>
-            </div>
-        </div>
     </section>
 
     <!-- SECTION: CREATIVE WORKS
