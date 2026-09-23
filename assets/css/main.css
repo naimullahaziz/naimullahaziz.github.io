@@ -3543,3 +3543,11 @@
         @media (prefers-reduced-motion: reduce) {
             .in-view .tl-minimal .tl-item.is-now .tl-dot::after { animation: none !important; }
         }
+
+        /* Gradasi di .meta-value dibentang selebar KOTAK elemennya. Sebagai
+           anak kolom flex, kotaknya melar selebar kolom, jadi angka pendek
+           seperti "10+" cuma menempati 17% bentangan dan yang terlihat hanya
+           ujung biru tuanya. Dengan align-self: flex-start kotaknya mengecil
+           seukuran teksnya, dan setiap angka menampilkan ketiga birunya
+           penuh, sependek atau sepanjang apa pun. */
+        .meta-float .meta-value { align-self: flex-start; }
