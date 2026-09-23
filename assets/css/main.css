@@ -1443,6 +1443,9 @@
         .stat .num { position: relative; z-index: 1; }
         .stat .label { position: relative; z-index: 1; }
 
+        /* Kartu statistik selalu biru, di halaman mana pun. Angka dan
+           statistik sengaja satu warna supaya bisa dibandingkan antar
+           halaman; yang berwarna-warni cuma titik grafik. */
         .stat-row .stat, .stat-stack .stat {
             --accent-color: var(--c-blue);
             --accent-pop: var(--c-blue-pop);
@@ -2208,11 +2211,14 @@
         }
 
 
-        /* --- PITA WILAYAH: LOKAL LALU INTERNASIONAL ---
-           Bidang kerja ditandai warna titik, tempat kerja ditandai pita ini.
-           Dua sumbu yang berbeda, jadi jangan digabung jadi satu warna. */
-        /* Garis pemisah jangkauan, plus nama kedua wilayahnya di tepi kiri.
-           Tingginya dari --divide yang dihitung main.js. */
+        /* --- GARIS PENCAPAIAN: LOKAL DI BAWAH, INTERNASIONAL DI ATAS ---
+           Warna titik menandai bidang kerja, garis ini menandai tempatnya.
+           Dua hal yang berbeda, jadi jangan digabung jadi satu warna. */
+        /* Garis pencapaian: MENDATAR, di --divide yang dihitung main.js.
+           Semua peran lokal ada di bawahnya, semua peran internasional di
+           atasnya. Kalau nanti ada data-level lokal yang melewati level
+           internasional terendah, garis ini kehilangan artinya, jadi
+           tingginya ikut data, bukan angka tetap. */
         .tl-divider {
             position: absolute;
             left: 0; right: 0;
@@ -2222,6 +2228,10 @@
             pointer-events: none;
             z-index: 0;
         }
+
+        /* Nama kedua wilayah menempel di garis, di tepi kiri. Plot sengaja
+           dimulai dari X0 yang cukup jauh di main.js supaya nama ini tidak
+           bertabrakan dengan titik pertama. */
         .tl-band {
             position: absolute;
             left: 0;
@@ -2301,6 +2311,12 @@
             width: 28px; height: 28px;
             box-shadow: 0 0 0 5px rgba(var(--accent-rgb), 0.22);
         }
+        /* Kuning terang cuma 1,35:1 terhadap latar halaman, jadi sebagai
+           bentuk titiknya nyaris tidak terlihat. Cincin ambar gelap
+           membuatnya kebaca tanpa mengubah warnanya. Angka itu diukur di
+           peramban, bukan ditaksir. */
+        .tl-item.hue-yellow .tl-dot { border-color: var(--c-yellow); }
+
         .tl-dot:hover, .tl-dot:focus-visible {
             transform: scale(1.25);
             box-shadow: 0 0 0 9px rgba(var(--accent-rgb), 0.26);
@@ -2675,4 +2691,649 @@
             .door-cards .home-card { padding: 1.8rem 1.6rem 1.5rem; border-radius: 20px; }
             .door-no { font-size: 1.7rem; top: 1.1rem; right: 1.2rem; width: 2rem; }
             .door-cards .home-card h3 { padding-right: 3.5rem; }
+        }
+
+
+        /* =========================================================
+           HALAMAN STUDI KASUS (project-instacilacap.html)
+
+           Grafik perjalanannya memakai komponen .tl-* yang sama persis
+           dengan grafik karier di beranda, jadi tidak ada aturan grafik
+           baru di sini. Yang ditambah cuma badan teks dan hero satu kolom.
+           ========================================================= */
+
+        /* Hero pola beranda tanpa visual di kanan */
+        .hero-grid.one-col { grid-template-columns: 1fr; }
+        .hero-grid.one-col .hero-copy { max-width: 46rem; }
+
+        /* Badan teks studi kasus selebar wadahnya, tanpa kolom sempit. */
+        .case-body { max-width: none; }
+        .case-body p {
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 1.1rem;
+            font-size: 1.02rem;
+        }
+        .case-body p:last-child { margin-bottom: 0; }
+        .case-body strong { color: var(--text-primary); }
+
+        /* =========================================================
+           SUMBU TAHUN DI BAWAH GRAFIK (project-instacilacap.html)
+
+           Tahunnya diletakkan tepat di bawah titik pertama dan
+           terakhir, memakai persen yang sama dengan data-x0 dan
+           data-x1 pada .tl-track. Kalau salah satu angka itu diubah
+           di HTML, persen di sini harus ikut diubah, kalau tidak
+           tahunnya menunjuk ke tempat yang salah.
+
+           Sengaja tanpa garis tanda: garis tegak dari titik ke
+           labelnya sudah dimatikan lewat data-labels="near".
+           ========================================================= */
+        .tl-era {
+            position: relative;
+            height: 1.2rem;
+            margin-top: 0.4rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+        .tl-era span {
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%);
+        }
+        .tl-era span:first-child { left: 5.83%; }   /* 70 / 1200 */
+        .tl-era span:last-child  { left: 94.17%; }  /* 1130 / 1200 */
+
+        /* Di bawah 900px grafiknya berubah jadi daftar menurun, jadi dua
+           tahun bersebelahan tidak lagi menunjuk apa pun. */
+        @media (max-width: 900px) {
+            .tl-era { display: none; }
+        }
+
+        /* =========================================================
+           RINGKASAN TANPA KOTAK (.meta-plain)
+
+           Modifier untuk .meta-grid. Kotaknya dibuang, diganti satu
+           baris mendatar: nama kecil di atas, isinya di bawah, tiap
+           kolom dipisah garis rambut tegak, seluruh barisnya diapit
+           garis atas dan bawah. Mendatar supaya ringkasannya tidak
+           memakan empat baris tinggi di awal halaman.
+
+           Jumlah kolomnya DITULIS TETAP, bukan auto-fit, karena
+           border-left kolom pertama dimatikan lewat nth-child. Kalau
+           jumlah kolomnya dibiarkan berubah sendiri, kolom pertama di
+           baris kedua akan tetap membawa garis tegak yang salah.
+
+           project-vaeleon.html masih memakai .meta-grid polos, jadi
+           semua aturan di sini HARUS lewat .meta-plain.
+           ========================================================= */
+        .meta-grid.meta-plain {
+            grid-template-columns: repeat(4, 1fr);
+            background: none;
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0;
+            gap: 0;
+            overflow: visible;
+        }
+        .meta-plain .meta-item {
+            background: none;
+            gap: 0.5rem;
+            padding: 1.25rem 1.5rem;
+            border-left: 1px solid var(--border-color);
+        }
+        .meta-plain .meta-item:first-child {
+            border-left: 0;
+            padding-left: 0;
+        }
+        .meta-plain .meta-item:last-child { padding-right: 0; }
+        .meta-plain .meta-label { font-size: 0.68rem; }
+        .meta-plain .meta-value {
+            color: var(--text-primary);
+            font-size: 0.97rem;
+        }
+
+        /* Empat kolom jadi terlalu sempit sebelum layar ponsel, jadi
+           dipecah dua dulu. Garis tegak kolom kiri ikut dimatikan. */
+        @media (max-width: 860px) {
+            .meta-grid.meta-plain { grid-template-columns: repeat(2, 1fr); }
+            .meta-plain .meta-item:nth-child(2n+1) {
+                border-left: 0;
+                padding-left: 0;
+            }
+            .meta-plain .meta-item:nth-child(-n+2) { padding-top: 1.1rem; }
+            .meta-plain .meta-item:nth-child(n+3) {
+                border-top: 1px solid var(--border-color);
+            }
+        }
+
+        /* Di ponsel dua kolom pun memaksa isinya patah-patah, jadi
+           kembali menurun: nama di kiri, isinya di kanan. */
+        @media (max-width: 520px) {
+            .meta-grid.meta-plain { display: block; border-bottom: 0; }
+            .meta-plain .meta-item {
+                display: grid;
+                grid-template-columns: 5.6rem 1fr;
+                align-items: baseline;
+                gap: 0 1.2rem;
+                padding: 0.95rem 0;
+                border-left: 0;
+                border-top: 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+        }
+        /* =========================================================
+           EMPAT LANGKAH (.pb-*, project-instacilacap.html)
+
+           Sengaja tenang. Sorotan halaman ini ada di arsip foto tepat
+           di atasnya, jadi langkah-langkah ini cuma deretan tombol kecil
+           yang dihubungkan anak panah. Diagram dan penjelasannya ada di
+           dalam .tl-details yang tersembunyi, dan baru muncul setelah
+           disalin ke jendela .modal-timeline oleh main.js.
+
+           Jangan membesarkan kartunya lagi. Begitu bagian ini punya blok
+           warna selebar halaman, dia mengalahkan foto-fotonya, dan itu
+           persis yang tidak diinginkan di sini.
+           ========================================================= */
+        .pb-steps {
+            list-style: none;
+            margin: 2.2rem 0 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 0.9rem;
+        }
+        .pb-move { display: flex; align-items: stretch; }
+
+        /* Anak panah antar langkah. Murni penunjuk urutan: tidak ada
+           panjang atau jarak di sini yang mewakili angka apa pun. */
+        .pb-move + .pb-move::before {
+            content: "\2192";
+            align-self: center;
+            margin-right: 0.9rem;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1;
+        }
+
+        /* Warnanya keluar sejak awal, bukan menunggu kursor. Kecil tapi
+           berisi, jadi tetap menonjol tanpa memakan ruang: empat pil ini
+           gabungan luasnya masih jauh di bawah satu kartu foto di atasnya.
+
+           Isiannya memakai varian "deep" supaya teks putih di atasnya
+           lulus 4,5:1. Kuning sendirian memakai varian "pop" yang menyala
+           dengan teks navy, karena kuning yang digelapkan sampai aman
+           untuk teks putih sudah bukan kuning lagi. */
+        .pb-step {
+            appearance: none;
+            -webkit-appearance: none;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: baseline;
+            gap: 0.7rem;
+            padding: 0.85rem 1.3rem;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            background: var(--accent-color);
+            color: #FFFFFF;
+            box-shadow: 0 6px 16px rgba(var(--accent-rgb), 0.22);
+            transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        box-shadow 0.35s ease;
+        }
+        .pb-move.hue-yellow .pb-step {
+            background: var(--c-yellow-pop);
+            color: var(--c-yellow-on);
+        }
+        .pb-step:hover,
+        .pb-step:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 13px 28px rgba(var(--accent-rgb), 0.34);
+        }
+        .pb-step:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+
+        /* Sempat dipudarkan sampai 0,72, tapi di atas latar sejenuh ini
+           itu cuma 3,59:1 pada pil hijau, di bawah ambang 4,5:1 untuk teks
+           sekecil ini. Bedanya dibawa ukuran dan jarak huruf saja. */
+        .pb-no {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            color: inherit;
+        }
+
+        .pb-name {
+            font-size: 0.94rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        @media (max-width: 760px) {
+            .pb-steps { flex-direction: column; align-items: stretch; gap: 0.6rem; }
+            .pb-step { width: 100%; border-radius: 16px; }
+            /* Tersusun menurun, anak panahnya ikut menunjuk ke bawah. */
+            .pb-move + .pb-move::before {
+                content: "\2193";
+                align-self: flex-start;
+                margin: 0 0 0.6rem 1.2rem;
+            }
+            .pb-move { flex-direction: column; }
+        }
+
+        /* --- DIAGRAM DI DALAM POP-UP --- */
+        /* Diagramnya dipindahkan main.js ke #tl-modal-body, jadi semua
+           aturan di bawah harus bisa hidup di luar .pb-move. */
+        .pb-art {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(var(--accent-rgb), 0.08);
+            border-radius: 16px;
+            padding: 1.4rem 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+        .pb-art svg { display: block; width: 100%; max-width: 280px; height: auto; }
+
+        /* Kuning menyala cuma 1,35:1 terhadap panel terang, jadi sebagai
+           bentuk dia nyaris tidak terlihat. Di dalam diagram, kuning
+           memakai varian ambar yang lebih gelap. */
+        .hue-yellow .pb-art { --accent-pop: var(--c-yellow); }
+
+        .pb-seed,
+        .pb-hub,
+        .pb-lens,
+        .pb-flow { fill: var(--accent-pop); }
+        .pb-arrow,
+        .pb-join,
+        .pb-ring,
+        .pb-lane,
+        .pb-node,
+        .pb-pool {
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .pb-arrow { stroke-width: 2; }
+        .pb-join  { stroke-width: 3; }
+        .pb-ring  { stroke-width: 2; }
+        .pb-lane  { stroke-width: 2; }
+        .pb-node  { stroke-width: 3; }
+        .pb-pool  { stroke-width: 2; }
+
+        /* Kiri putus-putus: kumpulan orang lain. Kanan utuh: kumpulan
+           sendiri. Titiknya berjalan dari kiri ke kanan, jadi arahnya
+           membaca sebagai orang masuk, bukan orang pergi. */
+        .pb-pool-a { stroke-dasharray: 4 5; }
+
+        /* --- GERAKNYA ---
+           Dipicu kelas .pb-play yang dipasang main.js pada badan jendela
+           setelah diagramnya disalin ke sana. Animasinya hanya memunculkan,
+           tidak mengukur: tidak ada panjang, tinggi, atau durasi di sini
+           yang boleh dibaca sebagai angka. */
+        .js .pb-art .pb-seed,
+        .js .pb-art .pb-join,
+        .js .pb-art .pb-arrow,
+        .js .pb-art .pb-lens,
+        .js .pb-art .pb-node,
+        .js .pb-art .pb-flow { opacity: 0; }
+
+        .js .pb-play .pb-seed {
+            animation: pbPop 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: calc(0.12s + var(--i) * 0.026s);
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        .js .pb-play .pb-arrow {
+            animation: pbFade 0.4s ease forwards;
+            animation-delay: 0.9s;
+        }
+        .js .pb-play .pb-join {
+            animation: pbPop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 1.2s;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        .js .pb-play .pb-ring {
+            animation: pbGrow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        .js .pb-play .pb-ring-b { animation-delay: 0.18s; }
+        .js .pb-play .pb-lens {
+            animation: pbFadeLens 0.5s ease forwards;
+            animation-delay: 0.7s;
+        }
+        .js .pb-play .pb-lane {
+            stroke-dasharray: 130;
+            stroke-dashoffset: 130;
+            animation: pbDraw 0.7s ease forwards;
+            animation-delay: calc(0.12s + var(--i) * 0.14s);
+        }
+        .js .pb-play .pb-node {
+            animation: pbPop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: calc(0.65s + var(--i) * 0.14s);
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        .js .pb-play .pb-flow {
+            animation: pbTravel 2.8s cubic-bezier(0.55, 0, 0.45, 1) infinite;
+            animation-delay: calc(0.25s + var(--i) * 0.55s);
+        }
+
+        /* Yang meminta gerak seminimal mungkin langsung dapat bentuk
+           akhirnya. main.js memasang kelas ini menggantikan .pb-play. */
+        .js .pb-still .pb-seed,
+        .js .pb-still .pb-join,
+        .js .pb-still .pb-lens,
+        .js .pb-still .pb-node,
+        .js .pb-still .pb-flow { opacity: 1; }
+        .js .pb-still .pb-arrow { opacity: 0.72; }
+
+        @keyframes pbPop {
+            from { opacity: 0; transform: scale(0.3); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pbGrow {
+            from { opacity: 0; transform: scale(0.75); }
+            to   { opacity: 0.6; transform: scale(1); }
+        }
+        @keyframes pbFade { to { opacity: 0.72; } }
+        @keyframes pbFadeLens { to { opacity: 0.85; } }
+        @keyframes pbDraw { to { stroke-dashoffset: 0; } }
+        @keyframes pbTravel {
+            0%   { opacity: 0; cx: 44px; }
+            12%  { opacity: 1; }
+            80%  { opacity: 1; }
+            100% { opacity: 0; cx: 116px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js .pb-art .pb-seed,
+            .js .pb-art .pb-join,
+            .js .pb-art .pb-lens,
+            .js .pb-art .pb-node,
+            .js .pb-art .pb-flow { opacity: 1; }
+            .js .pb-art .pb-arrow { opacity: 0.72; }
+            .pb-step,
+            .pb-step:hover,
+            .pb-step:focus-visible { transition: none; transform: none; }
+        }
+
+        /* =========================================================
+           ARSIP AKUN (.shot, project-instacilacap.html)
+
+           Meminjam seluruh mesin kartu .release dari halaman music:
+           angkatan saat disentuh, gelap tipis, lencana di tengah.
+           Yang diubah cuma perbandingan sisinya, karena yang di sini
+           tangkapan layar mendatar, bukan sampul album persegi.
+
+           Kartunya <button> sungguhan supaya bisa dijangkau papan
+           ketik tanpa tambahan apa pun. Gaya bawaan tombol harus
+           dimatikan, kalau tidak dia muncul berbingkai abu-abu.
+           ========================================================= */
+        .shot-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+        .shot {
+            appearance: none;
+            -webkit-appearance: none;
+            background: none;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+        }
+        .shot .release-art {
+            aspect-ratio: 3 / 2;
+            border-radius: 14px;
+        }
+        /* Tangkapan layar harus utuh, tidak boleh dipotong sisinya, jadi
+           dimuat seluruhnya di dalam bingkai dengan latar netral. */
+        .shot .release-art img {
+            object-fit: contain;
+            background: var(--img-bg);
+        }
+        .shot .release-play {
+            font-size: 1.6rem;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        @media (max-width: 768px) {
+            .shot-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+        }
+
+        /* =========================================================
+           PRATINJAU FOTO DAN TOMBOL DI JENDELA GRAFIK (index.html)
+
+           Berkas pratinjaunya sudah bujur sangkar sejak awal, dipotong di
+           folder thumb/: tangkapan layar Instagram dipotong dari kiri supaya
+           panel keterangannya hilang, kisi foto dipotong dari tengah. Jadi
+           pemotongan tidak lagi diserahkan ke CSS.
+
+           Tinggi barisnya HARUS datang dari wadahnya, bukan dari isinya.
+           Kalau aspect-ratio ditaruh di gambarnya, ukuran asli gambar
+           tetap menentukan tinggi baris kisi dan hasilnya memanjang ke
+           bawah, bukan bujur sangkar. Nisbah 3,1 itu tiga kolom sama
+           lebar ditambah dua celahnya. */
+        .tl-shots {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-auto-rows: 1fr;
+            aspect-ratio: 3.1 / 1;
+            gap: 0.5rem;
+            margin: 0 0 1.2rem;
+            text-decoration: none;
+            border-radius: 12px;
+        }
+        .tl-shots img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            background: var(--img-bg);
+            border: 1px solid var(--border-color);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        border-color 0.3s ease;
+        }
+        .tl-shots:hover img,
+        .tl-shots:focus-visible img {
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+        }
+        .tl-shots:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+
+        .tl-cta { margin-top: 1.4rem; }
+        .tl-cta .btn { width: 100%; justify-content: center; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .tl-shots img,
+            .tl-shots:hover img { transition: none; transform: none; }
+        }
+        /* =========================================================
+           KARTU FOTO PENDUKUNG CERITA (.plain-shots-grid)
+
+           Memakai komponen .shot yang sama dengan arsip InstaCilacap,
+           jadi pop-upnya juga jendela yang sama. Bedanya cuma satu:
+           .shot-photo membolehkan gambarnya dipotong supaya memenuhi
+           bingkai, karena isinya foto, bukan tangkapan layar yang harus
+           terbaca utuh.
+
+           Lebarnya penuh, sama dengan kisi lain di halaman ini. Sempat
+           dibatasi 760px supaya terbaca lebih kecil daripada kartu arsip
+           di atas, tapi batas itu menyisakan ruang kosong di sisi kanan
+           dan kisinya jadi terlihat belum selesai.
+           ========================================================= */
+        /* Pengantar yang berdiri sesudah badan teks, bukan sesudah judul
+           section, perlu jarak sendiri. Tanpa ini dia terbaca sebagai
+           lanjutan paragraf di atasnya.
+
+           JANGAN memakai nama .case-lead untuk ini: kelas itu sudah ada
+           dan dipakai project-vaeleon.html dengan arti yang berbeda. */
+        .hint-after-body { margin-top: 2.2rem; }
+
+        .plain-shots-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.4rem;
+        }
+        /* Foto biasa, bukan tangkapan layar, jadi boleh dipotong supaya
+           memenuhi bingkainya. Yang harus utuh cuma tangkapan layar, dan
+           itulah sebabnya .shot bawaan memakai contain.
+
+           Bingkainya ikut 3:2 seperti kartu arsip, tidak lagi bujur
+           sangkar: dengan lebar penuh, bujur sangkar membuat kartu di
+           sini jadi yang paling tinggi di seluruh halaman. */
+        .shot-photo .release-art img {
+            object-fit: cover;
+            background: var(--img-bg);
+        }
+
+        @media (max-width: 620px) {
+            .plain-shots-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+            .plain-shots-grid .shot:first-child { grid-column: 1 / -1; }
+            .plain-shots-grid .shot:first-child .release-art { aspect-ratio: 16 / 9; }
+        }
+
+        /* =========================================================
+           LACI DI NAVBAR (.nav-group)
+
+           Tombol induknya harus terlihat persis seperti tautan lain di
+           navbar, jadi gaya bawaan <button> dimatikan dan pil serta
+           warnanya disalin dari .nav-links a.
+
+           Isinya disembunyikan dengan atribut hidden dari main.js, bukan
+           dengan display di CSS, supaya tautannya benar-benar keluar dari
+           urutan Tab dan dari pembaca layar selama laci tertutup.
+           ========================================================= */
+        .nav-group { position: relative; display: inline-block; }
+
+        .nav-parent {
+            appearance: none;
+            -webkit-appearance: none;
+            border: 0;
+            background: none;
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            margin-left: 0.35rem;
+            padding: 0.4rem 0.85rem;
+            border-radius: 100px;
+            transition: color 0.3s ease, background-color 0.35s ease;
+        }
+        .nav-parent:hover,
+        .nav-parent:focus-visible,
+        .nav-parent[aria-expanded="true"] {
+            background: var(--accent-soft);
+            color: var(--accent-color);
+        }
+        .nav-parent.is-current { color: var(--accent-color); font-weight: 700; }
+        .nav-parent:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+
+        .nav-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            min-width: 11rem;
+            background: var(--nav-solid);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: var(--shadow-card);
+            padding: 0.5rem;
+            z-index: 110;
+            animation: navDrop 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        /* Jembatan tak terlihat menutup celah 0,5rem antara tombol dan
+           lacinya. Tanpa ini, kursor yang turun dari tombol ke isi laci
+           sempat berada di luar .nav-group, dan lacinya berkedip tutup
+           di tengah jalan. Jeda 160ms di main.js itu jaring pengaman
+           kedua, bukan penggantinya. */
+        .nav-menu::before {
+            content: "";
+            position: absolute;
+            left: 0; right: 0;
+            top: -0.6rem;
+            height: 0.6rem;
+        }
+
+        /* Laci paling kanan dipatok ke kanan, kalau tidak dia meluber
+           keluar layar. */
+        .nav-group:last-child .nav-menu { left: auto; right: 0; }
+
+        .nav-links .nav-menu a {
+            display: block;
+            margin-left: 0;
+            padding: 0.6rem 0.85rem;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        @keyframes navDrop {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        /* Animasi masuk satu per satu tadinya memakai nth-child pada <a>.
+           Sekarang ada .nav-group di antaranya, jadi pencacahnya harus
+           menghitung semua anak, bukan hanya tautannya. */
+        .js .nav-links > .nav-group { animation: navIn 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+        .js .nav-links > :nth-child(1) { animation-delay: 0.18s; }
+        .js .nav-links > :nth-child(2) { animation-delay: 0.26s; }
+        .js .nav-links > :nth-child(3) { animation-delay: 0.34s; }
+        .js .nav-links > :nth-child(4) { animation-delay: 0.42s; }
+        .js .nav-links > :nth-child(5) { animation-delay: 0.50s; }
+        .js .nav-links > :nth-child(6) { animation-delay: 0.58s; }
+        /* Tautan di dalam laci tidak ikut animasi masuk navbar: lacinya
+           baru muncul saat diklik, jauh setelah animasi itu selesai. */
+        .js .nav-menu a { animation: none; }
+
+        @media (max-width: 980px) {
+            .nav-group { display: block; }
+            .nav-parent {
+                width: 100%;
+                margin-left: 0;
+                padding: 0.9rem 0;
+                border-radius: 0;
+                font-size: 1rem;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-parent:hover,
+            .nav-parent:focus-visible,
+            .nav-parent[aria-expanded="true"] { background: transparent; }
+            /* Di layar sempit lacinya mendorong isi di bawahnya, bukan
+               melayang di atasnya. */
+            .nav-menu {
+                position: static;
+                min-width: 0;
+                border: 0;
+                border-bottom: 1px solid var(--border-color);
+                border-radius: 0;
+                box-shadow: none;
+                padding: 0.2rem 0 0.6rem 0.9rem;
+                background: none;
+            }
+            .nav-links .nav-menu a {
+                padding: 0.7rem 0;
+                border-bottom: 0;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nav-menu { animation: none; }
         }

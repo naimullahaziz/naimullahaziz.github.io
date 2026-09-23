@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaCilacap | Na'imullah Aziz</title>
+
+    <meta name="description" content="How a regional photography community grew from one person to fifty, and met a commercial goal with no budget at all.">
+    <link rel="canonical" href="https://naimullahaziz.github.io/project-instacilacap.html">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://naimullahaziz.github.io/project-instacilacap.html">
+    <meta property="og:title" content="InstaCilacap | Na'imullah Aziz">
+    <meta property="og:description" content="How a regional photography community grew from one person to fifty, and met a commercial goal with no budget at all.">
+    <meta property="og:image" content="https://naimullahaziz.github.io/assets/img/og-cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="InstaCilacap | Na'imullah Aziz">
+    <meta name="twitter:description" content="How a regional photography community grew from one person to fifty, and met a commercial goal with no budget at all.">
+    <meta name="twitter:image" content="https://naimullahaziz.github.io/assets/img/og-cover.jpg">
+    <meta name="theme-color" content="#FBFAF8">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23001741'/%3E%3Ctext x='32' y='43' font-family='Inter,Arial,sans-serif' font-size='30' font-weight='900' fill='%23ffffff' text-anchor='middle'%3ENA%3C/text%3E%3C/svg%3E">
+
+    <script>document.documentElement.classList.add('js');</script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav>
+        <div class="container nav-content">
+            <a class="logo" href="index.html" style="text-decoration:none;color:inherit;">Na'imullah Aziz</a>
+            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+                <span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html">Home</a>
+
+                <div class="nav-group">
+                    <button type="button" class="nav-parent is-current" aria-expanded="false" aria-controls="nav-work">Work</button>
+                    <div class="nav-menu" id="nav-work" hidden>
+                        <a href="work.html">All work</a>
+                        <a href="project-instacilacap.html" aria-current="page">InstaCilacap</a>
+                        <a href="project-vaeleon.html">Vaeleon</a>
+                        <a href="cv.html">CV</a>
+                    </div>
+                </div>
+
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="#" class="nav-accent" data-deck data-iframe="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?embed">Full deck</a>
+
+                <div class="nav-group">
+                    <button type="button" class="nav-parent" aria-expanded="false" aria-controls="nav-creative">Creative</button>
+                    <div class="nav-menu" id="nav-creative" hidden>
+                        <a href="music.html">Music</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero memakai pola beranda, bukan pola halaman Vaeleon. -->
+    <header class="hero hue-red" id="top">
+        <div class="hero-glow one" aria-hidden="true"></div>
+        <div class="hero-glow two" aria-hidden="true"></div>
+        <div class="container hero-grid one-col">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">Media &amp; community &middot; Case study</span>
+            <h1>One person,<br>then fifty.</h1>
+            <p>A regional photography and travel community in Cilacap, built from an empty account to around fifty contributors and just over 10K followers, then handed over when I left.</p>
+            <div class="hero-actions">
+                <a href="#journey" class="btn btn-cta">See the journey</a>
+                <a href="index.html#journey" class="btn btn-ghost">Back to the timeline</a>
+            </div>
+          </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+    <!-- SEKILAS -->
+    <section id="glance" class="container hue-red">
+        <div class="meta-grid meta-plain reveal">
+            <div class="meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">Founder and lead</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">People</span>
+                <span class="meta-value">Nine of us running it, around fifty contributing</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Period</span>
+                <span class="meta-value">2014 &ndash; 2015, about a year</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Budget</span>
+                <span class="meta-value">None</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRAFIK PERJALANAN
+         Memakai komponen yang sama persis dengan grafik karier di beranda:
+         kelas .tl-*, jalur SVG yang digambar main.js dari data-level, dan
+         jendela keterangan yang sama. Jadi tidak ada mesin kedua yang harus
+         dirawat, dan bahasa visualnya seragam di seluruh situs.
+
+         Sumbu tegaknya JUMLAH ORANG, skala lurus dari 0 sampai 50. Datar di
+         awal lalu menanjak itu memang bentuk sebenarnya, bukan digambar
+         supaya terlihat dramatis. data-x0 dan data-x1 memepetkan plot karena
+         halaman ini tidak punya nama sumbu di tepi kiri. -->
+    <section id="journey" class="container hue-navy">
+        <div class="section-header reveal">
+            <span>The journey</span>
+            <h2>How it actually grew</h2>
+        </div>
+
+        <p class="tl-hint reveal">The line is the number of people contributing, from one to around fifty, across 2014 and 2015. Flat at the start because I was doing it alone. Colour marks what each stage actually needed: making the work, finding people, organising them, growing the audience, then handing it over. Pick any point to read what changed there.</p>
+
+        <div class="tl-wrap reveal">
+            <div class="tl-track" data-x0="70" data-x1="1130" data-labels="near">
+                <svg class="tl-path" viewBox="0 0 1200 420" preserveAspectRatio="none" aria-hidden="true">
+                    <path id="tl-route"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          vector-effect="non-scaling-stroke" />
+                </svg>
+
+                <div class="tl-item hue-red" data-level="2">
+                    <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
+                    <span class="tl-year">1</span>
+                    <span class="tl-tag">Alone</span>
+                    <div class="tl-details" hidden>
+                        <span class="tl-when">Just me</span>
+                        <h3 class="tl-role">Proof before people</h3>
+                        <p class="tl-org">Twenty-five posts, shot and published on my own</p>
+                        <ul>
+                            <li>I posted <b>twenty-five pieces about local places myself</b> before asking a single person to join.</li>
+                            <li>Asking people to help fill an empty account is asking for a favour. Asking them to join something already worth watching is an invitation. The second one works.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tl-item hue-yellow" data-level="10">
+                    <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
+                    <span class="tl-year">5</span>
+                    <span class="tl-tag">First five</span>
+                    <div class="tl-details" hidden>
+                        <span class="tl-when">Five people</span>
+                        <h3 class="tl-role">Hobby instead of pay</h3>
+                        <p class="tl-org">Recruited from local photography hobbyists</p>
+                        <ul>
+                            <li>There was no budget, so I did not pretend there was one.</li>
+                            <li>I followed and invited <b>people who already went out shooting at weekends</b>. The work was the reward, so nobody was waiting to be paid.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tl-item hue-blue" data-level="17">
+                    <button type="button" class="tl-dot is-lead" aria-haspopup="dialog"></button>
+                    <span class="tl-year">9</span>
+                    <span class="tl-tag">Nine</span>
+                    <div class="tl-details" hidden>
+                        <span class="tl-when">Nine of us</span>
+                        <h3 class="tl-role">Split the work</h3>
+                        <p class="tl-org">Shooting trips became shared assignments</p>
+                        <ul>
+                            <li>Once there were nine of us, me doing everything myself was the bottleneck. We divided shooting, selecting and publishing.</li>
+                            <li><b>This is where I stopped being the photographer and started running it</b>, and gave up the part I actually enjoyed.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tl-item hue-green" data-level="96">
+                    <button type="button" class="tl-dot is-lead" aria-haspopup="dialog"></button>
+                    <span class="tl-year">50+</span>
+                    <span class="tl-tag">Fifty</span>
+                    <div class="tl-details" hidden>
+                        <span class="tl-when">Around fifty contributors</span>
+                        <h3 class="tl-role">Build reasons to arrive</h3>
+                        <p class="tl-org">Giveaways with local promoters, and open trips</p>
+                        <ul>
+                            <li>I found promoters for giveaways and opened trips anyone could join.</li>
+                            <li><b>Growth stopped depending on me posting.</b> People came for events they wanted to attend. Plenty joined just for the trips; <b>around fifty</b> went further and sent photographs in regularly. I am working from memory on that number, so read it as roughly fifty rather than exactly.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tl-item hue-navy" data-level="96">
+                    <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
+                    <span class="tl-year">10K+</span>
+                    <span class="tl-tag">Handed over</span>
+                    <div class="tl-details" hidden>
+                        <span class="tl-when">At just over 10K followers</span>
+                        <h3 class="tl-role">Leave on purpose</h3>
+                        <p class="tl-org">Handed to the core team, not left to drift</p>
+                        <ul>
+                            <li>I left to focus on family and a teaching post. Rather than running it half-present, I handed it to the people already doing the work.</li>
+                            <li><b>By then the commercial goal was met.</b> The catering had the promotion it needed and the orders were coming in.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Sumbu waktu. Hanya kedua ujungnya yang bertanggal, karena hanya
+                 itu yang diingat pasti; menaruh tahun di titik tengah berarti
+                 mengarang. Posisi kirinya 70/1200 dan kanannya 1130/1200, sama
+                 dengan data-x0 dan data-x1 di atas. -->
+            <div class="tl-era" aria-hidden="true">
+                <span>2014</span>
+                <span>2015</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARSIP AKUNNYA
+         Tangkapan layar postingan aslinya, bukan foto yang diangkat satu per
+         satu dari akunnya. Bedanya penting: yang ditampilkan di sini adalah
+         BUKTI bahwa kegiatannya nyata dan bertanggal, bukan karya foto orang
+         lain yang dipakai ulang tanpa nama.
+
+         Tanggal dan angka di keterangan pop-up diambil dari teks postingan
+         itu sendiri, jadi semuanya bisa dicek di akunnya. Jangan menambah
+         angka yang tidak tertulis di postingannya.
+
+         Kisi dan kartunya memakai komponen .release dari halaman music,
+         dengan pembeda .shot untuk perbandingan sisi 3:2. -->
+    <section id="archive" class="container hue-red">
+        <div class="section-header reveal">
+            <span>From the account</span>
+            <h2>What the community actually did</h2>
+        </div>
+
+        <p class="tl-hint reveal">Five posts from the account between 2014 and 2015. Pick any one to read what it was.</p>
+
+        <div class="music-grid shot-grid">
+
+            <button type="button" class="release shot reveal" data-gallery="assets/img/instacilacap/first-uploads.webp">
+                <span class="release-art">
+                    <img src="assets/img/instacilacap/first-uploads.webp" alt="A grid of early InstaCilacap photographs: the coast at dawn, a village procession, a cyclist on a shaded road, fishing boats, pine needles and sunsets around Cilacap" width="1404" height="996" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Before anyone joined</span>
+                <span class="release-meta">2014 &middot; The first posts</span>
+                <span class="shot-desc" hidden>The account opened with my own photographs of Cilacap, taken on whatever camera I had. The message underneath them was simple: <b>the town looks like this, where are yours?</b> Nobody was asked to join until there was already something worth joining.</span>
+            </button>
+
+            <button type="button" class="release shot reveal" data-gallery="assets/img/instacilacap/nusakambangan-kalipat.webp">
+                <span class="release-art">
+                    <img src="assets/img/instacilacap/nusakambangan-kalipat.webp" alt="InstaCilacap members holding a banner on a beach on Nusakambangan island, with photographs from the trip below" width="1451" height="954" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Pantai Kalipat, Nusakambangan</span>
+                <span class="release-meta">14 December 2014 &middot; Expedition</span>
+                <span class="shot-desc" hidden>A boat from Teluk Penyu, then a couple of hours over rocky ground, to a beach on Nusakambangan that almost nobody outside the island had seen. <b>Around twenty of us made it.</b> The island is far better known for its prison than its coastline, which is exactly why the photographs were worth making.</span>
+            </button>
+
+            <button type="button" class="release shot reveal" data-gallery="assets/img/instacilacap/thousand-photos.webp">
+                <span class="release-art">
+                    <img src="assets/img/instacilacap/thousand-photos.webp" alt="A collage of over a thousand photographs posted through the hashtag instacilacap during 2014" width="1451" height="953" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">A thousand photographs</span>
+                <span class="release-meta">1 January 2015 &middot; The hashtag</span>
+                <span class="shot-desc" hidden>Within a few months of starting the <b>#instacilacap</b> hashtag, <b>more than a thousand photographs</b> of the town had been posted through it, most of them by people I had never met. The account could only feature a fraction of them, so this collage went up to thank everyone who had shared one.</span>
+            </button>
+
+            <button type="button" class="release shot reveal" data-gallery="assets/img/instacilacap/wwim11-benteng-pendem.webp">
+                <span class="release-art">
+                    <img src="assets/img/instacilacap/wwim11-benteng-pendem.webp" alt="Members walking through the overgrown corridors of Benteng Pendem fort and standing on a green hillside" width="1457" height="954" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Benteng Pendem and Doraemon Hill</span>
+                <span class="release-meta">23 March 2015 &middot; Worldwide InstaMeet 11</span>
+                <span class="shot-desc" hidden>Instagram runs a global meet-up weekend, and we held the Cilacap one at an old fort and a hillside that most people had stopped visiting. <b>Quiet places were the ones worth photographing</b>, and a worldwide event gave a small town a reason to be on the map that weekend.</span>
+            </button>
+
+            <button type="button" class="release shot reveal" data-gallery="assets/img/instacilacap/photoride-charity.webp">
+                <span class="release-art">
+                    <img src="assets/img/instacilacap/photoride-charity.webp" alt="A large group of cyclists filling a street in Cilacap during the InstaCilacap Photo Ride for Charity" width="1455" height="954" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Photo Ride for Charity</span>
+                <span class="release-meta">28 June 2015 &middot; Community event</span>
+                <span class="shot-desc" hidden>Members rode across Cilacap together, photographing as they went, and what was collected on the day went to families who needed it. Run with <b>BLASTBLUE ADVENTURE and the Cilacap cycling forum</b>. The pictures came from one member's camera and everybody else's phones, which was the whole point.</span>
+            </button>
+
+        </div>
+    </section>
+
+    <!-- KEADAANNYA -->
+    <section id="situation" class="container hue-red">
+        <div class="section-header reveal">
+            <span>The situation</span>
+            <h2>A year that was supposed to be a gap</h2>
+        </div>
+        <div class="case-body reveal">
+            <p>I had finished my degree in Bandung and was preparing for IELTS with friends, aiming at a master's abroad. Then my father died and the family business collapsed with him. I went home to Cilacap to be with my mother, and to look for work there instead.</p>
+            <p>That year I helped run her catering business while I waited for a teaching post to open. I wanted to promote the catering on Instagram, which in Cilacap at the time almost nobody was using seriously.</p>
+            <p><strong>So I built the audience first.</strong> An account about local tourism in Cilacap, a place I thought deserved to be seen, with the catering sitting quietly inside a following that had its own reason to exist. One thing carried the other.</p>
+        </div>
+
+        <!-- Kartu foto kateringnya memakai komponen .shot yang sama dengan
+             arsip InstaCilacap, jadi pop-upnya juga jendela yang sama.
+             Pembeda .shot-photo membolehkan gambarnya dipotong supaya
+             memenuhi bingkai 3:2, karena isinya foto. Tangkapan layar di
+             arsip tetap dimuat utuh, tidak boleh terpotong.
+
+             Kisinya sengaja DIBATASI lebarnya. Kateringnya itu alasan
+             cerita ini ada, bukan karya yang dipamerkan, jadi kartunya
+             harus terbaca lebih kecil daripada kartu arsip di atas.
+             Kalau batas lebar ini dilepas, keduanya terlihat setara dan
+             pembaca kehilangan urutan pentingnya. -->
+        <p class="tl-hint hint-after-body reveal">What the year actually looked like. Pick any one to read it.</p>
+
+        <div class="music-grid shot-grid plain-shots-grid">
+
+            <button type="button" class="release shot shot-photo reveal" data-gallery="assets/img/instacilacap/catering-delivery.webp">
+                <span class="release-art">
+                    <img src="assets/img/instacilacap/catering-delivery.webp" alt="A motorbike with a green crate strapped to the back, loaded with boxed meals ready to deliver" width="720" height="720" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">The delivery fleet</span>
+                <span class="release-meta">A crate and a motorbike</span>
+                <span class="shot-desc" hidden>A plastic crate strapped to the back of a motorbike. Orders went out on this, one run at a time, across a town where almost nobody was ordering food online yet.</span>
+            </button>
+
+            <button type="button" class="release shot shot-photo reveal" data-gallery="assets/img/instacilacap/catering-stall.webp">
+                <span class="release-art">
+                    <img src="assets/img/instacilacap/catering-stall.webp" alt="A small food stall with a red banner, set up in front of the family house" width="720" height="720" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">The whole shopfront</span>
+                <span class="release-meta">In front of the house</span>
+                <span class="shot-desc" hidden>The stall stood in front of our house, under a mango tree. No premises, no signage beyond one banner. <b>This is the business the Instagram account was quietly carrying.</b></span>
+            </button>
+
+            <button type="button" class="release shot shot-photo reveal" data-gallery="assets/img/instacilacap/catering-order.webp">
+                <span class="release-art">
+                    <img src="assets/img/instacilacap/catering-order.webp" alt="Rows of boxed rice meals being packed beside a tray of fried chicken" width="720" height="720" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">An order going out</span>
+                <span class="release-meta">Rice, chicken, cucumber</span>
+                <span class="shot-desc" hidden>Rice, chicken and a slice of cucumber, boxed and repeated until the count was right. Unglamorous work, and the reason I was home that year at all.</span>
+            </button>
+
+        </div>
+    </section>
+
+    <!-- CARA KERJANYA
+         Sengaja kecil. Sorotan halaman ini ada di arsip foto tepat di atas,
+         jadi empat langkah ini cuma deretan tombol yang dihubungkan anak
+         panah; diagram dan penjelasannya baru muncul di pop-up.
+
+         Pop-upnya memakai jendela .modal-timeline yang sama dengan grafik
+         karier, jadi tidak ada mesin kedua. Syaratnya tiap langkah punya
+         .tl-details berisi .tl-when, .tl-role, .tl-org, lalu .tl-extra
+         untuk diagramnya dan sebuah <ul> untuk butirannya.
+
+         Tidak ada batang persentase di sini: tidak ada ukuran yang
+         memisahkan sumbangan tiap langkah terhadap pertumbuhan, jadi
+         panjang batang apa pun akan mengarang. Yang digambar mekanismenya. -->
+    <section id="playbook" class="container hue-blue">
+        <div class="section-header reveal">
+            <span>How it was done</span>
+            <h2>Four moves, no budget</h2>
+        </div>
+
+        <p class="tl-hint reveal">All four answer the same problem: no money, no audience, and nobody who owed me a favour. Pick one to see how it worked.</p>
+
+        <ol class="pb-steps reveal">
+
+            <li class="pb-move hue-red">
+                <button type="button" class="pb-step">
+                    <span class="pb-no">01</span>
+                    <span class="pb-name">Prove it before asking</span>
+                </button>
+                <div class="tl-details" hidden>
+                    <span class="tl-when">Move 01</span>
+                    <h3 class="tl-role">Prove it before asking</h3>
+                    <p class="tl-org">An empty account. Nobody joins nothing.</p>
+                    <div class="tl-extra">
+                        <div class="pb-art">
+                            <svg viewBox="0 0 160 100" aria-hidden="true">
+                                <g class="pb-seeds">
+                                    <circle class="pb-seed" style="--i:0" cx="14" cy="24" r="4" />
+                                    <circle class="pb-seed" style="--i:1" cx="27" cy="24" r="4" />
+                                    <circle class="pb-seed" style="--i:2" cx="40" cy="24" r="4" />
+                                    <circle class="pb-seed" style="--i:3" cx="53" cy="24" r="4" />
+                                    <circle class="pb-seed" style="--i:4" cx="66" cy="24" r="4" />
+                                    <circle class="pb-seed" style="--i:5" cx="14" cy="37" r="4" />
+                                    <circle class="pb-seed" style="--i:6" cx="27" cy="37" r="4" />
+                                    <circle class="pb-seed" style="--i:7" cx="40" cy="37" r="4" />
+                                    <circle class="pb-seed" style="--i:8" cx="53" cy="37" r="4" />
+                                    <circle class="pb-seed" style="--i:9" cx="66" cy="37" r="4" />
+                                    <circle class="pb-seed" style="--i:10" cx="14" cy="50" r="4" />
+                                    <circle class="pb-seed" style="--i:11" cx="27" cy="50" r="4" />
+                                    <circle class="pb-seed" style="--i:12" cx="40" cy="50" r="4" />
+                                    <circle class="pb-seed" style="--i:13" cx="53" cy="50" r="4" />
+                                    <circle class="pb-seed" style="--i:14" cx="66" cy="50" r="4" />
+                                    <circle class="pb-seed" style="--i:15" cx="14" cy="63" r="4" />
+                                    <circle class="pb-seed" style="--i:16" cx="27" cy="63" r="4" />
+                                    <circle class="pb-seed" style="--i:17" cx="40" cy="63" r="4" />
+                                    <circle class="pb-seed" style="--i:18" cx="53" cy="63" r="4" />
+                                    <circle class="pb-seed" style="--i:19" cx="66" cy="63" r="4" />
+                                    <circle class="pb-seed" style="--i:20" cx="14" cy="76" r="4" />
+                                    <circle class="pb-seed" style="--i:21" cx="27" cy="76" r="4" />
+                                    <circle class="pb-seed" style="--i:22" cx="40" cy="76" r="4" />
+                                    <circle class="pb-seed" style="--i:23" cx="53" cy="76" r="4" />
+                                    <circle class="pb-seed" style="--i:24" cx="66" cy="76" r="4" />
+                                </g>
+                                <path class="pb-arrow" d="M 88 50 L 110 50" />
+                                <path class="pb-arrow pb-head" d="M 104 44 L 110 50 L 104 56" />
+                                <circle class="pb-join" cx="134" cy="50" r="9" />
+                            </svg>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>I published <b>twenty-five pieces about local places myself</b> before inviting a single person.</li>
+                        <li>Joining stopped being a favour and became an invitation. Asking people to fill an empty account is asking for a favour; asking them to join something already worth watching is not.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="pb-move hue-yellow">
+                <button type="button" class="pb-step">
+                    <span class="pb-no">02</span>
+                    <span class="pb-name">Pay in hobby, not money</span>
+                </button>
+                <div class="tl-details" hidden>
+                    <span class="tl-when">Move 02</span>
+                    <h3 class="tl-role">Pay in hobby, not money</h3>
+                    <p class="tl-org">No budget, and I was not going to pretend there was one.</p>
+                    <div class="tl-extra">
+                        <div class="pb-art">
+                            <svg viewBox="0 0 160 100" aria-hidden="true">
+                                <circle class="pb-ring pb-ring-a" cx="62" cy="50" r="30" />
+                                <circle class="pb-ring pb-ring-b" cx="98" cy="50" r="30" />
+                                <path class="pb-lens" d="M 80 25.9 A 30 30 0 0 1 80 74.1 A 30 30 0 0 1 80 25.9 Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>I looked for <b>people already out shooting at weekends</b>, and invited them to do the same thing together.</li>
+                        <li>The work was the reward, so nobody was waiting to be paid.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="pb-move hue-blue">
+                <button type="button" class="pb-step">
+                    <span class="pb-no">03</span>
+                    <span class="pb-name">Stop being the bottleneck</span>
+                </button>
+                <div class="tl-details" hidden>
+                    <span class="tl-when">Move 03</span>
+                    <h3 class="tl-role">Stop being the bottleneck</h3>
+                    <p class="tl-org">Nine of us, and every decision still came back to me.</p>
+                    <div class="tl-extra">
+                        <div class="pb-art">
+                            <svg viewBox="0 0 160 100" aria-hidden="true">
+                                <path class="pb-lane" style="--i:0" d="M 34 50 C 70 50, 78 22, 118 22" />
+                                <path class="pb-lane" style="--i:1" d="M 34 50 L 118 50" />
+                                <path class="pb-lane" style="--i:2" d="M 34 50 C 70 50, 78 78, 118 78" />
+                                <circle class="pb-hub" cx="24" cy="50" r="10" />
+                                <circle class="pb-node" style="--i:0" cx="128" cy="22" r="7" />
+                                <circle class="pb-node" style="--i:1" cx="128" cy="50" r="7" />
+                                <circle class="pb-node" style="--i:2" cx="128" cy="78" r="7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>We split it into shooting, selecting and publishing, and each part got an owner.</li>
+                        <li><b>This is where I stopped being the photographer and started running it</b>, and gave up the part I actually enjoyed.</li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="pb-move hue-green">
+                <button type="button" class="pb-step">
+                    <span class="pb-no">04</span>
+                    <span class="pb-name">Borrow another audience</span>
+                </button>
+                <div class="tl-details" hidden>
+                    <span class="tl-when">Move 04</span>
+                    <h3 class="tl-role">Borrow someone else&rsquo;s audience</h3>
+                    <p class="tl-org">Growth still depended on me posting, which does not scale.</p>
+                    <div class="tl-extra">
+                        <div class="pb-art">
+                            <svg viewBox="0 0 160 100" aria-hidden="true">
+                                <circle class="pb-pool pb-pool-a" cx="34" cy="50" r="24" />
+                                <circle class="pb-pool pb-pool-b" cx="126" cy="50" r="24" />
+                                <circle class="pb-flow" style="--i:0" cy="50" r="4" />
+                                <circle class="pb-flow" style="--i:1" cy="50" r="4" />
+                                <circle class="pb-flow" style="--i:2" cy="50" r="4" />
+                                <circle class="pb-flow" style="--i:3" cy="50" r="4" />
+                            </svg>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>I ran <b>giveaways with local promoters</b> and opened trips anyone could join.</li>
+                        <li>People arrived for something they wanted to attend, not because I asked. Growth stopped depending on me posting.</li>
+                    </ul>
+                </div>
+            </li>
+
+        </ol>
+    </section>
+    <!-- HASILNYA -->
+    <section id="outcome" class="container hue-green">
+        <div class="section-header reveal">
+            <span>What changed</span>
+            <h2>What the year produced</h2>
+        </div>
+
+        <div class="stat-row reveal">
+            <div class="stat">
+                <div class="num" data-count="10" data-suffix="K+">10K+</div>
+                <div class="label">Followers at handover, from zero</div>
+            </div>
+            <div class="stat">
+                <div class="num" data-count="50" data-suffix="+">50+</div>
+                <div class="label">Contributors organised, with no budget</div>
+            </div>
+            <div class="stat">
+                <div class="num" data-count="25" data-suffix="">25</div>
+                <div class="label">Posts made alone before recruiting</div>
+            </div>
+        </div>
+
+        <div class="case-body reveal" style="margin-top: 2.4rem;">
+            <p><strong>The commercial goal was met.</strong> My mother's catering got the promotion it needed and the orders came in. That was the actual brief, and the community was how I paid for it without money.</p>
+            <p><strong>What it cost:</strong> a year of weekends, and giving up the part I actually enjoyed, which was being the one behind the camera. What it produced was an audience of ten thousand from nothing, around fifty people organised around a shared hobby, and a small family business that got busier.</p>
+        </div>
+    </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <p>&copy; 2026 Na'imullah Aziz. Built in Central Java, Indonesia.</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="work.html">Work</a>
+                <a href="project-instacilacap.html">InstaCilacap</a>
+                <a href="project-vaeleon.html">Vaeleon</a>
+                <a href="music.html">Music</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="cv.html">CV</a>
+                <a href="#" data-deck data-iframe="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?embed">Full deck</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -40,11 +40,27 @@
             </button>
             <div class="nav-links" id="nav-links">
                 <a href="index.html" aria-current="page">Home</a>
-                <a href="work.html">Work</a>
-                <a href="music.html">Music</a>
+
+                <div class="nav-group">
+                    <button type="button" class="nav-parent" aria-expanded="false" aria-controls="nav-work">Work</button>
+                    <div class="nav-menu" id="nav-work" hidden>
+                        <a href="work.html">All work</a>
+                        <a href="project-instacilacap.html">InstaCilacap</a>
+                        <a href="project-vaeleon.html">Vaeleon</a>
+                        <a href="cv.html">CV</a>
+                    </div>
+                </div>
+
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
                 <a href="#" class="nav-accent" data-deck data-iframe="https://www.canva.com/design/DAGU3RvRqQU/Gkyj56FhjJ_AcBzM4mVnHQ/view?embed">Full deck</a>
+
+                <div class="nav-group">
+                    <button type="button" class="nav-parent" aria-expanded="false" aria-controls="nav-creative">Creative</button>
+                    <div class="nav-menu" id="nav-creative" hidden>
+                        <a href="music.html">Music</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -111,7 +127,7 @@
             <li class="hue-blue"><span class="tl-key" aria-hidden="true"></span>Operations &amp; production</li>
         </ul>
 
-        <p class="tl-hint reveal">Nine roles since 2014. Height is reach and responsibility, not headcount: international work sits above local work, and the larger points are the ones where I led people. Colour is the kind of work. Pick any point to read it.</p>
+        <p class="tl-hint reveal">Nine roles since 2014. The line is how the work itself was going, the dashed line is where it went international, and the larger points are where I carried the most responsibility. Colour is the kind of work. Pick any point to read it.</p>
 
         <div class="tl-wrap reveal">
             <div class="tl-track">
@@ -119,11 +135,14 @@
                      di elemennya, dan main.js yang menggambar kurvanya melewati
                      titik-titik itu. Jadi yang diubah cukup data-level.
 
-                     Sumbu tegaknya jangkauan dan tanggung jawab, BUKAN jumlah
-                     orang. Peran global selalu di atas peran lokal. Jumlah orang
-                     ditandai ukuran titik, bukan tingginya. -->
-                <!-- Garis pemisah jangkauan lokal dan global, plus namanya.
-                     Tingginya dihitung main.js dari data-level tiap titik. -->
+                     Sumbu tegaknya KONDISI KARIER menurut Na'im sendiri, bukan
+                     ukuran objektif apa pun. Ukuran titik menandai besarnya
+                     tanggung jawab, bisa karena memimpin orang atau karena
+                     memegang klien dan anggaran besar. -->
+                <!-- Garis pencapaian. Semua peran lokal ada di bawahnya dan semua
+                     peran internasional di atasnya, jadi tingginya HARUS dijaga:
+                     kalau ada data-level lokal yang melewati level internasional
+                     terendah, garis ini kehilangan artinya. -->
                 <span class="tl-band tl-band-hi" aria-hidden="true">International</span>
                 <span class="tl-band tl-band-lo" aria-hidden="true">Local</span>
                 <span class="tl-divider" aria-hidden="true"></span>
@@ -137,23 +156,43 @@
                           vector-effect="non-scaling-stroke" />
                 </svg>
 
-                <div class="tl-item hue-red" data-zone="Local" data-level="42">
+                <div class="tl-item hue-red" data-zone="Local" data-level="20">
                     <button type="button" class="tl-dot is-lead" aria-haspopup="dialog"></button>
                         <span class="tl-year">2014</span>
                     <span class="tl-tag">Founder<br>InstaCilacap</span>
                     <div class="tl-details" hidden>
-                        <span class="tl-when">Jan 2014 &ndash; Jan 2016</span>
+                        <span class="tl-when">2014 &ndash; 2015</span>
                         <h3 class="tl-role">Founder</h3>
                         <p class="tl-org">InstaCilacap &middot; Central Java, Indonesia</p>
-                        <span class="cv-scope">50+ people: 10 core team, 40 contributors</span>
+                        <span class="cv-scope">Around 50 contributors, 9 running it</span>
+                        <!-- Pratinjau foto dan tombolnya disalin main.js ke dalam
+                             jendela pop-up: .tl-extra masuk setelah cv-scope,
+                             .tl-cta paling akhir.
+
+                             Berkasnya versi kecil 420px di folder thumb/, sudah
+                             dipotong bujur sangkar sejak awal. Yang besar tidak
+                             dipakai di sini: gambar di dalam wadah hidden tidak
+                             pernah dimuat sampai disalin ke jendela, jadi kalau
+                             berkasnya besar, bingkainya sempat kosong dulu.
+                             SENGAJA tanpa loading="lazy" karena alasan itu. -->
+                        <div class="tl-extra">
+                            <a class="tl-shots" href="project-instacilacap.html" aria-label="Open the InstaCilacap case study">
+                                <img src="assets/img/instacilacap/thumb/first-uploads.webp" alt="A grid of early InstaCilacap photographs of the coast, roads and daily life around the town" width="420" height="420">
+                                <img src="assets/img/instacilacap/thumb/nusakambangan-kalipat.webp" alt="Members on a beach on Nusakambangan island" width="420" height="420">
+                                <img src="assets/img/instacilacap/thumb/photoride-charity.webp" alt="Cyclists filling a street during the Photo Ride for Charity" width="420" height="420">
+                            </a>
+                        </div>
                         <ul>
-                            <li><b>Founded and led a regional media community of more than 50 people</b>, structured as a core team of ten with forty contributors across media and journalism.</li>
-                            <li>Set editorial direction and coordinated contributions into a consistent publishing rhythm, then handed the platform over to a junior on leaving.</li>
+                            <li><b>Founded and led a regional media community of around 50 contributors</b>, run by a core of nine covering shooting, selection and publishing across media and journalism.</li>
+                            <li>Set editorial direction and coordinated contributions into a consistent publishing rhythm, then handed it to the core team on leaving.</li>
                         </ul>
+                        <div class="tl-cta">
+                            <a class="btn btn-cta" href="project-instacilacap.html">See the journey</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="tl-item hue-green" data-level="47">
+                <div class="tl-item hue-green" data-level="40">
                     <button type="button" class="tl-dot is-lead" aria-haspopup="dialog"></button>
                         <span class="tl-year">2015</span>
                     <span class="tl-tag">IT &amp; Curriculum<br>Vocational school</span>
@@ -170,8 +209,8 @@
                     </div>
                 </div>
 
-                <div class="tl-item hue-yellow" data-level="26">
-                    <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
+                <div class="tl-item hue-yellow" data-level="60">
+                    <button type="button" class="tl-dot is-lead" aria-haspopup="dialog"></button>
                         <span class="tl-year">2021</span>
                     <span class="tl-tag">E-Commerce Manager<br>Maytech</span>
                     <div class="tl-details" hidden>
@@ -187,7 +226,7 @@
                     </div>
                 </div>
 
-                <div class="tl-item hue-navy" data-level="35">
+                <div class="tl-item hue-navy" data-level="48">
                     <button type="button" class="tl-dot is-lead" aria-haspopup="dialog"></button>
                         <span class="tl-year">2022</span>
                     <span class="tl-tag">Manager<br>Vaeleon</span>
@@ -201,10 +240,13 @@
                             <li>Delivered WordPress builds for clients, including theme and plugin setup, hosting and domains.</li>
                             <li>Oversaw brand and graphic work from client brief through to launch.</li>
                         </ul>
+                        <div class="tl-cta">
+                            <a class="btn btn-cta" href="project-vaeleon.html">See the brand system</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="tl-item hue-green" data-level="12">
+                <div class="tl-item hue-green" data-level="5">
                     <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
                         <span class="tl-year">2023</span>
                     <span class="tl-tag">Teacher<br>Primary school</span>
@@ -218,7 +260,7 @@
                     </div>
                 </div>
 
-                <div class="tl-item hue-yellow" data-zone="International" data-level="59">
+                <div class="tl-item hue-yellow" data-zone="International" data-level="68">
                     <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
                         <span class="tl-year">2024</span>
                     <span class="tl-tag">Linguist<br>Alignerr &amp; Outlier</span>
@@ -232,7 +274,7 @@
                     </div>
                 </div>
 
-                <div class="tl-item hue-navy" data-level="55">
+                <div class="tl-item hue-navy" data-level="74">
                     <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
                         <span class="tl-year">2024</span>
                     <span class="tl-tag">Communication<br>Prowibo, UK</span>
@@ -247,7 +289,7 @@
                     </div>
                 </div>
 
-                <div class="tl-item hue-blue" data-level="78">
+                <div class="tl-item hue-blue" data-level="85">
                     <button type="button" class="tl-dot is-lead" aria-haspopup="dialog"></button>
                         <span class="tl-year">2025</span>
                     <span class="tl-tag">Jr. Producer<br>Live Play, US</span>
@@ -263,7 +305,7 @@
                     </div>
                 </div>
 
-                <div class="tl-item hue-blue is-now" data-level="92">
+                <div class="tl-item hue-blue is-now" data-level="95">
                     <button type="button" class="tl-dot" aria-haspopup="dialog"></button>
                         <span class="tl-year">Now</span>
                     <span class="tl-tag">Operations<br>Prowibo, UK</span>
@@ -324,11 +366,11 @@
 
         <div class="stat-row" style="margin-top: 2.4rem;">
             <div class="stat reveal">
-                <div class="num" data-count="13.4" data-suffix="K">13.4K</div>
-                <div class="label">Community grown from zero on InstaCilacap</div>
+                <div class="num" data-count="10" data-suffix="K+">10K+</div>
+                <div class="label">Followers grown from zero at InstaCilacap, before handover</div>
             </div>
             <div class="stat reveal">
-                <div class="num" data-count="7" data-suffix="+">7+</div>
+                <div class="num" data-count="10" data-suffix="+">10+</div>
                 <div class="label">Years across digital and multimedia work</div>
             </div>
             <div class="stat reveal">
@@ -430,6 +472,8 @@
             <div class="footer-links">
                 <a href="index.html">Home</a>
                 <a href="work.html">Work</a>
+                <a href="project-instacilacap.html">InstaCilacap</a>
+                <a href="project-vaeleon.html">Vaeleon</a>
                 <a href="music.html">Music</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>

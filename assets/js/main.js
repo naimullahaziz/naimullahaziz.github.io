@@ -74,11 +74,89 @@ const navLinks = document.getElementById('nav-links');
 navToggle.addEventListener('click', () => {
     const open = navLinks.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', String(open));
+    if (!open) closeNavMenus();
 });
 navLinks.addEventListener('click', (e) => {
     if (e.target.tagName === 'A') {
         navLinks.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
+        closeNavMenus();
+    }
+});
+
+// --- LACI DI NAVBAR ---
+// Satu laci saja yang boleh terbuka. Atribut hidden yang menentukan
+// tampil atau tidak, bukan kelas, supaya isinya tetap tersembunyi dari
+// pembaca layar dan dari urutan Tab selama masih tertutup.
+const navParents = Array.from(document.querySelectorAll('.nav-parent'));
+
+function closeNavMenus(except) {
+    navParents.forEach(btn => {
+        if (btn === except) return;
+        btn.setAttribute('aria-expanded', 'false');
+        const menu = document.getElementById(btn.getAttribute('aria-controls'));
+        if (menu) menu.hidden = true;
+    });
+}
+
+// Laci terbuka begitu kursor mendekat, tanpa menunggu diklik. Hanya pada
+// alat yang benar-benar punya kursor DAN hanya pada tata letak lebar: di
+// layar sempit navbar-nya menumpuk ke bawah, dan pada layar sentuh hover
+// ikut terpicu oleh sentuhan, jadi lacinya akan terbuka sendiri saat
+// orang cuma bermaksud menggulung.
+const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)');
+const wideLayout = window.matchMedia('(min-width: 981px)');
+const canHover = () => hoverCapable.matches && wideLayout.matches;
+
+let hoverTimer;
+
+navParents.forEach(btn => {
+    const menu = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!menu) return;
+    const group = btn.closest('.nav-group');
+
+    const open = () => {
+        closeNavMenus(btn);
+        btn.setAttribute('aria-expanded', 'true');
+        menu.hidden = false;
+    };
+    const shut = () => {
+        btn.setAttribute('aria-expanded', 'false');
+        menu.hidden = true;
+    };
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clearTimeout(hoverTimer);
+        if (btn.getAttribute('aria-expanded') === 'true') shut(); else open();
+    });
+
+    group.addEventListener('mouseenter', () => {
+        if (!canHover()) return;
+        clearTimeout(hoverTimer);
+        open();
+    });
+
+    // Jeda kecil sebelum menutup. Tanpa itu, kursor yang sedang bergerak
+    // dari tombolnya menuju isi lacinya sempat keluar dari .nav-group dan
+    // lacinya tertutup persis saat orang mau memakainya.
+    group.addEventListener('mouseleave', () => {
+        if (!canHover()) return;
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(shut, 160);
+    });
+});
+
+// Klik di luar navbar menutup laci yang sedang terbuka.
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-group')) closeNavMenus();
+});
+
+// Escape menutup laci lebih dulu, sebelum urusan modal.
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (navParents.some(b => b.getAttribute('aria-expanded') === 'true')) {
+        closeNavMenus();
     }
 });
 
@@ -180,8 +258,13 @@ function openGallery(subCardElement) {
     if (!lastFocused) lastFocused = subCardElement;
 
     currentIndex = 0;
-    galleryTitle.innerHTML = subCardElement.querySelector('.sub-title').innerHTML;
-    galleryDesc.innerHTML = subCardElement.querySelector('.sub-desc').innerHTML;
+    // Kartu arsip di halaman studi kasus memakai nama kelas sendiri karena
+    // tampilannya meminjam .release dari halaman music, bukan .sub-card.
+    const titleEl = subCardElement.querySelector(".sub-title, .shot-title");
+    const descEl = subCardElement.querySelector(".sub-desc, .shot-desc");
+    if (!titleEl || !descEl) return;
+    galleryTitle.innerHTML = titleEl.innerHTML;
+    galleryDesc.innerHTML = descEl.innerHTML;
 
     updateGalleryContent();
     modalGallery.style.display = 'flex';
@@ -216,9 +299,12 @@ function updateGalleryContent() {
     galleryCounter.textContent = (currentIndex + 1) + ' / ' + currentImages.length;
 
     const single = currentImages.length < 2;
-    modalGallery.querySelectorAll('.gallery-nav').forEach(btn => {
-        btn.style.display = single ? 'none' : 'flex';
+    modalGallery.querySelectorAll(".gallery-nav").forEach(btn => {
+        btn.style.display = single ? "none" : "flex";
     });
+    // "1 / 1" tidak memberi tahu apa pun, jadi disembunyikan kalau
+    // gambarnya memang cuma satu.
+    galleryCounter.style.display = single ? "none" : "";
 }
 
 modalGallery.addEventListener('click', (e) => {
@@ -287,7 +373,8 @@ document.addEventListener('click', (e) => {
 
 // --- CARD ACTIVATION (mouse + keyboard) ---
 function activate(el) {
-    if (el.classList.contains('card')) return openProject(el);
+    if (el.classList.contains("card")) return openProject(el);
+    if (el.classList.contains("shot")) return openGallery(el);
     if (el.classList.contains('sub-card')) {
         const url = el.getAttribute('data-iframe');
         if (url) return openIframe(url);
@@ -305,7 +392,10 @@ document.addEventListener('click', (e) => {
         openIframe(frameTrigger.dataset.iframe, frameTrigger, frameTrigger.hasAttribute('data-deck'));
         return;
     }
-    const target = e.target.closest('.sub-card, .card[role="button"]');
+    // .shot adalah <button> sungguhan, jadi Enter dan Spasi sudah
+    // menghasilkan click sendiri. Sengaja TIDAK ditambahkan ke penangan
+    // keydown di bawah, kalau tidak pop-upnya terbuka dua kali.
+    const target = e.target.closest(".sub-card, .card[role='button'], .shot");
     if (target) activate(target);
 });
 
@@ -423,14 +513,36 @@ if (modalTimeline) {
         const d = item.querySelector('.tl-details');
         if (!d) return;
 
-        lastFocused = item.querySelector('.tl-dot');
+        // Grafik karier dipicu dari titiknya, langkah di studi kasus dari
+        // tombolnya sendiri. Fokus dikembalikan ke mana pun asalnya.
+        lastFocused = item.querySelector('.tl-dot') || item.querySelector('.pb-step') || item;
         tlWhen.textContent = d.querySelector('.tl-when').textContent;
         tlRole.innerHTML = d.querySelector('.tl-role').innerHTML;
         tlOrg.innerHTML = d.querySelector('.tl-org').innerHTML;
-
+        // Empat bagian opsional, urutannya tetap: keterangan cakupan,
+        // lalu .tl-extra (diagram di studi kasus, pratinjau foto di
+        // beranda), lalu butirannya, lalu .tl-cta untuk tombolnya.
+        // Urutan di sini yang menentukan tampilan jendela, bukan urutan
+        // di HTML-nya, jadi jangan disusun ulang tanpa alasan.
         const scope = d.querySelector('.cv-scope');
+        const extra = d.querySelector('.tl-extra');
         const list = d.querySelector('ul');
-        tlBody.innerHTML = (scope ? scope.outerHTML : '') + (list ? list.outerHTML : '');
+        const cta = d.querySelector('.tl-cta');
+        tlBody.innerHTML = (scope ? scope.outerHTML : '') +
+            (extra ? extra.outerHTML : '') +
+            (list ? list.outerHTML : '') +
+            (cta ? cta.outerHTML : '');
+        // Warna langkahnya ikut dibawa masuk. Tanpa ini keempat diagram
+        // tampil biru semua, karena jendela ini berada di luar section-nya
+        // dan mewarisi aksen bawaan dari :root. Hanya untuk langkah studi
+        // kasus, supaya jendela grafik karier tidak ikut berubah.
+        const isStep = !!item.querySelector('.pb-step');
+        tlBody.className = isStep ? (item.className.match(/hue-[a-z]+/) || [''])[0] : '';
+        // Animasi diagramnya baru jalan setelah masuk jendela ini, dan
+        // menghitung ulang tata letak di sini yang membuatnya benar-benar
+        // diputar ulang setiap kali jendelanya dibuka.
+        void tlBody.offsetWidth;
+        tlBody.classList.add(reduceMotion ? 'pb-still' : 'pb-play');
 
         modalTimeline.style.display = 'flex';
         modalTimeline.setAttribute('aria-hidden', 'false');
@@ -452,8 +564,8 @@ if (modalTimeline) {
 
     // Label di sebelah titik ikut bisa diklik, sasarannya jadi lebih lega.
     document.addEventListener('click', (e) => {
-        const trigger = e.target.closest('.tl-dot, .tl-tag');
-        if (trigger) window.openTimeline(trigger.closest('.tl-item'));
+        const trigger = e.target.closest('.tl-dot, .tl-tag, .pb-step');
+        if (trigger) window.openTimeline(trigger.closest('.tl-item, .pb-move'));
     });
 }
 
@@ -483,11 +595,19 @@ if (modalTimeline) {
 
     const VB_W = 1200;
     const VB_H = 420;
-    // Tepi kiri disisakan lebar untuk nama sumbu Local dan International,
-    // kalau tidak, namanya bertabrakan dengan titik pertama.
-    const X0 = 155, X1 = 1110;
+    // Tepi kiri dan kanan plot. Di beranda tepi kirinya sengaja lebar untuk
+    // nama sumbu Local dan International; halaman lain yang tidak punya nama
+    // sumbu bisa memepetkannya lewat data-x0 dan data-x1 pada .tl-track.
+    const X0 = Number(track.dataset.x0) || 155;
+    const X1 = Number(track.dataset.x1) || 1110;
     const Y_TOP = 95, Y_BOTTOM = 325;  // level 100 dan level 0
     const EDGE = 4;                // jarak label dari tepi atas atau bawah
+    // data-labels="near" menempelkan label ke titiknya dan mematikan garis
+    // penyambung. Hanya aman kalau titiknya sedikit dan berjauhan; di beranda
+    // yang sembilan titik, label begini bisa mendarat sama tinggi dan saling
+    // menimpa, jadi di sana labelnya tetap dikunci ke pita.
+    const nearLabels = track.dataset.labels === "near";
+    const NEAR_GAP = 20;           // jarak label ke titiknya, mode near
 
     const levels = items.map(it => Number(it.dataset.level) || 0);
     const pts = levels.map((lv, i) => ({
@@ -506,9 +626,16 @@ if (modalTimeline) {
             const p2 = p[i + 1];
             const p3 = p[i + 2] || p2;
             const c1x = p1.x + (p2.x - p0.x) * T;
-            const c1y = p1.y + (p2.y - p0.y) * T;
             const c2x = p2.x - (p3.x - p1.x) * T;
-            const c2y = p2.y - (p3.y - p1.y) * T;
+            // Titik kendali ditahan di antara kedua ujung ruasnya, supaya
+            // kurvanya tidak pernah melewati nilai datanya. Tanpa ini, dua
+            // titik yang sama tinggi bisa menghasilkan gelembung ke atas,
+            // dan grafiknya jadi menunjukkan angka yang tidak pernah ada.
+            const lo = Math.min(p1.y, p2.y);
+            const hi = Math.max(p1.y, p2.y);
+            const hold = v => Math.max(lo, Math.min(hi, v));
+            const c1y = hold(p1.y + (p2.y - p0.y) * T);
+            const c2y = hold(p2.y - (p3.y - p1.y) * T);
             d += ' C ' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) +
                  ', ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) +
                  ', ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1);
@@ -518,14 +645,16 @@ if (modalTimeline) {
 
     route.setAttribute('d', smooth(pts));
     track.style.setProperty('--len', Math.ceil(route.getTotalLength()));
-
-    // Pemisah lokal dan global ditaruh di tengah celah antara peran lokal
-    // tertinggi dan peran global terendah, jadi ikut kalau datanya diubah.
-    const cross = items.findIndex((it, i) => i > 0 && it.hasAttribute('data-zone'));
+    // Garis pencapaian ditaruh di tengah celah antara peran lokal
+    // tertinggi dan peran internasional terendah, jadi tingginya ikut
+    // data. Kalau nanti ada level lokal yang melewati level
+    // internasional terendah, celah itu hilang dan garisnya tidak lagi
+    // memisahkan apa pun.
+    const cross = items.findIndex((it, i) => i > 0 && it.hasAttribute("data-zone"));
     if (cross > 0) {
         const topLocal = Math.min.apply(null, pts.slice(0, cross).map(p => p.y));
-        const lowGlobal = Math.max.apply(null, pts.slice(cross).map(p => p.y));
-        track.style.setProperty('--divide', ((topLocal + lowGlobal) / 2 / VB_H * 100).toFixed(2) + '%');
+        const lowIntl = Math.max.apply(null, pts.slice(cross).map(p => p.y));
+        track.style.setProperty("--divide", ((topLocal + lowIntl) / 2 / VB_H * 100).toFixed(2) + "%");
     }
 
     // Tombolnya tanpa teks, jadi namanya diambil dari keterangannya.
@@ -564,6 +693,14 @@ if (modalTimeline) {
             if (!tag) return;
             const h = tag.offsetHeight;
             const dotY = pts[i].y / VB_H * trackH;
+
+            if (nearLabels) {
+                it.style.setProperty("--label-dy",
+                    ((i % 2 === 0) ? -(h + NEAR_GAP) : NEAR_GAP) + "px");
+                it.style.setProperty("--connector", "0px");
+                return;
+            }
+
             const dy = (i % 2 === 0) ? EDGE - dotY : trackH - h - EDGE - dotY;
             it.style.setProperty('--label-dy', Math.round(dy) + 'px');
             it.style.setProperty('--connector',
@@ -578,5 +715,39 @@ if (modalTimeline) {
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(place, 120);
+    });
+})();
+
+
+// --- LOMPATAN KE #anchor ---
+// Lompatan bawaan browser ke fragmen URL tidak selalu terjadi di sini,
+// jadi diulang sekali sesudah load.
+//
+// behavior 'auto' itu WAJIB, bukan pilihan gaya. html punya
+// scroll-behavior: smooth, dan gulungan mulus bisa dipotong gulungan
+// berikutnya. Versi pertama fungsi ini memanggil scrollIntoView empat
+// kali berturut-turut untuk mengejar pergeseran tata letak yang ternyata
+// tidak ada: keempatnya saling memotong dan halaman mendarat di tempat
+// acak, terukur 292px terlalu rendah sekali jalan dan 108px terlalu
+// tinggi di jalan berikutnya. Satu lompatan tegas sudah cukup.
+//
+// Jaraknya dari navbar diatur scroll-margin-top pada section, jadi di
+// sini tidak ada angka yang perlu disamakan dengan tinggi navbar.
+(function () {
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    // Kalau pembacanya sudah menggulung sendiri selama halaman dimuat,
+    // posisinya jangan direbut.
+    let userMoved = false;
+    ['wheel', 'touchstart', 'keydown'].forEach(evt => {
+        window.addEventListener(evt, () => { userMoved = true; }, { passive: true, once: true });
+    });
+
+    window.addEventListener('load', () => {
+        if (userMoved) return;
+        target.scrollIntoView({ behavior: 'auto', block: 'start' });
     });
 })();
