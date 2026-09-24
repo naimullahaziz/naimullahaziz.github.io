@@ -343,20 +343,23 @@
             display: grid;
             place-items: center;
             opacity: 0;
-            animation: rotateWord 15s infinite;
+            animation: rotateWord 9s infinite;
         }
+        /* Tiga kata, sama dengan tiga pintu "What I do" dan warnanya:
+           Operations biru, Visual kuning (varian gelap supaya terbaca di
+           atas putih), Multimedia hijau. Satu kata tampil 3 detik; kalau
+           jumlah katanya berubah, durasi animasi dan persen di rotateWord
+           harus ikut dihitung ulang. */
         .orbit-core .rotator span:nth-child(1) { color: var(--c-blue);   animation-delay: 0s; }
-        .orbit-core .rotator span:nth-child(2) { color: var(--c-navy);   animation-delay: 3s; }
+        .orbit-core .rotator span:nth-child(2) { color: var(--c-yellow); animation-delay: 3s; }
         .orbit-core .rotator span:nth-child(3) { color: var(--c-green);  animation-delay: 6s; }
-        .orbit-core .rotator span:nth-child(4) { color: var(--c-yellow); animation-delay: 9s; }
-        .orbit-core .rotator span:nth-child(5) { color: var(--c-red);    animation-delay: 12s; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes rotateWord {
             0%    { opacity: 0; transform: translateY(6px); }
-            3%    { opacity: 1; transform: translateY(0); }
-            18%   { opacity: 1; transform: translateY(0); }
-            21%   { opacity: 0; transform: translateY(-6px); }
+            5%    { opacity: 1; transform: translateY(0); }
+            30%   { opacity: 1; transform: translateY(0); }
+            35%   { opacity: 0; transform: translateY(-6px); }
             100%  { opacity: 0; transform: translateY(-6px); }
         }
 
@@ -3551,3 +3554,27 @@
            seukuran teksnya, dan setiap angka menampilkan ketiga birunya
            penuh, sependek atau sepanjang apa pun. */
         .meta-float .meta-value { align-self: flex-start; }
+
+        /* Tombol laci (Work, Creative) harus setinggi dan sebaris dengan
+           pil tautan lain. Tautan navbar itu inline, sedangkan tombol
+           berperilaku seperti inline-block, jadi dengan perataan garis dasar
+           bawaan pil tombolnya 36px (tautan 30px) dan navbarnya ikut
+           terdorong 13px lebih tinggi. Diukur di 1024px.
+
+           Percobaan pertama memakai margin negatif; pilnya jadi sama tinggi
+           tapi teks tombolnya bergeser 9px ke atas. Yang dipakai sekarang:
+           navbar dijadikan flex dan semua butirnya dirata-tengahkan secara
+           tegak, dan line-height tombol 1.2 supaya pilnya 30px seperti
+           tautan. Hanya di layar lebar; di menu hamburger semua butirnya
+           sudah sama tinggi (55px) dan menurun. */
+        @media (min-width: 981px) {
+            .nav-links {
+                display: flex;
+                align-items: center;
+            }
+            /* Sebagai butir flex, tautan ikut dihitung padding-nya, jadi
+               tautan dan tombol sama-sama diberi line-height 1.2 supaya
+               pilnya sama-sama 30px. */
+            .nav-links > a,
+            .nav-parent { line-height: 1.2; }
+        }
