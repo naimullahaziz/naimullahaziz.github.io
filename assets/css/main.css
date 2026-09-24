@@ -3702,3 +3702,10 @@
             .work-grid { grid-template-columns: 1fr; }
             .door-chip { font-size: 0.82rem; padding: 0.6rem 0.95rem; }
         }
+
+        /* Kartu pekerjaan tanpa pop-up (misalnya saat karyanya sedang
+           disusun ulang): tidak ada kursor tangan dan tidak ada efek angkat,
+           supaya tidak menjanjikan klik yang tidak membuka apa pun. */
+        .work-card.is-static { cursor: default; }
+        .work-card.is-static:hover { transform: none; }
+        .work-card.is-static .img-container::after { display: none; }
