@@ -3578,3 +3578,127 @@
             .nav-links > a,
             .nav-parent { line-height: 1.2; }
         }
+
+        /* =========================================================
+           HALAMAN WORK: SARINGAN TIGA PINTU (work.html)
+
+           Satu kartu satu pekerjaan. Tiga pintu beranda jadi saringan:
+           satu kartu boleh punya beberapa pintu, jadi tidak ada pekerjaan
+           yang dipaksa masuk satu laci.
+
+           Titik pintu hanya menyala atau padam. Jangan dijadikan batang
+           atau persentase: porsi tiap bidang tidak pernah diukur.
+           ========================================================= */
+        :root {
+            --door-ops: #0062CC;
+            --door-visual: #B88300;   /* ambar, bukan kuning menyala: harus terbaca sebagai titik kecil */
+            --door-media: #027A48;
+        }
+
+        /* Kepala halaman diberi ruang bawah tambahan supaya kartu melayang
+           yang menumpang di tepinya tidak menabrak paragrafnya. */
+        .page-head.page-head-float { padding-bottom: 6.4rem; }
+        @media (max-width: 860px) {
+            .page-head.page-head-float { padding-bottom: 4.4rem; }
+        }
+
+        .door-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 0 0 0.9rem;
+        }
+        .door-chip {
+            appearance: none;
+            -webkit-appearance: none;
+            font: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            line-height: 1.2;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.7rem 1.15rem;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 98, 204, 0.18);
+            background: var(--surface-color);
+            color: #0B2A5B;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .door-chip i {
+            width: 9px; height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .chip-ops i    { background: var(--door-ops); }
+        .chip-visual i { background: var(--door-visual); }
+        .chip-media i  { background: var(--door-media); }
+        .door-chip:hover { transform: translateY(-2px); border-color: rgba(0, 98, 204, 0.4); }
+        .door-chip:focus-visible { outline: 2px solid var(--c-blue); outline-offset: 3px; }
+        /* Tombol yang sedang dipilih diisi warna pintunya. */
+        .door-chip[aria-pressed="true"] { background: #0B2A5B; border-color: #0B2A5B; color: #FFFFFF; }
+        .chip-ops[aria-pressed="true"]    { background: var(--door-ops);    border-color: var(--door-ops); }
+        .chip-visual[aria-pressed="true"] { background: var(--door-visual); border-color: var(--door-visual); }
+        .chip-media[aria-pressed="true"]  { background: var(--door-media);  border-color: var(--door-media); }
+        .door-chip[aria-pressed="true"] i { background: #FFFFFF; }
+
+        .door-count {
+            font-size: 0.86rem;
+            color: #4B5B78;
+            margin: 0 0 1.8rem;
+            min-height: 1.2em;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.6rem;
+        }
+        .work-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+        .work-card[hidden] { display: none; }
+        .work-card .img-container { height: auto; aspect-ratio: 16 / 10; }
+        .work-card h3 { font-size: 1.25rem; margin-bottom: 0.7rem; }
+        .work-card .card-desc p { font-size: 0.94rem; }
+
+        /* Titik pintu di tiap kartu. Yang padam tetap terlihat sebagai
+           lingkaran tipis, supaya jelas ada tiga kemungkinan dan kartu
+           ini memakai sebagian di antaranya. */
+        .doors { display: inline-flex; gap: 0.4rem; margin-bottom: 0.9rem; }
+        .doors i {
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 1.5px rgba(11, 42, 91, 0.22);
+        }
+        .doors .d-ops.on    { background: var(--door-ops);    box-shadow: none; }
+        .doors .d-visual.on { background: var(--door-visual); box-shadow: none; }
+        .doors .d-media.on  { background: var(--door-media);  box-shadow: none; }
+
+        .case-badge {
+            display: inline-block;
+            margin: 0 0 0.6rem 0.7rem;
+            vertical-align: top;
+            font-size: 0.66rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #0062CC;
+            background: rgba(0, 98, 204, 0.08);
+            padding: 0.25rem 0.55rem;
+            border-radius: 999px;
+        }
+
+        /* Muncul halus saat saringan berganti. */
+        .work-card.is-filtered-in { animation: workIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        @keyframes workIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .work-card.is-filtered-in { animation: none; }
+            .door-chip:hover { transform: none; }
+        }
+        @media (max-width: 620px) {
+            .work-grid { grid-template-columns: 1fr; }
+            .door-chip { font-size: 0.82rem; padding: 0.6rem 0.95rem; }
+        }

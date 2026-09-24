@@ -44,9 +44,7 @@
                 <div class="nav-group">
                     <button type="button" class="nav-parent is-current" aria-expanded="false" aria-controls="nav-work">Work</button>
                     <div class="nav-menu" id="nav-work" hidden>
-                        <a href="work.html" aria-current="page">All work</a>
-                        <a href="project-instacilacap.html">InstaCilacap</a>
-                        <a href="project-vaeleon.html">Vaeleon</a>
+                        <a href="work.html" aria-current="page">By role</a>
                         <a href="cv.html">CV</a>
                     </div>
                 </div>
@@ -64,62 +62,79 @@
             </div>
         </div>
     </nav>
-    <header class="page-head hue-blue">
+    <header class="page-head page-head-float hue-blue">
         <div class="head-glow" aria-hidden="true"></div>
         <div class="container">
             <span class="eyebrow">Selected work</span>
-            <h1>Operations, campaigns<br>and production.</h1>
-            <p>Roles across an international NGO, a live production studio, e-commerce and freelance clients, plus the campaigns and films I make on my own. Click any card to open its projects.</p>
+            <h1>One job,<br>three kinds of work.</h1>
+            <p>Almost everything I have done has needed digital operations, visual communication and multimedia at the same time. Each role below is one card; the dots show which of the three it drew on. Filter by any of them, or open a card to see the work inside.</p>
         </div>
     </header>
-    <main id="main">
-    <!-- STUDI KASUS -->
-    <section id="case" class="container">
-        <div class="section-header reveal">
-            <span>Case study</span>
-            <h2>A brand system, documented</h2>
-        </div>
 
-        <div class="home-cards">
-            <a class="home-card case-link hue-blue reveal" href="project-vaeleon.html" style="grid-column: 1 / -1;">
-                <span class="case-strip" aria-hidden="true">
-                    <img src="assets/img/vaeleon-band.jpg" alt="" width="1600" height="246" loading="lazy" decoding="async">
-                </span>
-                <span class="case-link-body">
-                    <span class="badge">Brand system</span>
-                    <h3>Vaeleon Project</h3>
-                    <p>Nine pages covering the logo lockup, a four-colour palette with a navy-derived neutral scale, binding contrast rules, and a fixed 60-30-10 distribution across print and digital.</p>
-                    <span class="go">Read the case study <span class="arrow" aria-hidden="true">&#8594;</span></span>
-                </span>
-            </a>
+    <main id="main">
+
+    <!-- SEKILAS: kartu melayang, aturan yang sama dengan halaman lain. -->
+    <section id="glance" class="container">
+        <div class="meta-grid meta-float meta-float-3 reveal">
+            <div class="meta-item">
+                <span class="meta-label">Roles</span>
+                <span class="meta-value">7</span>
+                <span class="meta-note">places and engagements since 2014</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Areas</span>
+                <span class="meta-value">3</span>
+                <span class="meta-note">operations, visual communication, multimedia</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Case studies</span>
+                <span class="meta-value">2</span>
+                <span class="meta-note">with the full story behind the work</span>
+            </div>
         </div>
     </section>
 
-    <!-- SECTION 1: PROFESSIONAL WORK & WEB MANAGEMENT -->
-    <section id="work" class="container">
-        <div class="section-header reveal">
-            <span>Operations, Comms &amp; Web</span>
-            <h2>Professional Experience</h2>
-        </div>
+    <!-- KARYA
+         Satu kartu satu pekerjaan, bukan satu karya. Tiga pintu dari
+         beranda jadi SARINGAN, bukan laci: hampir semua pekerjaan memakai
+         lebih dari satu, jadi satu kartu boleh punya beberapa pintu.
 
-        <div class="bento-grid large">
-            <!-- MAIN CARD: Prowibo Operations & Comms -->
-            <div class="card visual-card tall reveal" role="button" tabindex="0" aria-haspopup="dialog">
+         data-doors menentukan saringan dan titik warnanya:
+           ops    = Digital Operations    (biru)
+           visual = Visual Communication  (kuning)
+           media  = Multimedia            (hijau)
+         Titik hanya menyala atau padam. JANGAN diubah jadi batang atau
+         persentase: porsi tiap bidang tidak pernah diukur.
+
+         Kartu yang sudah punya halaman studi kasus berupa tautan <a>;
+         sisanya membuka pop-up daftar karyanya lewat .hidden-details.
+         Urutannya dari yang paling baru selesai; freelance di akhir
+         karena berjalan sepanjang karier. -->
+    <section id="roles" class="container">
+        <div class="door-filter reveal" role="group" aria-label="Filter the work by area">
+            <button type="button" class="door-chip" data-door-filter="all" aria-pressed="true">All work</button>
+            <button type="button" class="door-chip chip-ops" data-door-filter="ops" aria-pressed="false"><i aria-hidden="true"></i>Digital Operations</button>
+            <button type="button" class="door-chip chip-visual" data-door-filter="visual" aria-pressed="false"><i aria-hidden="true"></i>Visual Communication</button>
+            <button type="button" class="door-chip chip-media" data-door-filter="media" aria-pressed="false"><i aria-hidden="true"></i>Multimedia</button>
+        </div>
+        <p class="door-count" aria-live="polite"></p>
+
+        <div class="work-grid">
+
+            <!-- Prowibo -->
+            <div class="card visual-card work-card reveal" data-doors="ops visual" role="button" tabindex="0" aria-haspopup="dialog">
                 <div class="img-container">
                     <img src="assets/img/work/prowibo-annual.webp" alt="Annual report spread designed for Professors Without Borders" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
+                    <div class="gallery-indicator">Open the work</div>
                 </div>
                 <div class="content">
-                    <span class="badge">Operations &amp; Visual Comms</span>
-                    <h3 class="card-title">Professors Without Borders (Prowibo)</h3>
+                    <span class="doors" aria-label="Digital Operations and Visual Communication"><i class="d-ops on"></i><i class="d-visual on"></i><i class="d-media"></i></span>
+                    <h3 class="card-title">Professors Without Borders</h3>
                     <div class="card-desc">
-                        <p><span class="role-period">Oct 2025 &ndash; Present</span><strong>Operations Assistant</strong><br>End-to-end digital operations and visual communications. Designing Annual Reports and One-Pagers, managing organizational documents, setting up Monday.com automations, and producing LinkedIn and social media content to the direction set by the CEO.</p>
+                        <p><span class="role-period">Dec 2024 &ndash; Present</span><strong>Communication Assistant, then Operations Assistant</strong><br>Working to the CEO's direction in an international NGO: annual reports and one-pagers, Monday.com automations, LinkedIn content, and the campaign for its Global Poetry Showcase.</p>
                     </div>
                 </div>
-
-                <!-- HIDDEN SUB-PROJECTS FOR PROWIBO -->
                 <div class="hidden-details">
-
                     <div class="sub-card" role="button" tabindex="0" data-iframe="https://www.canva.com/design/DAGyDAiIg2k/X76gJWvzY64e9pefuEFtXg/view?embed">
                         <div class="sub-card-img">
                             <img src="assets/img/work/prowibo-annual1.webp" alt="Cover of the Prowibo annual report" loading="lazy" decoding="async" onerror="this.style.display='none'">
@@ -127,10 +142,9 @@
                         </div>
                         <div class="sub-card-content">
                             <h4 class="sub-title">Annual Report Design</h4>
-                            <p class="sub-desc">Visual layout and infographics for global organizational annual reports.</p>
+                            <p class="sub-desc">Visual layout and infographics for the organisation's annual report.</p>
                         </div>
                     </div>
-
                     <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/prowibo-onepager1.webp,assets/img/work/prowibo-onepager2.webp">
                         <div class="sub-card-img">
                             <img src="assets/img/work/prowibo-onepager1.webp" alt="One-page executive document layout" loading="lazy" decoding="async" onerror="this.style.display='none'">
@@ -138,10 +152,9 @@
                         </div>
                         <div class="sub-card-content">
                             <h4 class="sub-title">One-Pager Documents</h4>
-                            <p class="sub-desc">Designing one-page executive documents for presentations and partnerships.</p>
+                            <p class="sub-desc">One-page documents for presentations and partnerships.</p>
                         </div>
                     </div>
-
                     <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/prowibo-monday1.webp,assets/img/work/prowibo-monday2.webp">
                         <div class="sub-card-img">
                             <img src="assets/img/work/prowibo-monday1.webp" alt="Monday.com board configured for team workflows" loading="lazy" decoding="async" onerror="this.style.display='none'">
@@ -149,10 +162,9 @@
                         </div>
                         <div class="sub-card-content">
                             <h4 class="sub-title">Monday.com Automation</h4>
-                            <p class="sub-desc">Building workflows and automations for international team task management.</p>
+                            <p class="sub-desc">Workflows and automations for an internationally distributed team.</p>
                         </div>
                     </div>
-
                     <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/prowibo-linkedin1.webp,assets/img/work/prowibo-linkedin2.webp">
                         <div class="sub-card-img">
                             <img src="assets/img/work/prowibo-linkedin1.webp" alt="LinkedIn post visuals designed for Prowibo" loading="lazy" decoding="async" onerror="this.style.display='none'">
@@ -160,26 +172,35 @@
                         </div>
                         <div class="sub-card-content">
                             <h4 class="sub-title">LinkedIn Content</h4>
-                            <p class="sub-desc">Working directly under the CEO and turning their direction into content calendars, copywriting and visual assets for Prowibo's LinkedIn.</p>
+                            <p class="sub-desc">Turning the CEO's direction into content calendars, copywriting and visual assets for Prowibo's LinkedIn.</p>
+                        </div>
+                    </div>
+                    <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/prowibo-poetry1.webp,assets/img/work/prowibo-poetry2.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/prowibo-poetry1.webp" alt="Poetry showcase poster and brochure designs" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Global Poetry Showcase 2025</h4>
+                            <p class="sub-desc">Posters, digital brochures and Instagram feed for the event campaign.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Card: Live Play Mobile -->
-            <div class="card visual-card tall reveal" role="button" tabindex="0" aria-haspopup="dialog">
+            <!-- Live Play Mobile -->
+            <div class="card visual-card work-card reveal" data-doors="ops media" role="button" tabindex="0" aria-haspopup="dialog">
                 <div class="img-container">
-                    <img src="assets/img/work/live-01.webp" alt="Live bingo show production set" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
+                    <img src="assets/img/work/live-01.webp" alt="Live show production set" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">Open the work</div>
                 </div>
                 <div class="content">
-                    <span class="badge">Production</span>
-                    <h3 class="card-title">Live Play Mobile Inc.</h3>
+                    <span class="doors" aria-label="Digital Operations and Multimedia"><i class="d-ops on"></i><i class="d-visual"></i><i class="d-media on"></i></span>
+                    <h3 class="card-title">Live Play Mobile</h3>
                     <div class="card-desc">
-                        <p><span class="role-period">Jul 2025 &ndash; Oct 2025</span><strong>Jr. Producer</strong><br>Managed the production of live host-led bingo shows. Guided hosts, prepared scripts, and monitored real-time technical operations to keep each broadcast running smoothly.</p>
+                        <p><span class="role-period">Jul 2025 &ndash; Oct 2025</span><strong>Jr. Producer</strong><br>Produced live host-led shows under senior oversight: prepared scripts, briefed and directed hosts, and ran the technical side of each broadcast in real time.</p>
                     </div>
                 </div>
-
                 <div class="hidden-details">
                     <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/live-01.webp,assets/img/work/live-02.webp">
                         <div class="sub-card-img">
@@ -188,28 +209,78 @@
                         </div>
                         <div class="sub-card-content">
                             <h4 class="sub-title">Live Show Production</h4>
-                            <p class="sub-desc">Directing hosts in real-time and ensuring smooth technical broadcasts.</p>
+                            <p class="sub-desc">Directing hosts in real time and keeping each broadcast technically smooth.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="bento-grid" style="margin-top: 2.5rem;">
-            <!-- Card: Maytech -->
-            <div class="card visual-card reveal" role="button" tabindex="0" aria-haspopup="dialog">
+            <!-- Primary school -->
+            <div class="card visual-card work-card reveal" data-doors="visual media" role="button" tabindex="0" aria-haspopup="dialog">
                 <div class="img-container">
-                    <img src="assets/img/work/maytech-01.webp" alt="Product listing layout for a school procurement storefront" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
+                    <img src="assets/img/work/client-01.webp" alt="Campaign visuals made for a primary school" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">Open the work</div>
                 </div>
                 <div class="content">
-                    <span class="badge">E-Commerce</span>
-                    <h3 class="card-title">Maytech Digital Provider</h3>
+                    <span class="doors" aria-label="Visual Communication and Multimedia"><i class="d-ops"></i><i class="d-visual on"></i><i class="d-media on"></i></span>
+                    <h3 class="card-title">Primary school</h3>
                     <div class="card-desc">
-                        <p><span class="role-period">Jan 2021 &ndash; Jul 2022</span><strong>E-Commerce Manager</strong><br>Ran the online store supplying IT equipment to schools through SIPLah, Indonesia's government procurement platform. Managed listings, pricing, product photography and store presentation, plus the company website, hosting and buyer communication.</p>
+                        <p><span class="role-period">Jul 2023 &ndash; Jul 2024</span><strong>Elementary School Teacher</strong><br>Alongside teaching, the school's Let's Move campaign and new student admissions visuals, and a documentary of its Independence Day and scouting events.</p>
                     </div>
                 </div>
+                <div class="hidden-details">
+                    <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/client-01.webp,assets/img/work/client-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/work/client-01.webp" alt="Let's Move campaign visual identity" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Let's Move &amp; Admissions Campaign</h4>
+                            <p class="sub-desc">Visual feed branding for the school's campaign and new student admissions.</p>
+                        </div>
+                    </div>
+                    <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/creative/doc-01.webp,assets/img/creative/doc-02.webp">
+                        <div class="sub-card-img">
+                            <img src="assets/img/creative/doc-01.webp" alt="Independence Day documentary stills" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                            <div class="sub-gallery-indicator">View gallery</div>
+                        </div>
+                        <div class="sub-card-content">
+                            <h4 class="sub-title">Event Documentary</h4>
+                            <p class="sub-desc">Filming and editing for the Independence Day and school scouting events.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Vaeleon: sudah punya halaman studi kasus -->
+            <a class="card visual-card work-card is-case reveal" data-doors="visual" href="project-vaeleon.html">
+                <div class="img-container">
+                    <img src="assets/img/vaeleon-cover.jpg" alt="Cover of the Vaeleon brand guidelines" loading="lazy" decoding="async">
+                    <div class="gallery-indicator">Read the case study</div>
+                </div>
+                <div class="content">
+                    <span class="doors" aria-label="Visual Communication"><i class="d-ops"></i><i class="d-visual on"></i><i class="d-media"></i></span>
+                    <span class="case-badge">Case study</span>
+                    <h3 class="card-title">Vaeleon</h3>
+                    <div class="card-desc">
+                        <p><span class="role-period">Dec 2022 &ndash; Jan 2024</span><strong>Manager</strong><br>Led a team of five on web and design projects, reporting to the CEO. The case study is the practice's nine-page brand system: logo, palette, contrast rules and colour proportions.</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Maytech -->
+            <div class="card visual-card work-card reveal" data-doors="ops visual" role="button" tabindex="0" aria-haspopup="dialog">
+                <div class="img-container">
+                    <img src="assets/img/work/maytech-01.webp" alt="Product listing layout for a school procurement storefront" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">Open the work</div>
+                </div>
+                <div class="content">
+                    <span class="doors" aria-label="Digital Operations and Visual Communication"><i class="d-ops on"></i><i class="d-visual on"></i><i class="d-media"></i></span>
+                    <h3 class="card-title">Maytech Digital Provider</h3>
+                    <div class="card-desc">
+                        <p><span class="role-period">Jan 2021 &ndash; Jul 2022</span><strong>E-Commerce Manager</strong><br>Ran the online store supplying IT equipment to schools through SIPLah, Indonesia's government procurement platform: listings, pricing, product photography, store presentation, the company website and buyer communication.</p>
+                    </div>
+                </div>
                 <div class="hidden-details">
                     <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/maytech-01.webp,assets/img/work/maytech-02.webp">
                         <div class="sub-card-img">
@@ -218,26 +289,41 @@
                         </div>
                         <div class="sub-card-content">
                             <h4 class="sub-title">SIPLah Storefront</h4>
-                            <p class="sub-desc">Product listing management for school digital procurement platforms.</p>
+                            <p class="sub-desc">Product listings and presentation for a school procurement storefront.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Card: Web Freelance -->
-            <div class="card visual-card reveal" role="button" tabindex="0" aria-haspopup="dialog">
+            <!-- InstaCilacap: sudah punya halaman studi kasus -->
+            <a class="card visual-card work-card is-case reveal" data-doors="ops visual media" href="project-instacilacap.html">
                 <div class="img-container">
-                    <img src="assets/img/work/web-01.webp" alt="WordPress site build and hosting dashboard" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
+                    <img src="assets/img/instacilacap/first-uploads.webp" alt="A grid of early InstaCilacap photographs of the coast, roads and daily life around the town" loading="lazy" decoding="async">
+                    <div class="gallery-indicator">Read the case study</div>
                 </div>
                 <div class="content">
-                    <span class="badge">Web Management</span>
-                    <h3 class="card-title">Freelance Web Specialist</h3>
+                    <span class="doors" aria-label="Digital Operations, Visual Communication and Multimedia"><i class="d-ops on"></i><i class="d-visual on"></i><i class="d-media on"></i></span>
+                    <span class="case-badge">Case study</span>
+                    <h3 class="card-title">InstaCilacap</h3>
                     <div class="card-desc">
-                        <p><span class="role-period">Dec 2022 &ndash; Jan 2024</span><strong>WordPress &amp; Database</strong><br>Built and managed WordPress sites for local clients, configured cPanel and hosting, and used PHP and SQL to solve the technical problems behind them.</p>
+                        <p><span class="role-period">2014 &ndash; 2015</span><strong>Founder</strong><br>A regional photography and travel community, grown from an empty account to around fifty contributors and just over 10K followers, then handed to the core team.</p>
                     </div>
                 </div>
+            </a>
 
+            <!-- Freelance: berjalan sepanjang karier -->
+            <div class="card visual-card work-card reveal" data-doors="ops media" role="button" tabindex="0" aria-haspopup="dialog">
+                <div class="img-container">
+                    <img src="assets/img/work/web-01.webp" alt="WordPress site build and hosting dashboard" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                    <div class="gallery-indicator">Open the work</div>
+                </div>
+                <div class="content">
+                    <span class="doors" aria-label="Digital Operations and Multimedia"><i class="d-ops on"></i><i class="d-visual"></i><i class="d-media on"></i></span>
+                    <h3 class="card-title">Freelance</h3>
+                    <div class="card-desc">
+                        <p><span class="role-period">Alongside every role</span><strong>Web and video</strong><br>WordPress builds, hosting and databases for local clients, and short-form and multi-camera video edits, including work for MUD WTR and KFC.</p>
+                    </div>
+                </div>
                 <div class="hidden-details">
                     <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/web-01.webp,assets/img/work/web-02.webp">
                         <div class="sub-card-img">
@@ -246,130 +332,9 @@
                         </div>
                         <div class="sub-card-content">
                             <h4 class="sub-title">WordPress Builds &amp; Database</h4>
-                            <p class="sub-desc">Custom website builds, cPanel management, and SQL database optimization.</p>
+                            <p class="sub-desc">Custom website builds, cPanel management and SQL database work.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- SECTION 2: SOCIAL MEDIA & CAMPAIGNS -->
-    <section id="campaigns" class="container">
-        <div class="section-header reveal">
-            <span>Visual Strategy</span>
-            <h2>Campaigns &amp; Social Media</h2>
-        </div>
-        <div class="bento-grid large">
-
-            <!-- InstaCilacap -->
-            <div class="card visual-card tall reveal" role="button" tabindex="0" aria-haspopup="dialog">
-                <div class="img-container">
-                    <img src="assets/img/work/instacilacap-01.webp" alt="InstaCilacap Instagram feed layout" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Founder</span>
-                    <h3 class="card-title">InstaCilacap</h3>
-                    <div class="card-desc">
-                        <p>Founded and grew a regional platform from zero to 10K followers, showcasing the culture and attractions of Cilacap and connecting local businesses with residents. I handed it to a junior and no longer run the account.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/instacilacap-01.webp,assets/img/work/instacilacap-02.webp,assets/img/work/instacilacap-03.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/instacilacap-01.webp" alt="Curated local photography for InstaCilacap" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Content Curation &amp; Partnerships</h4>
-                            <p class="sub-desc">Curating local landscape photography and executing paid business collaboration campaigns.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Prowibo Showcase Campaign -->
-            <div class="card visual-card tall reveal" role="button" tabindex="0" aria-haspopup="dialog">
-                <div class="img-container">
-                    <img src="assets/img/work/prowibo-01.webp" alt="Global Poetry Showcase campaign poster" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Event Campaign</span>
-                    <h3 class="card-title">Global Poetry Showcase 2025</h3>
-                    <div class="card-desc">
-                        <p>Designed targeted campaign visuals, brochures, and promotional social media assets for the Global Poetry Showcase to maintain branding consistency and drive global engagement.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/prowibo-poetry1.webp,assets/img/work/prowibo-poetry2.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/prowibo-poetry1.webp" alt="Poetry showcase poster and brochure designs" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Campaign Assets</h4>
-                            <p class="sub-desc">Poster design, digital brochures, and Instagram feed curation for Prowibo's poetry event.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Freelance Client Content -->
-            <div class="card visual-card card-wide reveal" role="button" tabindex="0" aria-haspopup="dialog">
-                <div class="img-container">
-                    <img src="assets/img/work/client-01.webp" alt="Social media feed designs for client campaigns" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Creative Developer</span>
-                    <h3 class="card-title">Client Social Media &amp; Brands</h3>
-                    <div class="card-desc">
-                        <p>Developed digital identities and social media feeds for various clients, including health campaigns ("Let's Move") and full digital makeovers for educational institutions.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/work/client-01.webp,assets/img/work/client-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/work/client-01.webp" alt="Let's Move campaign visual identity" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Let's Move &amp; SMK Campaign</h4>
-                            <p class="sub-desc">Visual feed branding for educational campaigns and new student admissions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <!-- SECTION 3: MULTIMEDIA, VIDEO, & AUDIO -->
-    <section id="multimedia" class="container">
-        <div class="section-header reveal">
-            <span>Production Hub</span>
-            <h2>Video, Audio &amp; Animation</h2>
-        </div>
-        <div class="bento-grid">
-
-            <!-- Video Editing -->
-            <div class="card visual-card reveal" role="button" tabindex="0" aria-haspopup="dialog">
-                <div class="img-container">
-                    <img src="assets/img/creative/video-01.webp" alt="Short-form video edit timeline" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Video Editor</span>
-                    <h3 class="card-title">Short-Form &amp; Multi-Angle Video</h3>
-                    <div class="card-desc">
-                        <p>Short-form content for Reels and Shorts using Premiere, CapCut and Filmora, built up over several years. Projects ranged from product ads (MUD WTR) and podcast edits to multi-angle shoots.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
                     <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/creative/video-01.webp,assets/img/creative/video-02.webp">
                         <div class="sub-card-img">
                             <img src="assets/img/creative/video-01.webp" alt="Commercial and multi-camera edits" loading="lazy" decoding="async" onerror="this.style.display='none'">
@@ -377,74 +342,7 @@
                         </div>
                         <div class="sub-card-content">
                             <h4 class="sub-title">Commercials &amp; Multi-Cam</h4>
-                            <p class="sub-desc">Fast-paced editing with motion text (MUD WTR) and color grading for multi-angle shoots (KFC).</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Documentary -->
-            <div class="card visual-card reveal" role="button" tabindex="0" aria-haspopup="dialog">
-                <div class="img-container">
-                    <img src="assets/img/creative/doc-01.webp" alt="Documentary footage from a village event" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Documentary</span>
-                    <h3 class="card-title">Event &amp; Remote Village Coverage</h3>
-                    <div class="card-desc">
-                        <p>Filmed and edited the August 17th Independence Day documentary and school scouting activities. Transforming raw, modest setups into vibrant, emotionally powerful visual stories.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/creative/doc-01.webp,assets/img/creative/doc-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/creative/doc-01.webp" alt="Independence Day documentary stills" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Event Documentary</h4>
-                            <p class="sub-desc">Cinematography and emotional editing for Independence Day and school scouting events.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Audio & Animation -->
-            <div class="card visual-card reveal" role="button" tabindex="0" aria-haspopup="dialog">
-                <div class="img-container">
-                    <img src="assets/img/creative/audio-01.webp" alt="Spotify release artwork and animation frames" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                    <div class="gallery-indicator">Open projects</div>
-                </div>
-                <div class="content">
-                    <span class="badge">Music &amp; AI Animation</span>
-                    <h3 class="card-title">Original Songs &amp; Short Films</h3>
-                    <div class="card-desc">
-                        <p>Independent artist on Spotify (tracks: <em>Manusia Tangguh</em>, <em>Setapak</em>). Also directed and produced the short animated film <em>Tamashi no Senshi</em> assisted by Generative AI.</p>
-                    </div>
-                </div>
-
-                <div class="hidden-details">
-                    <div class="sub-card" role="button" tabindex="0" data-iframe="https://www.youtube-nocookie.com/embed/2QRPN7Cj9MU?autoplay=1&amp;rel=0">
-                        <div class="sub-card-img">
-                            <img src="https://i.ytimg.com/vi/2QRPN7Cj9MU/hqdefault.jpg" alt="Still frame from the animated short film Tamash&#299; no Senshi" loading="lazy" decoding="async">
-                            <div class="sub-gallery-indicator">Play film</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">&#39746;&#12398;&#25126;&#22763; (Tamash&#299; no Senshi) | #1</h4>
-                            <p class="sub-desc">Animated short directed and produced with generative AI, with an original soundtrack.</p>
-                        </div>
-                    </div>
-
-                    <div class="sub-card" role="button" tabindex="0" data-gallery="assets/img/creative/audio-01.webp,assets/img/creative/audio-02.webp">
-                        <div class="sub-card-img">
-                            <img src="assets/img/creative/audio-01.webp" alt="Music production and animation stills" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                            <div class="sub-gallery-indicator">View gallery</div>
-                        </div>
-                        <div class="sub-card-content">
-                            <h4 class="sub-title">Spotify Releases &amp; Animation</h4>
-                            <p class="sub-desc">Full music production and experimental short animated film creation utilizing Generative AI.</p>
+                            <p class="sub-desc">Fast-paced editing with motion text for MUD WTR, and colour grading for a multi-angle KFC shoot.</p>
                         </div>
                     </div>
                 </div>

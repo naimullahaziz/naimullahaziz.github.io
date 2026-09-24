@@ -808,3 +808,52 @@ if (modalTimeline) {
         target.scrollIntoView({ behavior: 'auto', block: 'start' });
     });
 })();
+
+
+// --- SARINGAN TIGA PINTU (work.html) ---
+// Tiga kartu pintu di beranda mengarah ke work.html#operations, #visual
+// dan #multimedia; halaman ini membaca alamat itu dan langsung menyaring.
+// Nama-nama itu sengaja BUKAN id elemen mana pun, supaya lompatan ke
+// #anchor di bawah tidak ikut bereaksi dan halamannya tetap mulai dari atas.
+(function () {
+    const chips = Array.from(document.querySelectorAll('[data-door-filter]'));
+    const cards = Array.from(document.querySelectorAll('.work-card'));
+    if (!chips.length || !cards.length) return;
+    const count = document.querySelector('.door-count');
+    const NAMES = { ops: 'Digital Operations', visual: 'Visual Communication', media: 'Multimedia' };
+    const FROM_HASH = { operations: 'ops', visual: 'visual', multimedia: 'media' };
+    const TO_HASH = { ops: 'operations', visual: 'visual', media: 'multimedia' };
+
+    function apply(door, fromUser) {
+        if (!NAMES[door]) door = 'all';
+        chips.forEach(c => c.setAttribute('aria-pressed', String(c.dataset.doorFilter === door)));
+        let shown = 0;
+        cards.forEach(card => {
+            const match = door === 'all' || card.dataset.doors.split(/\s+/).includes(door);
+            const wasHidden = card.hidden;
+            card.hidden = !match;
+            if (!match) return;
+            shown++;
+            if (wasHidden && !reduceMotion) {
+                card.classList.remove('is-filtered-in');
+                void card.offsetWidth;
+                card.classList.add('is-filtered-in');
+            }
+        });
+        if (count) {
+            count.textContent = door === 'all'
+                ? 'All ' + cards.length + ' roles.'
+                : shown + ' of ' + cards.length + ' roles drew on ' + NAMES[door] + '.';
+        }
+        // Alamatnya ikut diperbarui tanpa menambah riwayat, jadi tautan
+        // yang disalin membuka saringan yang sama.
+        if (fromUser) {
+            history.replaceState(null, '', door === 'all' ? location.pathname : '#' + TO_HASH[door]);
+        }
+    }
+
+    chips.forEach(c => c.addEventListener('click', () => apply(c.dataset.doorFilter, true)));
+    const fromHash = () => apply(FROM_HASH[location.hash.slice(1)] || 'all', false);
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+})();
