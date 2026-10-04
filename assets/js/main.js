@@ -105,8 +105,18 @@ function closeNavMenus(except) {
 // ikut terpicu oleh sentuhan, jadi lacinya akan terbuka sendiri saat
 // orang cuma bermaksud menggulung.
 const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)');
-const wideLayout = window.matchMedia('(min-width: 981px)');
+// Harus sama dengan batas 861px di main.css.
+const wideLayout = window.matchMedia('(min-width: 861px)');
 const canHover = () => hoverCapable.matches && wideLayout.matches;
+
+// Saat jendela diperlebar atau dipersempit melewati batas itu, semua laci
+// dan menu hamburger ditutup, supaya tidak ada sisa keadaan terbuka dari
+// bentuk navbar yang satunya.
+wideLayout.addEventListener('change', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    closeNavMenus();
+});
 
 let hoverTimer;
 

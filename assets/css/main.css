@@ -1199,29 +1199,9 @@
 
             .video-card-body { padding: 1.4rem; }
 
-            .nav-toggle { display: flex; }
-            .nav-links {
-                position: absolute;
-                top: 100%; left: 0; right: 0;
-                background: var(--nav-solid);
-                border-bottom: 1px solid var(--border-color);
-                flex-direction: column;
-                padding: 0.5rem 1.4rem 1.4rem;
-                display: none;
-            }
-            .nav-links.open { display: flex; }
-            .nav-links a {
-                margin-left: 0;
-                padding: 0.9rem 0;
-                font-size: 1rem;
-                border-bottom: 1px solid var(--border-color);
-                display: block;
-            }
-            .nav-links a:last-child { border-bottom: none; }
-            .nav-links a { padding: 0.9rem 0; border-radius: 0; }
-            .nav-links a:hover,
-            .nav-links a:focus-visible,
-            .nav-links a[aria-current="page"] { background: transparent; }
+            /* Menu hamburger dipindah ke blok 860px di bawah blok laci,
+               supaya satu batas saja yang menentukan bentuk navbar. */
+            .nav-links { padding: 0.5rem 1.4rem 1.4rem; }
             .iframe-head { padding: 1.2rem 1.3rem; }
             .iframe-head h2 { font-size: 1.15rem; }
 
@@ -3335,7 +3315,42 @@
            baru muncul saat diklik, jauh setelah animasi itu selesai. */
         .js .nav-menu a { animation: none; }
 
-        @media (max-width: 980px) {
+        /* Menu hamburger. Satu batas untuk semua aturan navbar: 860px di
+           sini, 861px untuk navbar mendatar di bawah, dan 861px juga di
+           main.js. Dulu tombol hamburger baru muncul di 768px sementara
+           gaya laci versi HP sudah aktif di 980px, jadi di antara keduanya
+           menunya pecah ke beberapa baris. Navbar mendatar butuh sekitar
+           640px plus padding, jadi 861px masih memberi ruang lega. */
+        @media (max-width: 860px) {
+            .nav-toggle { display: flex; }
+            .nav-links {
+                position: absolute;
+                top: 100%; left: 0; right: 0;
+                background: var(--nav-solid);
+                border-bottom: 1px solid var(--border-color);
+                flex-direction: column;
+                padding: 0.5rem 2rem 1.4rem;
+                display: none;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a {
+                margin-left: 0;
+                padding: 0.9rem 0;
+                font-size: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                display: block;
+                border-radius: 0;
+            }
+            .nav-links a:last-child { border-bottom: none; }
+            .nav-links a:hover,
+            .nav-links a:focus-visible,
+            .nav-links a[aria-current="page"] { background: transparent; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { padding: 0.5rem 1.4rem 1.4rem; }
+        }
+
+        @media (max-width: 860px) {
             .nav-group { display: block; }
             .nav-parent {
                 width: 100%;
@@ -3567,10 +3582,14 @@
            tegak, dan line-height tombol 1.2 supaya pilnya 30px seperti
            tautan. Hanya di layar lebar; di menu hamburger semua butirnya
            sudah sama tinggi (55px) dan menurun. */
-        @media (min-width: 981px) {
+        @media (min-width: 861px) {
+            /* nowrap: sebelum batas hamburger, butirnya tidak boleh turun
+               baris atau labelnya patah ("Full deck" jadi dua baris). */
             .nav-links {
                 display: flex;
                 align-items: center;
+                flex-wrap: nowrap;
+                white-space: nowrap;
             }
             /* Sebagai butir flex, tautan ikut dihitung padding-nya, jadi
                tautan dan tombol sama-sama diberi line-height 1.2 supaya
