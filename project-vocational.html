@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/main.css?v=20261005c">
+    <link rel="stylesheet" href="assets/css/main.css?v=20261005d">
 </head>
 <body>
 
@@ -149,88 +149,93 @@
             <p>The book carries the brand through every part of the school: curriculum, including the move to project-based learning from 2021; student affairs and extracurricular activities; facilities; public relations and partnerships with around 200 businesses and industry partners; and a section for each skill programme, from automotive engineering and pharmacy technology to accounting, Islamic banking and chemical analysis.</p>
         </div>
 
-        <!-- Empat set halaman yang bisa digeser di kartunya sendiri (.slide-card),
-             dan dibuka besar di jendela galeri yang sama, mulai dari halaman
-             yang diklik. Semua dirender dari PDF-nya. Halaman PDF 4 (kontak),
+        <!-- Delapan kartu seperti versi pertama (pilihan Na'im, 5 Oktober 2026);
+             tiap kartu membuka beberapa halaman terkait di jendela galeri, digeser
+             dengan panah. 23 halaman, dirender dari PDF-nya. Halaman PDF 4 (kontak),
              11 (teks templat) dan 26 (daftar nama lulusan) sengaja tidak dipakai. -->
-        <p class="tl-hint hint-after-body reveal">Four sets, 23 of the 59 pages, with the branding in use. Slide through each set, or open one to see all its pages.</p>
+        <p class="tl-hint hint-after-body reveal">Eight parts of the book, 23 of its 59 pages, with the branding in use. Pick any one to page through it.</p>
 
-        <div class="music-grid slide-grid">
+        <div class="music-grid shot-grid page-grid">
 
-            <div class="slide-card reveal" data-gallery="assets/img/vocational/book/book-cover.webp,assets/img/vocational/book/book-contents.webp,assets/img/vocational/book/book-curriculum.webp,assets/img/vocational/book/book-student-affairs.webp,assets/img/vocational/book/book-facilities.webp,assets/img/vocational/book/book-public-relations.webp">
-                <div class="slide-frame">
-                    <div class="slide-track">
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-cover-thumb.webp" alt="The cover of the 2023 profile book" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-contents-thumb.webp" alt="The contents page" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-curriculum-thumb.webp" alt="The divider page for curriculum" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-student-affairs-thumb.webp" alt="The divider page for student affairs" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-facilities-thumb.webp" alt="The divider page for facilities" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-public-relations-thumb.webp" alt="The divider page for public relations" width="480" height="679" loading="lazy"></button>
-                    </div>
-                    <button type="button" class="slide-nav prev" aria-label="Previous page">&#10094;</button>
-                    <button type="button" class="slide-nav next" aria-label="Next page">&#10095;</button>
-                    <span class="slide-count" aria-hidden="true">1 / 6</span>
-                </div>
-                <span class="release-title shot-title">The visual identity</span>
-                <span class="release-meta">6 pages</span>
-                <span class="shot-desc" hidden>How the brand carries through the book: the cover, the contents and the divider page that opens each part of the school.</span>
-            </div>
+            <button type="button" class="release shot shot-page reveal" data-gallery="assets/img/vocational/book/book-cover.webp,assets/img/vocational/book/book-students-left.webp,assets/img/vocational/book/book-students-right.webp">
+                <span class="release-art">
+                    <img src="assets/img/vocational/book/book-cover-thumb.webp" alt="Cover of the school's 2023 profile book" width="480" height="679" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">The cover</span>
+                <span class="release-meta">3 pages</span>
+                <span class="shot-desc" hidden>The cover of the 2023 edition, then the opening spread with students in uniform.</span>
+            </button>
 
-            <div class="slide-card reveal" data-gallery="assets/img/vocational/book/book-students-left.webp,assets/img/vocational/book/book-students-right.webp,assets/img/vocational/book/book-extracurricular.webp,assets/img/vocational/book/book-achievements.webp,assets/img/vocational/book/book-industry-class.webp,assets/img/vocational/book/book-marketing-team.webp">
-                <div class="slide-frame">
-                    <div class="slide-track">
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-students-left-thumb.webp" alt="The left half of the opening spread, students in uniform" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-students-right-thumb.webp" alt="The right half of the opening spread, students in uniform" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-extracurricular-thumb.webp" alt="A page on extracurricular activities" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-achievements-thumb.webp" alt="A page on the school's achievements and reputation" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-industry-class-thumb.webp" alt="A page on work culture in the industry class" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-marketing-team-thumb.webp" alt="A student marketing team in matching aprons" width="480" height="679" loading="lazy"></button>
-                    </div>
-                    <button type="button" class="slide-nav prev" aria-label="Previous page">&#10094;</button>
-                    <button type="button" class="slide-nav next" aria-label="Next page">&#10095;</button>
-                    <span class="slide-count" aria-hidden="true">1 / 6</span>
-                </div>
-                <span class="release-title shot-title">School life</span>
-                <span class="release-meta">6 pages</span>
-                <span class="shot-desc" hidden>Students and staff in the book's opening spread, extracurricular activities, achievements, the industry class and a student marketing team.</span>
-            </div>
+            <button type="button" class="release shot shot-page reveal" data-gallery="assets/img/vocational/book/book-contents.webp,assets/img/vocational/book/book-facilities.webp,assets/img/vocational/book/book-public-relations.webp">
+                <span class="release-art">
+                    <img src="assets/img/vocational/book/book-contents-thumb.webp" alt="The contents page of the profile book" width="480" height="679" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Contents</span>
+                <span class="release-meta">3 pages</span>
+                <span class="shot-desc" hidden>The contents page, then two of the divider pages that open each part of the school: facilities and public relations.</span>
+            </button>
 
-            <div class="slide-card reveal" data-gallery="assets/img/vocational/book/book-teaching-factory.webp,assets/img/vocational/book/book-mutupay.webp,assets/img/vocational/book/book-campus.webp,assets/img/vocational/book/book-workshop.webp,assets/img/vocational/book/book-classrooms.webp">
-                <div class="slide-frame">
-                    <div class="slide-track">
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-teaching-factory-thumb.webp" alt="A page on the Industry 4.0 teaching factory" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-mutupay-thumb.webp" alt="A page introducing MutuPay on a phone screen" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-campus-thumb.webp" alt="Photographs of the school buildings" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-workshop-thumb.webp" alt="Photographs of the workshop" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-classrooms-thumb.webp" alt="Photographs of classrooms and students at work" width="480" height="679" loading="lazy"></button>
-                    </div>
-                    <button type="button" class="slide-nav prev" aria-label="Previous page">&#10094;</button>
-                    <button type="button" class="slide-nav next" aria-label="Next page">&#10095;</button>
-                    <span class="slide-count" aria-hidden="true">1 / 5</span>
-                </div>
-                <span class="release-title shot-title">Facilities and services</span>
-                <span class="release-meta">5 pages</span>
-                <span class="shot-desc" hidden>The teaching factory, the MutuPay digital service and the school's buildings, workshop and classrooms.</span>
-            </div>
+            <button type="button" class="release shot shot-page reveal" data-gallery="assets/img/vocational/book/book-teaching-factory.webp,assets/img/vocational/book/book-campus.webp,assets/img/vocational/book/book-classrooms.webp">
+                <span class="release-art">
+                    <img src="assets/img/vocational/book/book-teaching-factory-thumb.webp" alt="A profile book page about the school's Industry 4.0 teaching factory" width="480" height="679" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Teaching factory</span>
+                <span class="release-meta">3 pages</span>
+                <span class="shot-desc" hidden>The teaching factory, built around Industry 4.0, then the school's buildings and its classrooms.</span>
+            </button>
 
-            <div class="slide-card reveal" data-gallery="assets/img/vocational/book/book-automotive.webp,assets/img/vocational/book/book-pharmacy.webp,assets/img/vocational/book/book-islamic-banking.webp,assets/img/vocational/book/book-chemistry.webp,assets/img/vocational/book/book-chemistry-practice.webp,assets/img/vocational/book/book-chemistry-lab.webp">
-                <div class="slide-frame">
-                    <div class="slide-track">
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-automotive-thumb.webp" alt="The opening page of automotive engineering" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-pharmacy-thumb.webp" alt="The opening page of pharmacy technology" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-islamic-banking-thumb.webp" alt="A page on the Islamic banking programme" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-chemistry-thumb.webp" alt="The opening page of chemical analysis" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-chemistry-practice-thumb.webp" alt="Chemical analysis students marketing products and sitting certification" width="480" height="679" loading="lazy"></button>
-                        <button type="button" class="slide"><img src="assets/img/vocational/book/book-chemistry-lab-thumb.webp" alt="Chemical analysis students in the laboratory" width="480" height="679" loading="lazy"></button>
-                    </div>
-                    <button type="button" class="slide-nav prev" aria-label="Previous page">&#10094;</button>
-                    <button type="button" class="slide-nav next" aria-label="Next page">&#10095;</button>
-                    <span class="slide-count" aria-hidden="true">1 / 6</span>
-                </div>
-                <span class="release-title shot-title">Skill programmes</span>
-                <span class="release-meta">6 pages</span>
-                <span class="shot-desc" hidden>The opening pages of the skill programmes, and chemical analysis students marketing their products, sitting competency certification and working in the lab.</span>
-            </div>
+            <button type="button" class="release shot shot-page reveal" data-gallery="assets/img/vocational/book/book-mutupay.webp,assets/img/vocational/book/book-islamic-banking.webp">
+                <span class="release-art">
+                    <img src="assets/img/vocational/book/book-mutupay-thumb.webp" alt="A profile book page introducing MutuPay, shown on a phone screen" width="480" height="679" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">MutuPay</span>
+                <span class="release-meta">2 pages</span>
+                <span class="shot-desc" hidden>MutuPay, one of the school's digital services, then the Islamic banking services page.</span>
+            </button>
+
+            <button type="button" class="release shot shot-page reveal" data-gallery="assets/img/vocational/book/book-curriculum.webp,assets/img/vocational/book/book-student-affairs.webp,assets/img/vocational/book/book-extracurricular.webp,assets/img/vocational/book/book-achievements.webp">
+                <span class="release-art">
+                    <img src="assets/img/vocational/book/book-curriculum-thumb.webp" alt="The section opener for curriculum, a phone held in an orange frame" width="480" height="679" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Curriculum and students</span>
+                <span class="release-meta">4 pages</span>
+                <span class="shot-desc" hidden>The divider pages for curriculum and student affairs, then extracurricular activities and the school's achievements.</span>
+            </button>
+
+            <button type="button" class="release shot shot-page reveal" data-gallery="assets/img/vocational/book/book-automotive.webp,assets/img/vocational/book/book-industry-class.webp,assets/img/vocational/book/book-workshop.webp">
+                <span class="release-art">
+                    <img src="assets/img/vocational/book/book-automotive-thumb.webp" alt="The opening page of the automotive engineering programme, students in safety helmets at work" width="480" height="679" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Automotive engineering</span>
+                <span class="release-meta">3 pages</span>
+                <span class="shot-desc" hidden>The opening page of automotive engineering, then work culture in its industry class, and the workshop.</span>
+            </button>
+
+            <button type="button" class="release shot shot-page reveal" data-gallery="assets/img/vocational/book/book-pharmacy.webp,assets/img/vocational/book/book-marketing-team.webp">
+                <span class="release-art">
+                    <img src="assets/img/vocational/book/book-pharmacy-thumb.webp" alt="The opening page of the pharmacy technology programme" width="480" height="679" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Pharmacy technology</span>
+                <span class="release-meta">2 pages</span>
+                <span class="shot-desc" hidden>The opening page of pharmacy technology, then its student marketing team.</span>
+            </button>
+
+            <button type="button" class="release shot shot-page reveal" data-gallery="assets/img/vocational/book/book-chemistry.webp,assets/img/vocational/book/book-chemistry-practice.webp,assets/img/vocational/book/book-chemistry-lab.webp">
+                <span class="release-art">
+                    <img src="assets/img/vocational/book/book-chemistry-thumb.webp" alt="The opening page of the chemical analysis programme, students in a laboratory" width="480" height="679" loading="lazy">
+                    <span class="release-play" aria-hidden="true">&#43;</span>
+                </span>
+                <span class="release-title shot-title">Chemical analysis</span>
+                <span class="release-meta">3 pages</span>
+                <span class="shot-desc" hidden>The opening page of chemical analysis, then students marketing their products, sitting competency certification and working in the lab.</span>
+            </button>
 
         </div>
     </section>
@@ -285,6 +290,6 @@
         </div>
     </footer>
 
-    <script src="assets/js/main.js?v=20261005c"></script>
+    <script src="assets/js/main.js?v=20261005d"></script>
 </body>
 </html>
