@@ -3843,3 +3843,48 @@
         @media (max-width: 768px) {
             .is-tall .gallery-wrapper { height: 64vh; }
         }
+
+        /* =========================================================
+           TOKO MAYTECH (.store-banner, .product-wall, project-maytech.html)
+
+           Banner tokonya utuh, lalu ke-28 listing sebagai dinding kotak
+           kecil. Fotonya foto produk berlatar putih, jadi kotaknya tetap
+           putih juga di mode gelap supaya tidak ada tepi putih yang
+           terpotong. Tidak interaktif: namanya sudah tertulis di bawah.
+           ========================================================= */
+        .store-banner {
+            margin: 0 0 1.6rem;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 22px rgba(18, 19, 26, 0.08);
+        }
+        .store-banner img { display: block; width: 100%; height: auto; }
+
+        .product-wall {
+            list-style: none;
+            margin: 0 0 2.6rem;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+            gap: 1rem 0.8rem;
+        }
+        .product-wall li { display: flex; flex-direction: column; gap: 0.45rem; }
+        .product-wall img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            object-fit: contain;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+        .product-wall span {
+            font-size: 0.78rem;
+            line-height: 1.35;
+            color: var(--text-secondary);
+        }
+        @media (max-width: 620px) {
+            .product-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem 0.6rem; }
+        }
