@@ -905,11 +905,77 @@ if (modalTimeline) {
         // ditahan peramban selama halaman tidak sedang digambar.
         track.addEventListener('scroll', update, { passive: true });
 
-        slides.forEach((slide, i) => slide.addEventListener('click', () => {
-            lastFocused = slide;
-            openGallery(card, i);
-        }));
+        // Klik kartu membuka album berisi semua halaman di set itu, bukan
+        // satu foto (permintaan Na'im). Halaman di album baru dibuka besar.
+        slides.forEach(slide => slide.addEventListener('click', () => openAlbum(card, slide)));
 
         update();
     });
 })();
+
+
+// --- ALBUM (project-vocational.html) ---
+// Jendela berisi semua halaman satu set dalam grid. Klik satu halaman
+// membuka jendela galeri biasa di atasnya, mulai dari halaman itu, dengan
+// panah untuk lanjut. Escape menutup galeri dulu, baru albumnya.
+const albumModal = document.createElement('div');
+albumModal.className = 'modal-album';
+albumModal.setAttribute('role', 'dialog');
+albumModal.setAttribute('aria-modal', 'true');
+albumModal.setAttribute('aria-labelledby', 'album-title');
+albumModal.hidden = true;
+albumModal.innerHTML = `
+    <div class="album-box">
+        <button type="button" class="album-close" aria-label="Close album">&times;</button>
+        <div class="album-head">
+            <h3 id="album-title"></h3>
+            <p class="album-desc"></p>
+        </div>
+        <div class="album-grid"></div>
+    </div>`;
+document.body.appendChild(albumModal);
+
+let albumOpener = null;
+
+function openAlbum(card, opener) {
+    const thumbs = [...card.querySelectorAll('.slide img')];
+    const grid = albumModal.querySelector('.album-grid');
+    albumModal.querySelector('#album-title').innerHTML = card.querySelector('.shot-title').innerHTML;
+    albumModal.querySelector('.album-desc').innerHTML = card.querySelector('.shot-desc').innerHTML;
+    grid.innerHTML = '';
+    thumbs.forEach((img, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'album-item';
+        btn.setAttribute('aria-label', img.alt + ', open full size');
+        btn.innerHTML = `<img src="${img.getAttribute('src')}" alt="" width="480" height="679"><span>${i + 1}</span>`;
+        btn.addEventListener('click', () => {
+            lastFocused = btn;
+            openGallery(card, i);
+        });
+        grid.appendChild(btn);
+    });
+    albumOpener = opener || null;
+    albumModal.hidden = false;
+    lockScroll();
+    albumModal.querySelector('.album-close').focus();
+}
+
+function closeAlbum() {
+    if (albumModal.hidden) return;
+    albumModal.hidden = true;
+    unlockScroll();
+    if (albumOpener) albumOpener.focus();
+    albumOpener = null;
+}
+
+albumModal.querySelector('.album-close').addEventListener('click', closeAlbum);
+albumModal.addEventListener('click', (e) => { if (e.target === albumModal) closeAlbum(); });
+// Fase capture: berjalan SEBELUM penangan Escape milik galeri. Kalau
+// galeri masih terbuka, albumnya mengalah; tanpa ini satu Escape menutup
+// galeri lalu langsung albumnya juga.
+document.addEventListener('keydown', (e) => {
+    if (albumModal.hidden || topmostModal()) return;
+    if (e.key === 'Escape') closeAlbum();
+    if (e.key === 'Tab') trapFocus(albumModal, e);
+}, true);
