@@ -276,6 +276,10 @@ function openGallery(subCardElement) {
     galleryTitle.innerHTML = titleEl.innerHTML;
     galleryDesc.innerHTML = descEl.innerHTML;
 
+    // Halaman buku itu tegak; jendela bawaannya dibuat untuk tangkapan
+    // layar mendatar, jadi halamannya tampil terlalu kecil di sana.
+    modalGallery.classList.toggle('is-tall', subCardElement.classList.contains('shot-page'));
+
     updateGalleryContent();
     modalGallery.style.display = 'flex';
     modalGallery.setAttribute('aria-hidden', 'false');
