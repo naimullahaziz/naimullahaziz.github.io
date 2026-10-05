@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/main.css?v=20261005b">
+    <link rel="stylesheet" href="assets/css/main.css?v=20261005c">
 </head>
 <body>
 
@@ -130,8 +130,8 @@
          Dari struktur folder kerja Na'im (tangkapan layar, 4 Oktober 2026):
          1 Pre-order, 2 Proses-order, 3 Pasca-order, Work plan, SPK,
          Invoice, Bukti pembayaran, Bukti penyetoran..., BAST, Dokumentasi,
-         Persiapan laporan, Video laporan, Riwayat. Isi tiap tahap belum
-         diceritakan, jadi dokumennya tidak dipetakan ke tahap tertentu.
+         Persiapan laporan, Video laporan, Riwayat. Pembagian dokumen per
+         tahap di kartu-kartunya dikonfirmasi Na'im pada 5 Oktober 2026.
          "Bukti penyetoran" = bukti setor pajak: Na'im membantu klien
          (sekolah) mengurus semua dokumen kelengkapan, termasuk pajak. -->
     <section id="orders" class="container hue-yellow">
@@ -140,39 +140,42 @@
             <h2>Every order, from start to report</h2>
         </div>
 
-        <ol class="flow reveal" aria-label="The three stages every order was filed in">
+        <!-- Pembagian dokumen per tahap dikonfirmasi Na'im (5 Oktober 2026). -->
+        <ol class="flow flow-cards reveal" aria-label="The three stages every order was filed in, and the paperwork in each">
             <li class="flow-step hue-yellow">
                 <span class="flow-no">1</span>
                 <h3>Pre-order</h3>
                 <p>Before the order</p>
+                <ul class="doc-chips">
+                    <li>Work plan</li>
+                    <li>Work order (SPK)</li>
+                </ul>
             </li>
             <li class="flow-arrow" aria-hidden="true">&rarr;</li>
             <li class="flow-step hue-blue">
                 <span class="flow-no">2</span>
                 <h3>Order in progress</h3>
                 <p>While the order is filled</p>
+                <ul class="doc-chips">
+                    <li>Invoice</li>
+                    <li>Documentation</li>
+                </ul>
             </li>
             <li class="flow-arrow" aria-hidden="true">&rarr;</li>
             <li class="flow-step hue-green">
                 <span class="flow-no">3</span>
                 <h3>Post-order</h3>
                 <p>After the order, through to the report</p>
+                <ul class="doc-chips">
+                    <li>Handover certificate (BAST)</li>
+                    <li>Proof of payment</li>
+                    <li>Tax payment receipts</li>
+                    <li>Report preparation</li>
+                    <li>Video report</li>
+                </ul>
             </li>
         </ol>
-
-        <p class="doc-chips-label reveal">The paperwork I handled</p>
-        <ul class="doc-chips reveal">
-            <li>Work plan</li>
-            <li>Work order (SPK)</li>
-            <li>Invoice</li>
-            <li>Proof of payment</li>
-            <li>Tax payment receipts</li>
-            <li>Handover certificate (BAST)</li>
-            <li>Documentation</li>
-            <li>Report preparation</li>
-            <li>Video report</li>
-            <li>Order history</li>
-        </ul>
+        <p class="flow-foot reveal">Every order also went into a running order history.</p>
 
         <div class="case-body reveal">
             <p><strong>Three stages.</strong> I ran each order through its full cycle and filed it in three stages: pre-order, order in progress and post-order, with a running history of every order.</p>
@@ -255,7 +258,6 @@
             <li title="12-door steel locker"><img src="assets/img/maytech/products/p15.webp" alt="12-door steel locker" width="360" height="360" loading="lazy"></li>
             <li title="Four-person office desk"><img src="assets/img/maytech/products/p14.webp" alt="Four-person office desk" width="360" height="360" loading="lazy"></li>
         </ul>
-        </ul>
 
         <div class="case-body reveal">
             <p>I built all 28 listings, covering what a school buys: classroom displays and audio, computers, school systems such as management, library and attendance, and furniture.</p>
@@ -286,6 +288,6 @@
         </div>
     </footer>
 
-    <script src="assets/js/main.js?v=20261005b"></script>
+    <script src="assets/js/main.js?v=20261005c"></script>
 </body>
 </html>

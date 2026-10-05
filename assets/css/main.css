@@ -4101,3 +4101,11 @@
             .album-box { padding: 1.3rem 1.1rem 1.4rem; border-radius: 18px; }
             .album-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
         }
+
+        /* Kartu tahap yang membawa dokumennya sendiri (project-maytech.html).
+           Pembagian dokumennya dikonfirmasi Na'im, 5 Oktober 2026. */
+        .flow-cards { margin-bottom: 1rem; }
+        .flow-cards .flow-step { display: flex; flex-direction: column; }
+        .flow-cards .doc-chips { margin: 1.1rem 0 0; gap: 0.4rem; }
+        .flow-cards .doc-chips li { font-size: 0.8rem; padding: 0.35rem 0.7rem; background: var(--bg-color); }
+        .flow-foot { margin: 0 0 2.2rem; font-size: 0.88rem; color: var(--text-secondary); }
