@@ -4055,3 +4055,7 @@
             .brand-link { grid-template-columns: 1fr; }
             .brand-link img { max-width: 200px; }
         }
+
+        /* Halaman buku dan dokumen yang tegak di strip foto pop-up timeline:
+           dipotong dari atas supaya judul halamannya tetap terlihat. */
+        .tl-shots.is-pages img { object-position: top; }
