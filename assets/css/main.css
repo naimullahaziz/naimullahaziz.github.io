@@ -3884,3 +3884,85 @@
                 @media (max-width: 620px) {
             .product-wall { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.4rem; }
         }
+
+        /* =========================================================
+           KARTU GESER (.slide-card, project-vocational.html)
+
+           Satu kartu berisi beberapa halaman buku yang bisa digeser di
+           tempat: geser jari di layar sentuh, atau panah yang muncul saat
+           kursor di atas kartu. Klik halaman mana pun membuka jendela
+           galeri yang sama, mulai dari halaman itu. Penggesernya memakai
+           scroll-snap bawaan peramban, jadi tidak ada pustaka tambahan.
+           ========================================================= */
+        .slide-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.8rem 1.4rem; }
+        .slide-card { display: flex; flex-direction: column; min-width: 0; }
+        .slide-frame {
+            position: relative;
+            aspect-ratio: 1 / 1.414;
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--img-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 22px rgba(18, 19, 26, 0.10);
+            margin-bottom: 0.9rem;
+        }
+        .slide-track {
+            display: flex;
+            height: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            overscroll-behavior-x: contain;
+        }
+        .slide-track::-webkit-scrollbar { display: none; }
+        .slide {
+            flex: 0 0 100%;
+            height: 100%;
+            scroll-snap-align: start;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            background: none;
+            cursor: zoom-in;
+        }
+        .slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .slide:focus-visible { outline: 2px solid var(--accent-color); outline-offset: -4px; }
+        .slide-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(10, 15, 30, 0.55);
+            color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .slide-nav.prev { left: 8px; }
+        .slide-nav.next { right: 8px; }
+        .slide-frame:hover .slide-nav,
+        .slide-nav:focus-visible { opacity: 1; }
+        @media (hover: none) { .slide-nav { opacity: 1; } }
+        .slide-nav:disabled { opacity: 0 !important; pointer-events: none; }
+        .slide-count {
+            position: absolute;
+            bottom: 8px; right: 8px;
+            padding: 0.15rem 0.55rem;
+            border-radius: 100px;
+            background: rgba(10, 15, 30, 0.6);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        @media (max-width: 980px) {
+            .slide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 480px) {
+            .slide-grid { grid-template-columns: 1fr; max-width: 340px; }
+        }

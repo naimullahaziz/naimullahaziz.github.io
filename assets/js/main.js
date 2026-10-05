@@ -258,7 +258,7 @@ const galleryCounter = document.getElementById('gallery-counter');
 const galleryTitle = document.getElementById('gallery-title');
 const galleryDesc = document.getElementById('gallery-desc');
 
-function openGallery(subCardElement) {
+function openGallery(subCardElement, startIndex = 0) {
     const galleryData = subCardElement.getAttribute('data-gallery');
     if (!galleryData) return;
 
@@ -267,7 +267,7 @@ function openGallery(subCardElement) {
 
     if (!lastFocused) lastFocused = subCardElement;
 
-    currentIndex = 0;
+    currentIndex = Math.min(Math.max(startIndex, 0), currentImages.length - 1);
     // Kartu arsip di halaman studi kasus memakai nama kelas sendiri karena
     // tampilannya meminjam .release dari halaman music, bukan .sub-card.
     const titleEl = subCardElement.querySelector(".sub-title, .shot-title");
@@ -278,7 +278,7 @@ function openGallery(subCardElement) {
 
     // Halaman buku itu tegak; jendela bawaannya dibuat untuk tangkapan
     // layar mendatar, jadi halamannya tampil terlalu kecil di sana.
-    modalGallery.classList.toggle('is-tall', subCardElement.classList.contains('shot-page'));
+    modalGallery.classList.toggle('is-tall', subCardElement.matches('.shot-page, .slide-card'));
 
     updateGalleryContent();
     modalGallery.style.display = 'flex';
@@ -870,4 +870,46 @@ if (modalTimeline) {
     const fromHash = () => apply(FROM_HASH[location.hash.slice(1)] || 'all', false);
     window.addEventListener('hashchange', fromHash);
     fromHash();
+})();
+
+
+// --- KARTU GESER (project-vocational.html) ---
+// Tiap .slide-card berisi beberapa halaman yang digeser dengan scroll-snap.
+// Panah menggeser satu halaman, penghitung mengikuti posisi geser, dan
+// klik halaman mana pun membuka galeri mulai dari halaman itu.
+(function () {
+    document.querySelectorAll('.slide-card').forEach(card => {
+        const track = card.querySelector('.slide-track');
+        const slides = [...track.querySelectorAll('.slide')];
+        const prev = card.querySelector('.slide-nav.prev');
+        const next = card.querySelector('.slide-nav.next');
+        const count = card.querySelector('.slide-count');
+        if (!slides.length) return;
+
+        const index = () => Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+        const update = () => {
+            const i = Math.min(index(), slides.length - 1);
+            count.textContent = (i + 1) + ' / ' + slides.length;
+            prev.disabled = i === 0;
+            next.disabled = i === slides.length - 1;
+        };
+        const go = (dir) => {
+            const target = Math.min(Math.max(index() + dir, 0), slides.length - 1);
+            track.scrollTo({ left: target * track.clientWidth, behavior: 'smooth' });
+        };
+
+        prev.addEventListener('click', () => go(-1));
+        next.addEventListener('click', () => go(1));
+
+        // Langsung, tanpa requestAnimationFrame: hitungannya murah, dan rAF
+        // ditahan peramban selama halaman tidak sedang digambar.
+        track.addEventListener('scroll', update, { passive: true });
+
+        slides.forEach((slide, i) => slide.addEventListener('click', () => {
+            lastFocused = slide;
+            openGallery(card, i);
+        }));
+
+        update();
+    });
 })();
