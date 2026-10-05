@@ -3966,3 +3966,53 @@
         @media (max-width: 480px) {
             .slide-grid { grid-template-columns: 1fr; max-width: 340px; }
         }
+
+        /* Tiga kartu cara menata toko (project-maytech.html). Gambarnya
+           dari toko itu sendiri: banner utuh, atau tiga foto produk
+           berjajar di atas latar putih seperti di toko aslinya. */
+        .store-features {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.4rem;
+            margin: 0 0 2.6rem;
+        }
+        .store-feature {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 22px rgba(18, 19, 26, 0.06);
+            display: flex;
+            flex-direction: column;
+        }
+        .store-feature-art {
+            margin: 0;
+            aspect-ratio: 16 / 9;
+            background: #fff;
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        .store-feature-art.is-banner { background: #0a3cc2; display: flex; align-items: center; }
+        .store-feature-art.is-banner img { display: block; width: 100%; height: auto; }
+        .store-feature-art.is-trio {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            padding: 0.9rem;
+            align-items: center;
+        }
+        .store-feature-art.is-trio img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .store-feature h3 { font-size: 1.08rem; margin: 1.1rem 1.3rem 0.4rem; }
+        .store-feature p { margin: 0 1.3rem 1.3rem; color: var(--text-secondary); font-size: 0.92rem; line-height: 1.55; }
+
+        @media (max-width: 900px) {
+            .store-features { grid-template-columns: 1fr; max-width: 520px; }
+        }
